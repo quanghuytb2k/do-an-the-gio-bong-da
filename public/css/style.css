@@ -53,7 +53,7 @@ a:hover {
     /* height: calc(100vh - 58px); */
     min-height: 100vh;
     padding-top: 3.625rem;
-    padding-left: 15rem;
+    padding-left: 0rem;
 }
 
 #content {

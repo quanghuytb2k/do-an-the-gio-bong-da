@@ -24,3 +24,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test', 'admin\UserController@create')->name('test');
 Route::post('/store', 'admin\UserController@store')->name('store');
+
+//pitches
+Route::get('/create-pitches', 'admin\PitchesController@create')->name('create-pitches');
+Route::post('/store-pitches', 'admin\PitchesController@store')->name('store-pitches');
+
