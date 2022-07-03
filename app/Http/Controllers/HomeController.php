@@ -25,4 +25,7 @@ class HomeController extends Controller
     {
         return view('frontend.index');
     }
+    public function service(){
+        return view('frontend.service');
+    }
 }

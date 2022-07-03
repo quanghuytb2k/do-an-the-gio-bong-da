@@ -22,6 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/index', 'HomeController@index')->name('index');
+Route::get('/service', 'HomeController@service')->name('service');
 Route::get('/test', 'admin\UserController@create')->name('test');
 Route::post('/store', 'admin\UserController@store')->name('store');
 

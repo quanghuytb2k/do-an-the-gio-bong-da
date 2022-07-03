@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <title>The gioi the thao</title>
+    <title>Solartec - Renewable Energy Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{{ asset('img/favicon.ico') }}" rel="icon">
+    <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +19,6 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
@@ -26,7 +26,7 @@
     <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-{{--    <link href=" {{ asset('css/bootstrap/bootstrap.css') }}" rel="stylesheet">--}}
+    {{--    <link href=" {{ asset('css/bootstrap/bootstrap.css') }}" rel="stylesheet">--}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Template Stylesheet -->
@@ -35,6 +35,11 @@
 
 <body>
 <!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 <!-- Spinner End -->
 
 
@@ -73,9 +78,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
-            <a href="/service" class="nav-item nav-link">Đặt sân</a>
-            <a href="about.html " class="nav-item nav-link">Tìm đối</a>
+            <a href="index.html" class="nav-item nav-link ">Trang chủ</a>
+            <a href="about.html" class="nav-item nav-link active">Đặt sân</a>
+            <a href="service.blade.php" class="nav-item nav-link ">Tìm đối</a>
             <a href="project.html" class="nav-item nav-link">Lịch thi đấu</a>
             <!-- <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -95,48 +100,38 @@
 <!-- Navbar End -->
 
 
-<!-- Carousel Start -->
-<div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="owl-carousel header-carousel position-relative">
-        <div class="owl-carousel-item position-relative" data-dot="<img src='{{ asset('img/carousel/carousel-3.jpg') }}'>">
-            <div class="owl-carousel-item-img">
-                <img src="{{ asset('/img/carousel/carousel-1.jpg') }}" alt="">
-            </div>
-        </div>
-        <div class="owl-carousel-item position-relative" data-dot="<img src=' {{ asset('img/carousel/carousel-2.jpg') }}'>">
-            <div class="owl-carousel-item-img">
-                <img src=" {{ asset('img/carousel/carousel-2.jpg') }}" alt="">
-            </div>
-        </div>
-        <div class="owl-carousel-item position-relative" data-dot="<img src='{{ asset('img/carousel-3.jpg') }}'>">
-            <div class="owl-carousel-item-img">
-                <img src="{{ asset('img/carousel/carousel-3.jpg ') }} " alt="">
-            </div>
-        </div>
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5 mb-5">
+    <div class="container py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Đặt sân</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="text-white" href="#">Trang chủ</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Đặt sân</li>
+            </ol>
+        </nav>
     </div>
 </div>
-<!-- Carousel End -->
+<!-- Page Header End -->
 
 
-
-<!-- Service Start -->
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h1 class="mb-4">Sân nổi bật</h1>
+            <h1 class="mb-4">Tất cả sân bóng</h1>
         </div>
         <div class="row g-4">
             <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item rounded overflow-hidden">
                     <div class="service-item-img">
                         <a href="" class="img-link">
-                            <img src="{{ asset('img/carousel/carousel-1.jpg')}}" alt="">
+                            <img src="img/carousel/carousel-1.jpg" alt="">
                         </a>
                     </div>
                     <div class="position-relative p-4 pt-4">
                         <h4 class="mb-3">Sân bóng thành phát</h4>
                         <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
+                        <a class="small fw-medium" href="/show">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
                     </div>
                 </div>
             </div>
@@ -144,12 +139,12 @@
                 <div class="service-item rounded overflow-hidden">
                     <div class="service-item-img">
                         <a href="" class="img-link">
-                            <img class="img-fluid" src=" {{ asset('img/img-600x400-2.jpg')}}" alt="">
+                            <img class="img-fluid" src="img/san-thien-truong.jpg" alt="">
                         </a>
                     </div>
                     <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
+                        <h4 class="mb-3">Sân bóng thiên trường</h4>
+                        <p>126 Thiên Trường, Ba Đình, Hà Nội.</p>
                         <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
                     </div>
                 </div>
@@ -158,12 +153,12 @@
                 <div class="service-item rounded overflow-hidden">
                     <div class="service-item-img">
                         <a href="" class="img-link">
-                            <img class="img-fluid" src="{{ asset('img/img-600x400-3.jpg  ')}}" alt="">
+                            <img class="img-fluid" src="img/svd-ho-tay.jpg" alt="">
                         </a>
                     </div>
                     <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
+                        <h4 class="mb-3">SVD Hồ Tây</h4>
+                        <p>270 Võ Chí Công, Hồ Tây, Hà Nội.</p>
                         <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
                     </div>
                 </div>
@@ -172,11 +167,11 @@
                 <div class="service-item rounded overflow-hidden">
                     <div class="service-item-img">
                         <a href="" class="img-link">
-                            <img class="img-fluid" src=" {{ asset('img/img-600x400-4.jpg')}}" alt="">
+                            <img class="img-fluid" src="img/san-bong-da-o-quan.jpg" alt="">
                         </a>
                     </div>
                     <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
+                        <h4 class="mb-3">Sân bóng Ô Quan Trưởng</h4>
                         <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
                         <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
                     </div>
@@ -186,11 +181,11 @@
                 <div class="service-item rounded overflow-hidden">
                     <div class="service-item-img">
                         <a href="" class="img-link">
-                            <img class="img-fluid" src="{{ asset('img/img-600x400-5.jpg')}}" alt="">
+                            <img class="img-fluid" src="img/san-nguyen-chi-thanh.jpg" alt="">
                         </a>
                     </div>
                     <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
+                        <h4 class="mb-3">Sân Nguyễn Chí Thanh</h4>
                         <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
                         <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
                     </div>
@@ -200,11 +195,53 @@
                 <div class="service-item rounded overflow-hidden">
                     <div class="service-item-img">
                         <a href="" class="img-link">
-                            <img class="img-fluid" src="{{ asset('img/img-600x400-6.jpg')}}" alt="">
+                            <img class="img-fluid" src="img/san-cau-giay.jpg" alt="">
                         </a>
                     </div>
                     <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
+                        <h4 class="mb-3">Sân bóng Cầu Giấy</h4>
+                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
+                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item rounded overflow-hidden">
+                    <div class="service-item-img">
+                        <a href="" class="img-link">
+                            <img class="img-fluid" src="img/san-cau-giay.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="position-relative p-4 pt-4">
+                        <h4 class="mb-3">Sân bóng Cầu Giấy</h4>
+                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
+                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item rounded overflow-hidden">
+                    <div class="service-item-img">
+                        <a href="" class="img-link">
+                            <img class="img-fluid" src="img/san-cau-giay.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="position-relative p-4 pt-4">
+                        <h4 class="mb-3">Sân bóng Cầu Giấy</h4>
+                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
+                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item rounded overflow-hidden">
+                    <div class="service-item-img">
+                        <a href="" class="img-link">
+                            <img class="img-fluid" src="img/san-cau-giay.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="position-relative p-4 pt-4">
+                        <h4 class="mb-3">Sân bóng Cầu Giấy</h4>
                         <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
                         <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
                     </div>
@@ -214,112 +251,6 @@
     </div>
 </div>
 <!-- Service End -->
-<!-- Projects Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h1 class="mb-4">Các sản phẩm nổi bật</h1>
-        </div>
-        <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
-            <div class="col-12 text-center">
-                <ul class="list-inline mb-5" id="portfolio-flters">
-                    <li class="mx-2 active" data-filter="*">Tất cả</li>
-                    <li class="mx-2" data-filter=".first">Giày bóng đá</li>
-                    <li class="mx-2" data-filter=".second">Quần áo bóng đá</li>
-                    <li class="mx-2" data-filter=".third">Các dụng cụ liên quan</li>
-                </ul>
-            </div>
-        </div>
-        <div class="row g-4 portfolio-container wow fadeInUp" data-wow-delay="0.5s">
-            <div class="col-lg-4 col-md-6 portfolio-item first">
-                <div class="portfolio-img rounded overflow-hidden">
-                    <img class="img-fluid" src="{{ asset('img/img-600x400-6.jpg')}}" alt="">
-                    <div class="portfolio-btn">
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href="{{ asset('img/img-600x400-6.jpg')}}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i class="fa fa-link"></i></a>
-                    </div>
-                </div>
-                <div class="pt-3">
-                    <p class="text-primary mb-0">Solar Panels</p>
-                    <hr class="text-primary w-25 my-2">
-                    <h5 class="lh-base">We Are pioneers of solar & renewable energy industry</h5>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item second">
-                <div class="portfolio-img rounded overflow-hidden">
-                    <img class="img-fluid" src="{{ asset('img/img-600x400-5.jpg')}}" alt="">
-                    <div class="portfolio-btn">
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href="{{ asset('img/img-600x400-5.jpg')}}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i class="fa fa-link"></i></a>
-                    </div>
-                </div>
-                <div class="pt-3">
-                    <p class="text-primary mb-0">Wind Turbines</p>
-                    <hr class="text-primary w-25 my-2">
-                    <h5 class="lh-base">We Are pioneers of solar & renewable energy industry</h5>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item third">
-                <div class="portfolio-img rounded overflow-hidden">
-                    <img class="img-fluid" src="{{ asset('img/img-600x400-4.jpg')}}" alt="">
-                    <div class="portfolio-btn">
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href="i{{ asset('mg/img-600x400-4.jpg')}}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i class="fa fa-link"></i></a>
-                    </div>
-                </div>
-                <div class="pt-3">
-                    <p class="text-primary mb-0">Hydropower Plants</p>
-                    <hr class="text-primary w-25 my-2">
-                    <h5 class="lh-base">We Are pioneers of solar & renewable energy industry</h5>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item first">
-                <div class="portfolio-img rounded overflow-hidden">
-                    <img class="img-fluid" src="{{ asset('img/img-600x400-3.jpg')}}" alt="">
-                    <div class="portfolio-btn">
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href="{{ asset('img/img-600x400-3.jpg')}}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i class="fa fa-link"></i></a>
-                    </div>
-                </div>
-                <div class="pt-3">
-                    <p class="text-primary mb-0">Solar Panels</p>
-                    <hr class="text-primary w-25 my-2">
-                    <h5 class="lh-base">We Are pioneers of solar & renewable energy industry</h5>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item second">
-                <div class="portfolio-img rounded overflow-hidden">
-                    <img class="img-fluid" src="{{ asset('img/img-600x400-2.jpg')}}" alt="">
-                    <div class="portfolio-btn">
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href="{{ asset('img/img-600x400-2.jpg')}}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i class="fa fa-link"></i></a>
-                    </div>
-                </div>
-                <div class="pt-3">
-                    <p class="text-primary mb-0">Wind Turbines</p>
-                    <hr class="text-primary w-25 my-2">
-                    <h5 class="lh-base">We Are pioneers of solar & renewable energy industry</h5>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 portfolio-item third">
-                <div class="portfolio-img rounded overflow-hidden">
-                    <img class="img-fluid" src="{{ asset('img/img-600x400-1.jpg')}}" alt="">
-                    <div class="portfolio-btn">
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href="{{ asset('img/img-600x400-1.jpg')}}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i class="fa fa-link"></i></a>
-                    </div>
-                </div>
-                <div class="pt-3">
-                    <p class="text-primary mb-0">Hydropower Plants</p>
-                    <hr class="text-primary w-25 my-2">
-                    <h5 class="lh-base">We Are pioneers of solar & renewable energy industry</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Projects End -->
-
 
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-body footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -345,22 +276,19 @@
                 <h5 class="text-white mb-4">Project Gallery</h5>
                 <div class="row g-2">
                     <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-1.jpg')}}" alt="">
+                        <img class="img-fluid rounded" src="img/san-bong-da-o-quan.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-2.jpg')}}" alt="">
+                        <img class="img-fluid rounded" src="img/san-nguyen-chi-thanh.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-3.jpg')}}" alt="">
+                        <img class="img-fluid rounded" src="img/san-thien-truong.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-4.jpg')}}" alt="">
+                        <img class="img-fluid rounded" src="img/san-bong-da-o-quan.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-5.jpg')}}" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-6.jpg')}}" alt="">
+                        <img class="img-fluid rounded" src="img/san-cau-giay.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -395,15 +323,16 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{ asset('lib/wow/wow.min.js') }}"></script>
-<script src="{{ asset('lib/easing/easing.min.js') }}"></script>
-<script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
-<script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
-<script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('lib/isotope/isotope.pkgd.min.js') }}"></script>
-<script src="{{ asset('lib/lightbox/js/lightbox.min.js') }}"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/isotope/isotope.pkgd.min.js"></script>
+<script src="lib/lightbox/js/lightbox.min.js"></script>
 
 <!-- Template Javascript -->
-<script src="{{asset('js/main.js')}}"></script>
+<script src="js/main.js"></script>
 </body>
+
 </html>
