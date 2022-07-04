@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap');
+
+:root {
+    --primary-color: #faf4f4;
+    --secondary-color: #ffffff;
+    --tertiary-color: #47f144;
+    --premium-color: #f3c623;
+    --selected-color: #47f144;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--primary-color);
+    color: #000000;
+    /* display: flex; */
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+body>h1 {
+    color: var(--primary-color);
+    font-weight: 300;
+    font-size: 3em;
+    opacity: 0.6;
+    text-shadow:
+        1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #919191,
+        1px 6px 5px #5f5f5f;
+    margin-bottom: 35px;
+}
+
+
+
+
+img {
+    vertical-align: middle;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+    position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+    display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+    cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+    text-align: center;
+    background-color: #222;
+    padding: 2px 16px;
+    color: white;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Six columns side by side */
+.column {
+    float: left;
+    width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
+}
+
+
+.seat-selection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.seat-selection {
+    background-color: var(--tertiary-color);
+    margin-left: 10px;
+    box-shadow: -5px 10px 10px -8px #777;
+}
+
+
+
+label {
+    opacity: 0.7;
+}
+
+button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: #fff;
+    border-radius: 1em;
+    text-decoration: none;
+    height: 2em;
+    width: 7em;
+    font-weight: 300;
+}
+
+button:hover {
+    background-color: var(--tertiary-color);
+    color: white;
+}
+
+button:active {
+    border: 1px solid white;
+}
+
+.items,
+.totals {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.items>p,
+.totals>p {
+    margin: 0.5em;
+}
+
+p.ticket-premium-price,
+p.seats-premium-number {
+    margin-bottom: 1.5em;
+}
+
+
+
+.cinema-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    margin-bottom: 30px;
+}
+
+.seat {
+    /* background-color: #444451; */
+    background-color: var(--secondary-color);
+    height: 50px;
+    width: 60px;
+    margin: 3px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.row,
+.row-showcase {
+    display: flex;
+}
+
+.seat.occupied,
+.seat.premium-seat.occupied {
+    background-color: #fff;
+    opacity: 1;
+}
+
+.seat.premium-seat {
+    /* background-color: rgba(236, 225, 69, 0.5); */
+    background-color: var(--premium-color);
+    opacity: 0.8;
+}
+
+.seat.selected {
+    background-color: var(--selected-color);
+}
+
+.text-choose {
+    background-color: rgb(239, 224, 126);
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.seat.selected-premium {
+    background-color: var(--selected-color);
+    border: 1px solid rgb(236, 225, 69);
+}
+
+.seat:not(.occupied):hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.showcase .seat:not(.occupied):hover {
+    cursor: default;
+    transform: scale(1);
+}
+
+.showcase {
+    /* background-color: rgba(0, 0, 0, 0.1); */
+    padding: 5px 5px;
+    border-radius: 5px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+ul.row-showcase {
+    margin: 5px;
+    padding: 0;
+}
+
+.showcase li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.showcase li small {
+    color: white;
+    opacity: 0.7;
+    margin-left: 2px;
+}
+
+
+
+#dtb_yr {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    margin: 10px 0px 10px 0px;
+}
+
+#dtb_yr[type="text"],
+#dtb_yr[type="password"],
+textarea,
+select {
+    outline: none;
+}
+
+div.stars {
+    /* width: 100px; */
+    display: inline-block;
+}
+
+input.star {
+    display: none;
+}
+
+label.star {
+    float: right;
+    padding: 10px 10px 10px 0px;
+    font-size: 16px;
+    color: #444;
+    transition: all .2s;
+}
+
+input.star:checked~label.star:before {
+    content: '\f005';
+    color: #FD4;
+    transition: all .25s;
+}
+
+input.star-5:checked~label.star:before {
+    color: #FE7;
+    text-shadow: 0 0 20px #952;
+}
+
+input.star-1:checked~label.star:before {
+    color: #F62;
+}
+
+label.star:hover {
+    transform: rotate(-15deg) scale(1.3);
+}
+
+label.star:before {
+    content: '\f006';
+    font-family: FontAwesome;
+}
+
+
+/* map */
+.map-container {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+}
+
+.map-container iframe {
+    left: 0;
+    top: 0;
+
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
