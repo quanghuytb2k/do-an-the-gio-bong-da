@@ -31,3 +31,7 @@ Route::post('/store', 'admin\UserController@store')->name('store');
 Route::get('/create-pitches', 'admin\PitchesController@create')->name('create-pitches');
 Route::post('/store-pitches', 'admin\PitchesController@store')->name('store-pitches');
 
+// product
+Route::get('/add-product', 'admin\ProductController@create')->name('add-product');
+Route::post('/store-product', 'admin\ProductController@store')->name('store-product');
+
