@@ -121,132 +121,22 @@
             <h1 class="mb-4">Tất cả sân bóng</h1>
         </div>
         <div class="row g-4">
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+            @foreach ($stadiums as $stadium)             
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s" for>
                 <div class="service-item rounded overflow-hidden">
                     <div class="service-item-img">
                         <a href="" class="img-link">
-                            <img src="img/carousel/carousel-1.jpg" alt="">
+                            <img class="img-fluid" src="{{asset($stadium->images)}}" alt="">
                         </a>
                     </div>
                     <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="/show">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
+                        <h4 class="mb-3">{{$stadium->name}}</h4>
+                        <p>{{$stadium->address}}.</p>
+                        <a class="small fw-medium" href="/the-gioi-bong-da/show/{{$stadium->id}}">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src="img/san-thien-truong.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thiên trường</h4>
-                        <p>126 Thiên Trường, Ba Đình, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src="img/svd-ho-tay.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">SVD Hồ Tây</h4>
-                        <p>270 Võ Chí Công, Hồ Tây, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src="img/san-bong-da-o-quan.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng Ô Quan Trưởng</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src="img/san-nguyen-chi-thanh.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân Nguyễn Chí Thanh</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src="img/san-cau-giay.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng Cầu Giấy</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src="img/san-cau-giay.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng Cầu Giấy</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src="img/san-cau-giay.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng Cầu Giấy</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src="img/san-cau-giay.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng Cầu Giấy</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
@@ -276,7 +166,7 @@
                 <h5 class="text-white mb-4">Project Gallery</h5>
                 <div class="row g-2">
                     <div class="col-4">
-                        <img class="img-fluid rounded" src="img/san-bong-da-o-quan.jpg" alt="">
+                        <img class="img-fluid rounded" src="{{asset('img/san-bong-da-o-quan.jpg')}}" alt="">
                     </div>
                     <div class="col-4">
                         <img class="img-fluid rounded" src="img/san-nguyen-chi-thanh.jpg" alt="">
@@ -323,16 +213,16 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="lib/wow/wow.min.js"></script>
-<script src="lib/easing/easing.min.js"></script>
-<script src="lib/waypoints/waypoints.min.js"></script>
-<script src="lib/counterup/counterup.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="lib/isotope/isotope.pkgd.min.js"></script>
-<script src="lib/lightbox/js/lightbox.min.js"></script>
+<script src="{{ asset('lib/wow/wow.min.js') }}"></script>
+<script src="{{ asset('lib/easing/easing.min.js') }}"></script>
+<script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
+<script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
+<script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('lib/isotope/isotope.pkgd.min.js') }}"></script>
+<script src="{{ asset('lib/lightbox/js/lightbox.min.js') }}"></script>
 
 <!-- Template Javascript -->
-<script src="js/main.js"></script>
+<script src="{{asset('js/main.js')}}"></script>
 </body>
 
 </html>
