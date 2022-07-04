@@ -1,77 +1,78 @@
 @extends('layouts.backend.master')
 @section('content')
 
-
     <div class="container">
         <h1>Thêm bài viết</h1>
-        <form action="{{route('store-pitches')}}"method="POST"  enctype="multipart/form-data">
+        <form action="{{route('store-pitches')}}" method="POST" enctype="multipart/form-data">
             @csrf
-        <div class="row">
-            <div class="col-md-6">
-            <div class="form-group">
-                <label for="name">Nhập tên sân bóng</label>
-                <input type="text" name="name_pitches" class="form-control" placeholder='Nhập tên sân bóng'>
-            @error('name_pitches')
-            <small class="form-text text-danger">{{$message}}</small>
-            @enderror
-            </div>
-            <div class="form-group">
-                <label for="address">Nhập địa chỉ</label>
-                <input type="text" name="address" class="form-control" placeholder='Nhập địa chỉ'>
-                @error('address')
-                <small class="form-text text-danger">{{$message}}</small>
-                @enderror
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Nhập tên sân bóng</label>
+                        <input type="text" name="name_pitches" class="form-control" placeholder='Nhập tên sân bóng'>
+                        @error('name_pitches')
+                        <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Nhập địa chỉ</label>
+                        <input type="text" name="address" class="form-control" placeholder='Nhập địa chỉ'>
+                        @error('address')
+                        <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="images">Hình ảnh sân bóng</label>
+                        <input type="file" name="file" class="form-control-file">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Miêu tả sân bóng</label>
+                        <textarea name="description" class="form-control" id="description" cols="30"
+                                  rows="5">{{ old('description') }} </textarea>
+
+                        @error('description')
+                        <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Gía sân</label>
+                        <input type="text" name="price" class="form-control" placeholder='giá sân bóng'>
+                        @error('price')
+                        <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
                 </div>
-            <div class="form-group">
-                <label for="images">Hình ảnh sân bóng</label>
-                 <input type="file" name="file" class="form-control-file">
-            </div>
-            <div class="form-group">
-                <label for="description">Miêu tả sân bóng</label>
-                <textarea name="description" class="form-control" id="description" cols="30" rows="5">{{ old('description') }} </textarea>
 
-            @error('description')
-            <small class="form-text text-danger">{{$message}}</small>
-            @enderror
-            </div>
-            <div class="form-group">
-                <label for="price">Gía sân</label>
-                <input type="text" name="price" class="form-control" placeholder='giá sân bóng'>
-                @error('price')
-                <small class="form-text text-danger">{{$message}}</small>
-                @enderror
-            </div>
-            </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Tên chủ sân</label>
+                        <input type="text" name="name" class="form-control" placeholder='Tên chủ sân'>
+                        @error('name')
+                        <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="">Số điện thoại chủ sân</label>
+                        <input type="telephone" name="telephone" class="form-control"
+                               placeholder='Số điện thoại chủ sân '>
+                        @error('telephone')
+                        <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
+                    </div>
 
-            <div class="col-md-6">
-            <div class="form-group">
-                <label for="">Tên chủ sân</label>
-                <input type="text" name="name" class="form-control" placeholder='Tên chủ sân'>
-            @error('name')
-            <small class="form-text text-danger">{{$message}}</small>
-            @enderror
-            </div>
-            <div class="form-group">
-                <label for="">Số điện thoại chủ sân</label>
-                <input type="telephone" name="telephone" class="form-control" placeholder='Số điện thoại chủ sân '>
-                @error('telephone')
-                <small class="form-text text-danger">{{$message}}</small>
-                @enderror
-            </div>
+                    <div class="form-group booking-date" id="5">
+                        <label for="">Khung giờ đá của sân</label><br>
+                        <label for="start">Ngày chọn sân</label>
+                        <input type="date" id="start" multiple="multiple" name="date"><br>
+                        <label for="">Giờ chọn sân đá</label><br>
+                        <input class="time-pitches" type="time" id="time-pitches" name="time[]">
+                        <p id="add-time"><i class="fa fa-plus" aria-hidden="true"></i></p>
+                    </div>
+                </div>
 
-            <div class="form-group booking-date" id="5">
-                <label for="">Khung giờ đá của sân</label><br>
-                <label for="start">Ngày chọn sân</label>
-                <input type="date" id="start" multiple="multiple"  name="date"><br>
-                <label for="">Giờ chọn sân đá</label><br>
-                <input class="time-pitches" type="time" id="time-pitches" name="time[]">
-                <p id="add-time"><i class="fa fa-plus" aria-hidden="true"></i></p>
-            </div>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" name="sm-add" class="fbtn btn-danger" value="Thêm mới">
-            </div>
+                <div class="form-group">
+                    <input type="submit" name="sm-add" class="fbtn btn-danger" value="Thêm mới">
+                </div>
             </div>
         </form>
     </div>
@@ -102,20 +103,20 @@
         });
 
     </script>
-{{--    <script>--}}
-{{--        $("#district").click(function(){--}}
-{{--            var _token = $('input[name="_token"]').val();--}}
-{{--            var commune = $(this).val();--}}
-{{--            var data = {commune:commune, _token:_token};--}}
-{{--            $.ajax({--}}
-{{--                url:"{{route('commune')}}",--}}
-{{--                method :'POST',--}}
-{{--                data:data,--}}
-{{--                dataType: 'json',--}}
-{{--                success:function(data){--}}
-{{--                    $('.commune').html(data);--}}
-{{--                }--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-    @endsection
+    {{--    <script>--}}
+    {{--        $("#district").click(function(){--}}
+    {{--            var _token = $('input[name="_token"]').val();--}}
+    {{--            var commune = $(this).val();--}}
+    {{--            var data = {commune:commune, _token:_token};--}}
+    {{--            $.ajax({--}}
+    {{--                url:"{{route('commune')}}",--}}
+    {{--                method :'POST',--}}
+    {{--                data:data,--}}
+    {{--                dataType: 'json',--}}
+    {{--                success:function(data){--}}
+    {{--                    $('.commune').html(data);--}}
+    {{--                }--}}
+    {{--            });--}}
+    {{--        });--}}
+    {{--    </script>--}}
+@endsection
