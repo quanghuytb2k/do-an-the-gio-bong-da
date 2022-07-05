@@ -34,4 +34,8 @@ Route::post('/store-pitches', 'admin\PitchesController@store')->name('store-pitc
 // product
 Route::get('/add-product', 'admin\ProductController@create')->name('add-product');
 Route::post('/store-product', 'admin\ProductController@store')->name('store-product');
+Route::get('/list-product', 'admin\ProductController@list')->name('list-product');
+Route::get('/delete-product/{id}', 'admin\ProductController@delete')->name('delete-product');
+Route::get('/edit-product/{id}', 'admin\ProductController@edit')->name('edit-product');
+Route::post('/update-product/{id}', 'admin\ProductController@update')->name('update-product');
 
