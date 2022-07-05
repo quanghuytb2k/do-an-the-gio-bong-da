@@ -24,7 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.index');
+        $fiveStars = Pitches::where('football_pitches.star_rating' , '=', 5)->get();
+        return view('frontend.index', compact('fiveStars'));
     }
     public function service(){
         $stadiums = Pitches::all();

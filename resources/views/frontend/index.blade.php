@@ -126,90 +126,23 @@
             <h1 class="mb-4">Sân nổi bật</h1>
         </div>
         <div class="row g-4">
+            @foreach ($fiveStars as $item)
             <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item rounded overflow-hidden">
                     <div class="service-item-img">
                         <a href="" class="img-link">
-                            <img src="{{ asset('img/carousel/carousel-1.jpg')}}" alt="">
+                            <img src="{{ asset($item->images)}}" alt="">
                         </a>
                     </div>
                     <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
+                        <h4 class="mb-3">{{$item->name}}t</h4>
+                        <p>{{$item->address}}</p>
+                        <p>{{$item->price}}</p>
+                        <a class="small fw-medium" href="/the-gioi-bong-da/show/{{$item->id}}">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src=" {{ asset('img/img-600x400-2.jpg')}}" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src="{{ asset('img/img-600x400-3.jpg  ')}}" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src=" {{ asset('img/img-600x400-4.jpg')}}" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src="{{ asset('img/img-600x400-5.jpg')}}" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img class="img-fluid" src="{{ asset('img/img-600x400-6.jpg')}}" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">Sân bóng thành phát</h4>
-                        <p>385 Trần Duy Hưng, Cầu Giấy, Hà Nội.</p>
-                        <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
