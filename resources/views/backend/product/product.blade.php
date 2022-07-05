@@ -91,5 +91,6 @@
             <div class="form-group">
                 <input type="submit" name="sm-add" class=" btn-danger" value="Thêm mới">
             </div>
+        </form>
     </div>
 @endsection
