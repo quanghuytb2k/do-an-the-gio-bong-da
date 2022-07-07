@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -20,14 +22,15 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     {{--    <link href=" {{ asset('css/bootstrap/bootstrap.css') }}" rel="stylesheet">--}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('asset/css.css') }}">
-    <link rel="stylesheet prefetch" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
+    <link rel="stylesheet prefetch" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"/>
 
     <title>Chi tiet san</title>
 </head>
@@ -80,76 +83,209 @@
             </div> -->
             <a href="contact.html" class="nav-item nav-link">Sản phẩm</a>
         </div>
-        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng nhập <i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng nhập <i
+                class="fa-solid fa-arrow-right-to-bracket"></i></a>
     </div>
 </nav>
 <!-- Navbar End -->
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
-            <div class="mySlides">
-                <img src="https://www.sanbongconhantao.vn/image/data/kich-thuoc-san-bong.jpg" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <img src="https://www.sanbongconhantao.vn/image/data/kich-thuoc-san-bong.jpg" style="width:100%">
-            </div>
-
-            <div class="mySlides">
-                <img src="https://www.sanbongconhantao.vn/image/data/kich-thuoc-san-bong.jpg" style="width:100%">
-            </div>
-
-            <div class="caption-container">
-                <p id="caption"></p>
-            </div>
-
-            <div class="row">
-                <div class="column col-md-4">
-                    <img class="demo cursor"
-                         src="https://www.sanbongconhantao.vn/image/data/kich-thuoc-san-bong.jpg" style="width:100%"
-                         onclick="currentSlide(1)" alt="Anh 1">
+        @foreach($pitches as $item)
+            <div class="col-md-6">
+                <div class="mySlides">
+                    <img src="{{asset($item->images)}}" style="width:100%">
                 </div>
-                <div class="column col-md-4">
-                    <img class="demo cursor"
-                         src="https://www.sanbongconhantao.vn/image/data/kich-thuoc-san-bong.jpg" style="width:100%"
-                         onclick="currentSlide(2)" alt="Anh 2">
-                </div>
-                <div class="column col-md-4">
-                    <img class="demo cursor"
-                         src="https://www.sanbongconhantao.vn/image/data/kich-thuoc-san-bong.jpg" style="width:100%"
-                         onclick="currentSlide(3)" alt="Anh 3">
-                </div>
-            </div>
-            <div class="pt-3 mt-3">
-                <div>
-                    <div class="stars">
-                        <div>
-                            <h5 class="card-title">Tên sân</h5>
-                            <h5 class="card-title">Địa chỉ</h5>
-                            <h5 class="card-title">Số điện thoại</h5>
-                            <h5 class="card-title">Đánh giá</h5>
-                        </div>
-                        <form action="">
+                {{--            <div class="row">--}}
+                {{--                <div class="column col-md-4">--}}
+                {{--                    <img class="demo cursor"--}}
+                {{--                         src="https://www.sanbongconhantao.vn/image/data/kich-thuoc-san-bong.jpg" style="width:100%"--}}
+                {{--                         onclick="currentSlide(1)" alt="Anh 1">--}}
+                {{--                </div>--}}
+
+                {{--            </div>--}}
+                <div class="pt-3 mt-3">
+                    <div>
+                        <div class="stars">
                             <div>
-                                <input class="star star-5" id="star-5" type="radio" name="star" />
-                                <label class="star star-5" for="star-5"></label>
-                                <input class="star star-4" id="star-4" type="radio" name="star" />
-                                <label class="star star-4" for="star-4"></label>
-                                <input class="star star-3" id="star-3" type="radio" name="star" />
-                                <label class="star star-3" for="star-3"></label>
-                                <input class="star star-2" id="star-2" type="radio" name="star" />
-                                <label class="star star-2" for="star-2"></label>
-                                <input class="star star-1" id="star-1" type="radio" name="star" />
-                                <label class="star star-1" for="star-1"></label>
+                                <h5 class="card-title">Tên sân : {{$item->name_pitch}}</h5>
+                                <h5 class="card-title">Địa chỉ : {{$item->address}}</h5>
+                                <h5 class="card-title">Số điện thoại : {{$item->phone_number}}</h5>
+                                <h5 class="card-title">Đánh giá : {{$item->star_rating}}</h5>
                             </div>
-                        </form>
+                            <form action="">
+                                <div>
+                                    <input class="star star-5" id="star-5" type="radio" name="star"/>
+                                    <label class="star star-5" for="star-5"></label>
+                                    <input class="star star-4" id="star-4" type="radio" name="star"/>
+                                    <label class="star star-4" for="star-4"></label>
+                                    <input class="star star-3" id="star-3" type="radio" name="star"/>
+                                    <label class="star star-3" for="star-3"></label>
+                                    <input class="star star-2" id="star-2" type="radio" name="star"/>
+                                    <label class="star star-2" for="star-2"></label>
+                                    <input class="star star-1" id="star-1" type="radio" name="star"/>
+                                    <label class="star star-1" for="star-1"></label>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="map-container-google-1" class="z-depth-1-half map-container" style="width: 550px; ">
+                            <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                                    frameborder="0" style="border: 0" allowfullscreen></iframe>
+                        </div>
+                        <div>
+                            <h2>Tiện ích</h2>
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <td>Wifi</td>
+                                    <td>Căng tin</td>
+                                    <td>Giữ xe</td>
+                                </tr>
+                                <tr>
+                                    <td>Tìm đối</td>
+                                    <td>Shop thể thao</td>
+                                    <td>Livestream</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div id="map-container-google-1" class="z-depth-1-half map-container" style="width: 550px; ">
-                        <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                frameborder="0" style="border: 0" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- left-content -->
+            <div class=" col-md-6">
+                <div class="row">
+                    <div class="col-md" style="background-color:rgb(234, 220, 220) ;">
+                        <div>
+                            <div>
+
+                                <div class="cinema-container">
+                                    <div class="text-choose">
+                                        <h1>Ngày đặt sân</h1>
+                                    </div>
+                                    <div  style="width: 100px">
+                                            <div  style="width: 200px; text-align: center; line-height: 50px; margin-left: -40px"  class="seat">{{$day_year}}</div>
+                                    </div>
+{{--                                    <div class="row">--}}
+{{--                                        <div class="seat premium-seat">Thứ 6</div>--}}
+{{--                                        <div class="seat">Thứ 7</div>--}}
+{{--                                        <div class="seat">Chủ nhật</div>--}}
+{{--                                    </div>--}}
+                                    <div class="text-choose">
+                                        <h1>Chọn giờ</h1>
+                                    </div>
+                                    <!-- Normal seats -->
+                                    <div class="row">
+                                        @foreach($times as $value)
+                                        <div style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
+                                            <input class="seat <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="text" style="text-align: center; line-height: 50px; width: 120px; height: 60px" value="{{$value['time_start']}} - {{$value['time_end']}}">
+                                        </div>
+                                        @endforeach
+{{--                                        <div class="seat">15:00-16:00</div>--}}
+{{--                                        <div class="seat">15:00-16:00</div>--}}
+{{--                                        <div class="seat premium-seat">15:00-16:00</div>--}}
+{{--                                        <div class="seat premium-seat">15:00-16:00</div>--}}
+{{--                                        <div class="seat premium-seat">15:00-16:00</div>--}}
+{{--                                        <div class="seat">15:00-16:00</div>--}}
+{{--                                        <div class="seat">15:00-16:00</div>--}}
+                                    </div>
+{{--                                    <div class="text-choose">--}}
+{{--                                        <h1>Chọn sân</h1>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="row">--}}
+{{--                                        <div class="seat">Sân 1</div>--}}
+{{--                                        <div class="seat">Sân 1</div>--}}
+{{--                                        <div class="seat">Sân 1</div>--}}
+{{--                                        <div class="seat premium-seat">Sân 1</div>--}}
+{{--                                        <div class="seat">Sân 1</div>--}}
+{{--                                        <div class="seat premium-seat">Sân 1</div>--}}
+{{--                                        <div class="seat">Sân 1</div>--}}
+{{--                                        <div class="seat">Sân 1</div>--}}
+{{--                                    </div>--}}
+                                </div>
+                                <div class="showcase">
+{{--                                    <ul class="row-showcase">--}}
+{{--                                        <li>--}}
+{{--                                            <div class="seat"></div>--}}
+{{--                                            <small>Còn trống</small>--}}
+{{--                                        </li>--}}
+{{--                                        <li>--}}
+{{--                                            <div class="seat premium-seat"></div>--}}
+{{--                                            <small>Đã đặt</small>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                    <ul class="row-showcase">--}}
+{{--                                        <li>--}}
+{{--                                            <div class="seat selected"></div>--}}
+{{--                                            <small>Đang chọn</small>--}}
+{{--                                        </li>--}}
+{{--                                        <li>--}}
+{{--                                            <div class="seat occupied"></div>--}}
+{{--                                            <small>???</small>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModal">
+                                        ĐẶT SÂN
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Thanh toán</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Tên </label>
+                                                            <input type="text" class="form-control"
+                                                                   id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Số điện thoại</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="exampleInputPassword1">
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                   name="flexRadioDefault" id="flexRadioDefault1">
+                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                                Liên hệ </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                   name="flexRadioDefault" id="flexRadioDefault2"
+                                                                   checked>
+                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                                Đặt Online
+                                                            </label>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div>
-                        <h2>Tiện ích</h2>
+                        <h2>Các đối đặt sân</h2>
                         <table class="table">
                             <tbody>
                             <tr>
@@ -167,166 +303,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- left-content -->
-        <div class=" col-md-6">
-            <div class="row">
-                <div class="col-md" style="background-color:rgb(234, 220, 220) ;">
-                    <div>
-                        <div>
-
-                            <div class="cinema-container">
-                                <div class="text-choose">
-                                    <h1>Chọn ngày</h1>
-                                </div>
-                                <div class="row">
-                                    <div class="seat">Thứ 2</div>
-                                    <div class="seat">Thứ 3</div>
-                                    <div class="seat">Thứ 4</div>
-                                    <div class="seat">Thứ 5</div>
-                                </div>
-                                <div class="row">
-                                    <div class="seat premium-seat">Thứ 6</div>
-                                    <div class="seat">Thứ 7</div>
-                                    <div class="seat">Chủ nhật</div>
-                                </div>
-                                <div class="text-choose">
-                                    <h1>Chọn giờ</h1>
-                                </div>
-                                <!-- Normal seats -->
-                                <div class="row">
-                                    <div class="seat">15:00-16:00</div>
-                                    <div class="seat">15:00-16:00</div>
-                                    <div class="seat">15:00-16:00</div>
-                                    <div class="seat premium-seat">15:00-16:00</div>
-                                    <div class="seat premium-seat">15:00-16:00</div>
-                                    <div class="seat premium-seat">15:00-16:00</div>
-                                    <div class="seat">15:00-16:00</div>
-                                    <div class="seat">15:00-16:00</div>
-                                </div>
-                                <div class="row">
-                                    <div class="seat">15:00-16:00</div>
-                                    <div class="seat">15:00-16:00</div>
-                                    <div class="seat">15:00-16:00</div>
-                                    <div class="seat">15:00-16:00</div>
-                                    <div class="seat premium-seat">15:00-16:00</div>
-                                    <div class="seat">15:00-16:00</div>
-                                    <div class="seat">15:00-16:00</div>
-                                    <div class="seat">15:00-16:00</div>
-                                </div>
-                                <div class="text-choose">
-                                    <h1>Chọn sân</h1>
-                                </div>
-                                <div class="row">
-                                    <div class="seat">Sân 1</div>
-                                    <div class="seat">Sân 1</div>
-                                    <div class="seat">Sân 1</div>
-                                    <div class="seat premium-seat">Sân 1</div>
-                                    <div class="seat">Sân 1</div>
-                                    <div class="seat premium-seat">Sân 1</div>
-                                    <div class="seat">Sân 1</div>
-                                    <div class="seat">Sân 1</div>
-                                </div>
-                            </div>
-                            <div class="showcase">
-                                <ul class="row-showcase">
-                                    <li>
-                                        <div class="seat"></div>
-                                        <small>Còn trống</small>
-                                    </li>
-                                    <li>
-                                        <div class="seat premium-seat"></div>
-                                        <small>Đã đặt</small>
-                                    </li>
-                                </ul>
-                                <ul class="row-showcase">
-                                    <li>
-                                        <div class="seat selected"></div>
-                                        <small>Đang chọn</small>
-                                    </li>
-                                    <li>
-                                        <div class="seat occupied"></div>
-                                        <small>???</small>
-                                    </li>
-                                </ul>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#exampleModal">
-                                    Launch demo modal
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Thanh toán</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Tên </label>
-                                                        <input type="text" class="form-control"
-                                                               id="exampleInputEmail1" aria-describedby="emailHelp">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Số điện thoại</label>
-                                                        <input type="text" class="form-control"
-                                                               id="exampleInputPassword1">
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                                        <label class="form-check-label" for="flexRadioDefault1">
-                                                            Liên hệ </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                               name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault2">
-                                                            Đặt Online
-                                                        </label>
-                                                    </div>
-
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h2>Các đối đặt sân</h2>
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <td>Wifi</td>
-                            <td>Căng tin</td>
-                            <td>Giữ xe</td>
-                        </tr>
-                        <tr>
-                            <td>Tìm đối</td>
-                            <td>Shop thể thao</td>
-                            <td>Livestream</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 </body>
