@@ -121,7 +121,7 @@
             <h1 class="mb-4">Tất cả sân bóng</h1>
         </div>
         <div class="row g-4">
-            @foreach ($stadiums as $stadium)             
+            @foreach ($stadiums as $stadium)
             <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s" for>
                 <div class="service-item rounded overflow-hidden">
                     <div class="service-item-img">
@@ -132,7 +132,7 @@
                     <div class="position-relative p-4 pt-4">
                         <h4 class="mb-3">{{$stadium->name}}</h4>
                         <p>{{$stadium->address}}.</p>
-                        <a class="small fw-medium" href="/the-gioi-bong-da/show/{{$stadium->id}}">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
+                        <a class="small fw-medium" href="{{ route('detail-pitches',$stadium->id)}}">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
                     </div>
                 </div>
             </div>

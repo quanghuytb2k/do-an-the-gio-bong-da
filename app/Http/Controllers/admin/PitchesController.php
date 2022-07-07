@@ -32,16 +32,19 @@ class PitchesController extends Controller
             'name_pitch' => $request->input('name_pitches'),
             'price' => $request->input('price')
         ]);
-        $time = $request->time;
-
-        if (isset($time)) {
-            foreach ($time as $timeId) {
-                $timeCreate = PitchBookingTime::create([
-                    'time'=>$timeId,
-                    'day_year'=>$request->date
+        $time_start = $request->time_start;
+        $time_end = $request->time_end;
+        $c = count($time_end);
+//        dd($time_start[0]);
+        if (isset($time_start) && isset($time_end)) {
+            for($i=0; $i<$c; $i ++) {
+                    $timeCreate = PitchBookingTime::create([
+                        'time_start' => $time_start[$i],
+                        'time_end' => $time_end[$i],
+                        'day_year'=>$request->date
                 ]);
                 $Pitches_time = DB::table('pitches_time')->insert([
-                   'pitches_id' => $PitchesCreate->id,
+                    'pitches_id' => $PitchesCreate->id,
                     'time_id' => $timeCreate->id
                 ]);
             }

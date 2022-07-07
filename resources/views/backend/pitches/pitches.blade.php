@@ -63,9 +63,11 @@
                     <div class="form-group booking-date" id="5">
                         <label for="">Khung giờ đá của sân</label><br>
                         <label for="start">Ngày chọn sân</label>
-                        <input type="date" id="start" multiple="multiple" name="date"><br>
-                        <label for="">Giờ chọn sân đá</label><br>
-                        <input class="time-pitches" type="time" id="time-pitches" name="time[]">
+                        <input type="date" id="start" multiple="multiple" name="date"><br><br>
+                        <label for="">Giờ bắt đầu sân đá</label>
+                        <input class="time-pitches" type="time" id="time-pitches-start" name="time_start[]">
+                        <label for="">Giờ kết thúc sân đá</label>
+                        <input class="time-pitches" type="time" id="time-pitches-end" name="time_end[]">
                         <p id="add-time"><i class="fa fa-plus" aria-hidden="true"></i></p>
                     </div>
                 </div>
@@ -86,9 +88,12 @@
             // console.log(add_line);
             let html = '';
             html += `
-                    <input class="time-pitches" type="time" id="time-pitches" name="time[]" >
+                        <label for="">Giờ bắt đầu sân đá</label>
+                        <input class="time-pitches" type="time" id="time-pitches" name="time_start[]">
+                        <label for="">Giờ kết thúc sân đá</label>
+                        <input class="time-pitches" type="time" id="time-pitches" name="time_end[]">
                     `;
-            $("#time-pitches").after(html);
+            $("#time-pitches-end").after(html);
             // for (let i = 1; i <= add_line; i++) {
             //     html += `
             //         <input class="time-pitches" type="time" id="time-pitches" name="time[]" >
