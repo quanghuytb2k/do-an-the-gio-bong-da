@@ -178,8 +178,9 @@
                                     <div class="row">
                                         @foreach($times as $value)
                                         <div style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
-                                            <input class="seat <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="text" style="text-align: center; line-height: 50px; width: 120px; height: 60px" value="{{$value['time_start']}} - {{$value['time_end']}}">
+                                            <div id="time" class="seat time <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="text" style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">{{$value['time_start']}} - {{$value['time_end']}}</div>
                                         </div>
+{{--                                            <div class="seat seat-standard active" onclick="selectedseats(this)" zone="Thường" loc="00401001" price="120000">C2</div>--}}
                                         @endforeach
 {{--                                        <div class="seat">15:00-16:00</div>--}}
 {{--                                        <div class="seat">15:00-16:00</div>--}}
@@ -202,28 +203,14 @@
 {{--                                        <div class="seat">Sân 1</div>--}}
 {{--                                        <div class="seat">Sân 1</div>--}}
 {{--                                    </div>--}}
+                                    <div class="col-md-12">
+                                        <div>
+                                            <p>Giờ mà bạn chọn sân là : <spana>1</spana> <spana>2</spana> </p>
+                                            <p>Số tiền là:  <spana>1</spana> <spana>2</spana> </p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="showcase">
-{{--                                    <ul class="row-showcase">--}}
-{{--                                        <li>--}}
-{{--                                            <div class="seat"></div>--}}
-{{--                                            <small>Còn trống</small>--}}
-{{--                                        </li>--}}
-{{--                                        <li>--}}
-{{--                                            <div class="seat premium-seat"></div>--}}
-{{--                                            <small>Đã đặt</small>--}}
-{{--                                        </li>--}}
-{{--                                    </ul>--}}
-{{--                                    <ul class="row-showcase">--}}
-{{--                                        <li>--}}
-{{--                                            <div class="seat selected"></div>--}}
-{{--                                            <small>Đang chọn</small>--}}
-{{--                                        </li>--}}
-{{--                                        <li>--}}
-{{--                                            <div class="seat occupied"></div>--}}
-{{--                                            <small>???</small>--}}
-{{--                                        </li>--}}
-{{--                                    </ul>--}}
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#exampleModal">
@@ -306,6 +293,16 @@
         @endforeach
     </div>
 </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+    $("#time").click(function(){
+        console.log(123);
+        if($('#time').hasClass('premium-seat')) {
+            console.log('hhrr');
+        }
+    });
+
+</script>
 </body>
 <script src="{{ asset('asset/main.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>

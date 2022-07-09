@@ -34,13 +34,13 @@
                         <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="price">Gía sân</label>
-                        <input type="text" name="price" class="form-control" placeholder='giá sân bóng'>
-                        @error('price')
-                        <small class="form-text text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
+{{--                    <div class="form-group">--}}
+{{--                        <label for="price">Gía sân</label>--}}
+{{--                        <input type="text" name="price" class="form-control" placeholder='giá sân bóng'>--}}
+{{--                        @error('price')--}}
+{{--                        <small class="form-text text-danger">{{$message}}</small>--}}
+{{--                        @enderror--}}
+{{--                    </div>--}}
                 </div>
 
                 <div class="col-md-6">
@@ -68,6 +68,9 @@
                         <input class="time-pitches" type="time" id="time-pitches-start" name="time_start[]">
                         <label for="">Giờ kết thúc sân đá</label>
                         <input class="time-pitches" type="time" id="time-pitches-end" name="time_end[]">
+                        <label for="" style="margin-left: 160px">Gía sân</label>
+                        <input class="pitches-price" type="text" id="pitches-price" name="price[]">
+                        <hr>
                         <p id="add-time"><i class="fa fa-plus" aria-hidden="true"></i></p>
                     </div>
                 </div>
@@ -88,12 +91,16 @@
             // console.log(add_line);
             let html = '';
             html += `
+                        <hr>
                         <label for="">Giờ bắt đầu sân đá</label>
-                        <input class="time-pitches" type="time" id="time-pitches" name="time_start[]">
+                        <input class="time-pitches" type="time" id="time-pitches-start" name="time_start[]">
                         <label for="">Giờ kết thúc sân đá</label>
-                        <input class="time-pitches" type="time" id="time-pitches" name="time_end[]">
+                        <input class="time-pitches" type="time" id="time-pitches-end" name="time_end[]">
+                        <label for="" style="margin-left: 110px">Gía sân</label>
+                        <input class="pitches-price" type="text" id="pitches-price" name="price[]">
+
                     `;
-            $("#time-pitches-end").after(html);
+            $("#pitches-price").after(html);
             // for (let i = 1; i <= add_line; i++) {
             //     html += `
             //         <input class="time-pitches" type="time" id="time-pitches" name="time[]" >
