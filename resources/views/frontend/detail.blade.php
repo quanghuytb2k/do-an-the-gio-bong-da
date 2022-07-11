@@ -178,7 +178,7 @@
                                     <div class="row">
                                         @foreach($times as $value)
                                         <div style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
-                                            <div id="time" class="seat time <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="text" style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">{{$value['time_start']}} - {{$value['time_end']}}</div>
+                                            <div id="time" class="seat time <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="ratio" style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">{{$value['time_start']}} - {{$value['time_end']}}</div>
                                         </div>
 {{--                                            <div class="seat seat-standard active" onclick="selectedseats(this)" zone="Thường" loc="00401001" price="120000">C2</div>--}}
                                         @endforeach
@@ -190,6 +190,7 @@
 {{--                                        <div class="seat">15:00-16:00</div>--}}
 {{--                                        <div class="seat">15:00-16:00</div>--}}
                                     </div>
+                                </div>
 {{--                                    <div class="text-choose">--}}
 {{--                                        <h1>Chọn sân</h1>--}}
 {{--                                    </div>--}}
@@ -295,12 +296,16 @@
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script>
-    $("#time").click(function(){
-        console.log(123);
-        if($('#time').hasClass('premium-seat')) {
-            console.log('hhrr');
-        }
-    });
+    // $("#time").click(function(){
+    //     document.getElementById('time').style.backgroundColor = "green";
+    //     if($('#time').hasClass('premium-seat')) {
+    //     }
+    // });
+    $('.time').click(function() {
+    $('.checked').toggleClass('checked');    
+    $(this).toggleClass('checked');
+});
+
 
 </script>
 </body>
