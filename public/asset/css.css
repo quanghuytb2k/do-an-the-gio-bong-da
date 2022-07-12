@@ -349,8 +349,14 @@ label.star:before {
 .map-container iframe {
     left: 0;
     top: 0;
-
     height: 100%;
     width: 100%;
     position: absolute;
 }
+/* detail */
+.checked {
+    border:2px solid blue;
+    background-color: rgba(236, 225, 69, 0.5);
+    
+}
+  
