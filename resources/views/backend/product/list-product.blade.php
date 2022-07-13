@@ -6,7 +6,7 @@
                 <div class="section" id="title-page">
                     <div class="clearfix">
                         <h3 id="index" class="fl-left">Danh sách sản phẩm</h3>
-                        <a href="?page=add_cat" title="" id="add-new" class="fl-left">Thêm mới</a>
+                        <a href="{{route('add-product')}}" title="" id="add-new" class="fl-left">Thêm mới</a>
                     </div>
                 </div>
                 <div class="section" id="detail-page">

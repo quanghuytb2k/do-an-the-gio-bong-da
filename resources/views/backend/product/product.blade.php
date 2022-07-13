@@ -7,19 +7,21 @@
                 {{session('status')}}
             </div>
         @endif
-        <h1>thêm sản phẩm</h1>
+        <h1>Thêm sản phẩm</h1>
 
 
         <form action="{{route('store-product')}}" method="POST" files=true enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <input type="text" name="name" class="form-control" placeholder='tên sản phẩm'>
+                <label for="">Tên sản phẩm</label>
+                <input type="text" name="name" class="form-control" >
                 @error('name')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
             </div>
             <div class="form-group">
-                <input type="text" name="code" class="form-control" placeholder='mã sản phẩm'>
+                <label for="">Mã sản phẩm</label>
+                <input type="text" name="code" class="form-control" >
                 @error('code')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
@@ -31,20 +33,25 @@
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
             </div>
+
             <div class="form-group">
+                <label for="">Hình ảnh</label>
                 <input type="file" name="file" class="form-control-file" value="{{ old('file') }}">
             </div>
             <div class="form-group">
-                <input type="text" name="price" class="form-control" placeholder='giá sản phẩm'>
+                <label for="">Giá sản phẩm</label>
+                <input type="text" name="price" class="form-control" >
                 @error('price')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
             </div>
             <div class="form-group">
-                <input type="text" name="old_price" class="form-control" placeholder='giá cũ sản phẩm'>
+                <label for="">Giá cũ sản phẩm</label>
+                <input type="text" name="old_price" class="form-control">
             </div>
             <div class="form-group">
-                <input type="text" name="amount" class="form-control" placeholder='số lượng'>
+                <label for="">Số lượng</label>
+                <input type="text" name="amount" class="form-control" >
                 @error('amount')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
@@ -64,25 +71,29 @@
             {{--                @enderror--}}
             {{--            </div>--}}
             <div class="form-group">
-                <input type="text" name="trademake" class="form-control" placeholder='thuong hieu'>
+                <label for="">Thương hiệu</label>
+                <input type="text" name="trademake" class="form-control" >
                 @error('trademake')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
             </div>
             <div class="form-group">
-                <input type="text" name="origin" class="form-control" placeholder='xuat xu'>
+                <label for="">Xuất xứ</label>
+                <input type="text" name="origin" class="form-control" >
                 @error('origin')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
             </div>
             <div class="form-group">
-                <input type="text" name="size" class="form-control" placeholder='kich co'>
+                <label for="">Kích cỡ</label>
+                <input type="text" name="size" class="form-control" >
                 @error('size')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
             </div>
             <div class="form-group">
-                <input type="text" name="type_sole" class="form-control" placeholder='loai de giay'>
+                <label for="">Loại đế giày</label>
+                <input type="text" name="type_sole" class="form-control" >
                 @error('type_sole')
                 <small class="form-text text-danger">{{$message}}</small>
                 @enderror
