@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <title>The gioi the thao</title>
+    <title>Solartec - Renewable Energy Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{{ asset('img/favicon.ico') }}" rel="icon">
+    <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +19,6 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
@@ -26,7 +26,7 @@
     <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-{{--    <link href=" {{ asset('css/bootstrap/bootstrap.css') }}" rel="stylesheet">--}}
+    {{--    <link href=" {{ asset('css/bootstrap/bootstrap.css') }}" rel="stylesheet">--}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Template Stylesheet -->
@@ -35,6 +35,11 @@
 
 <body>
 <!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 <!-- Spinner End -->
 
 
@@ -95,96 +100,48 @@
 <!-- Navbar End -->
 
 
-<!-- Carousel Start -->
-<div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="owl-carousel header-carousel position-relative">
-        <div class="owl-carousel-item position-relative" data-dot="<img src='{{ asset('img/carousel/carousel-3.jpg') }}'>" style="height: 600px">
-            <div class="owl-carousel-item-img">
-                <img src="{{ asset('/img/carousel/carousel-1.jpg') }}" alt=""  style="height: 600px">
-            </div>
-        </div>
-        <div class="owl-carousel-item position-relative" data-dot="<img src=' {{ asset('img/carousel/carousel-2.jpg') }}'>"  style="height: 600px">
-            <div class="owl-carousel-item-img">
-                <img src=" {{ asset('img/carousel/carousel-2.jpg') }}" alt=""  style="height: 600px">
-            </div>
-        </div>
-        <div class="owl-carousel-item position-relative" data-dot="<img src='{{ asset('img/carousel-3.jpg') }}'>"  style="height: 600px">
-            <div class="owl-carousel-item-img">
-                <img src="{{ asset('img/carousel/carousel-3.jpg ') }} " alt=""  style="height: 600px">
-            </div>
-        </div>
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5 mb-5">
+    <div class="container py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Sản phẩm</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="text-white" href="#">Trang chủ</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Sản phẩm</li>
+            </ol>
+        </nav>
     </div>
 </div>
-<!-- Carousel End -->
+<!-- Page Header End -->
 
 
-
-<!-- Service Start -->
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h1 class="mb-4">Sân nổi bật</h1>
+            <h1 class="mb-4">Tất cả sản phẩm</h1>
         </div>
+
         <div class="row g-4">
-            @foreach ($fiveStars as $item)
-            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item rounded overflow-hidden">
-                    <div class="service-item-img">
-                        <a href="" class="img-link">
-                            <img src="{{ asset($item->images)}}" alt="">
-                        </a>
-                    </div>
-                    <div class="position-relative p-4 pt-4">
-                        <h4 class="mb-3">{{$item->name_pitch}}</h4>
-                        <p>{{$item->address}}</p>
-                        <p>{{$item->price}}</p>
-                        <a class="small fw-medium" href="{{ route('detail-pitches',$item->id)}}">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
+            @foreach($products as $item)
+                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s" for>
+                    <div class="service-item rounded overflow-hidden">
+                        <div class="service-item-img">
+                            <a href="" class="img-link">
+                                <img class="img-fluid" src="{{asset($item->thumbnail)}}" alt="">
+                            </a>
+                        </div>
+                        <div class="position-relative p-4 pt-4">
+                            <h4 class="mb-3">{{$item->name}}</h4>
+                            <p>{{number_format($item->price).'đ'}}</p>
+                            <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>
 </div>
 <!-- Service End -->
-<!-- Projects Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h1 class="mb-4">Các sản phẩm nổi bật</h1>
-        </div>
-        <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
-            <div class="col-12 text-center">
-                <ul class="list-inline mb-5" id="portfolio-flters">
-                    <li class="mx-2 active" data-filter="*">Tất cả</li>
-                    <li class="mx-2" data-filter=".first">Giày bóng đá</li>
-                    <li class="mx-2" data-filter=".second">Quần áo bóng đá</li>
-                    <li class="mx-2" data-filter=".third">Các dụng cụ liên quan</li>
-                </ul>
-            </div>
-        </div>
-        <div class="row g-4 portfolio-container wow fadeInUp" data-wow-delay="0.5s">
-            @foreach($product as $item)
-            <div class="col-lg-4 col-md-6 portfolio-item first">
-                <div class="portfolio-img rounded overflow-hidden">
-                    <img class="img-fluid" src="{{ asset($item->thumbnail)}}" alt="">
-                    <div class="portfolio-btn">
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href="{{ asset('img/img-600x400-6.jpg')}}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i class="fa fa-link"></i></a>
-                    </div>
-                </div>
-                <div class="pt-3">
-                    <p class="text-primary mb-0">{{$item->name}}</p>
-{{--                    <hr class="text-primary w-25 my-2">--}}
-                    <h5 class="lh-base">{{number_format($item->price).'đ'}}</h5>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</div>
-<!-- Projects End -->
-
 
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-body footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -210,22 +167,19 @@
                 <h5 class="text-white mb-4">Project Gallery</h5>
                 <div class="row g-2">
                     <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-1.jpg')}}" alt="">
+                        <img class="img-fluid rounded" src="{{asset('img/san-bong-da-o-quan.jpg')}}" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-2.jpg')}}" alt="">
+                        <img class="img-fluid rounded" src="img/san-nguyen-chi-thanh.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-3.jpg')}}" alt="">
+                        <img class="img-fluid rounded" src="img/san-thien-truong.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-4.jpg')}}" alt="">
+                        <img class="img-fluid rounded" src="img/san-bong-da-o-quan.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-5.jpg')}}" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid rounded" src="{{ asset('img/gallery-6.jpg')}}" alt="">
+                        <img class="img-fluid rounded" src="img/san-cau-giay.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -271,4 +225,5 @@
 <!-- Template Javascript -->
 <script src="{{asset('js/main.js')}}"></script>
 </body>
+
 </html>

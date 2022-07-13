@@ -45,8 +45,8 @@
         </a>
         <i class="arrow fas fa-angle-down"></i>
         <ul class="sub-menu">
-            <li><a href=" ">Thêm mới</a></li>
-            <li><a href=" ">Danh sách</a></li>
+            <li><a href="{{route('add-product')}}">Thêm mới</a></li>
+            <li><a href="{{route('list-product')}}">Danh sách</a></li>
             <li><a href="">Danh mục</a></li>
         </ul>
     </li>

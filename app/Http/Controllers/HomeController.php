@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pitches;
+use App\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,12 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $fiveStars = Pitches::where('football_pitches.star_rating' , '=', 5)->get();
-        return view('frontend.index', compact('fiveStars'));
+        $fiveStars = Pitches::limit(6)->get();
+        $product = Product::limit(6)->get();
+        return view('frontend.index', compact('fiveStars','product'));
     }
     public function service(){
         $stadiums = Pitches::all();
         return view('frontend.service', compact('stadiums'));
+    }
+    public function product(){
+        $products = Product::all();
+        return view('frontend.product', compact('products'));
     }
     public  function  detail($id){
         $pitches = Pitches::where('id',$id)->get();

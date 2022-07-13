@@ -14,15 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('auth.login');
+//});
 
 
 Auth::routes();
+Route::get('/', 'HomeController@index')->name('index');
 
-Route::get('/index', 'HomeController@index')->name('index');
+Route::get('/home', 'HomeController@index')->name('index');
 Route::get('/service', 'HomeController@service')->name('service');
+Route::get('/product', 'HomeController@product')->name('product');
 Route::get('/detail-pitches/{id}', 'HomeController@detail')->name('detail-pitches');
 
 Route::get('/show', 'HomeController@show')->name('show');

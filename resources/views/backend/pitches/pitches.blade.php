@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="container">
-        <h1>Thêm bài viết</h1>
+        <h1>Thêm sân bóng</h1>
         <form action="{{route('store-pitches')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
