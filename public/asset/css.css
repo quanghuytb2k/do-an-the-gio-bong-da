@@ -354,9 +354,28 @@ label.star:before {
     position: absolute;
 }
 /* detail */
-.checked {
+/* .checked {
     border:2px solid blue;
     background-color: rgba(236, 225, 69, 0.5);
     
-}
-  
+} */
+#time > label {
+    display:block;
+    height:40px;
+    margin-top:10px;
+    color:green;
+    text-align:center;
+    line-height: 40px;
+    background-color: var(--secondary-color);
+    border-radius: 10px 10px 10px 10px;
+ }
+ 
+ #time > input[type=checkbox] {
+    display: none;
+ }
+
+ 
+ #time > input:checked + label {
+    border: solid 2px green;
+    color: green;
+ } 

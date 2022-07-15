@@ -28,3 +28,36 @@ function showSlides(n) {
     dots[slideIndex - 1].className += " active";
     captionText.innerHTML = dots[slideIndex - 1].alt;
 }
+//input 
+$(document).ready(function(){
+    $('.input').click(function(){
+        var text = "";
+        $('.input:checked').each(function(){
+            text +=document.getElementById('value-label').innerHTML +',';
+        });
+        text=text.substring(0,text.length-1);
+        document.getElementById("selectedtext").innerHTML = text;
+
+$('input[type="checkbox"]').on("change", function() {
+   count = 0;
+    if($(this).hasClass('check_all')){
+      
+      $('input[type="checkbox"][class="checkbox1"]').prop('checked',true);
+       $('input[type="checkbox"][class="checkbox1"]').each(function(){
+      
+          count += parseInt($(this).val());
+         
+        });
+      
+      }else{
+        $('input[type="checkbox"]:checked').each(function(){
+      
+          count += parseInt($(this).val());
+        });
+      }
+  
+      document.getElementById("total-price").innerHTML = count;
+});
+
+    })
+})

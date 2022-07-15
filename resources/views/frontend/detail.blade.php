@@ -177,7 +177,10 @@
                                     <div class="row">
                                         @foreach($times as $value)
                                         <div style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
-                                            <div id="time" class="seat time <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="ratio" style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">{{$value['time_start']}} - {{$value['time_end']}}</div>
+                                            <div id="time" class="time <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="ratio" style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">
+                                                <input id="{{$value->id}}" type="checkbox" class="input" value="{{$value->price}}" name="apple" />
+                                                <label id="value-label" for="{{$value->id}}">{{$value['time_start']}} - {{$value['time_end']}}</label>
+                                            </div>
                                         </div>
 {{--                                            <div class="seat seat-standard active" onclick="selectedseats(this)" zone="Thường" loc="00401001" price="120000">C2</div>--}}
                                         @endforeach
@@ -205,8 +208,8 @@
 {{--                                    </div>--}}
                                     <div class="col-md-12">
                                         <div>
-                                            <p>Giờ mà bạn chọn sân là : <spana>1</spana> <spana>2</spana> </p>
-                                            <p>Số tiền là:  <spana>1</spana> <spana>2</spana> </p>
+                                            <p>Giờ mà bạn chọn sân là : <span id="selectedtext"></span></p>
+                                            <p>Số tiền là:   <span id="total-price"></span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -304,6 +307,38 @@
     $('.checked').toggleClass('checked');
     $(this).toggleClass('checked');
 });
+$(document).ready(function(){
+    $('.input').click(function(){
+        var text = "";
+        $('.input:checked').each(function(){
+            text +=document.getElementById('value-label').innerHTML +', ';
+        });
+        text=text.substring(0,text.length-1);
+        document.getElementById("selectedtext").innerHTML = text;
+
+$('input[type="checkbox"]').on("change", function() {
+   count = 0;
+    if($(this).hasClass('check_all')){
+      
+      $('input[type="checkbox"][class=".input"]').prop('checked',true);
+       $('input[type="checkbox"][class=".input"]').each(function(){
+      
+          count += parseInt($(this).val());
+         
+        });
+      
+      }else{
+        $('input[type="checkbox"]:checked').each(function(){
+      
+          count += parseInt($(this).val());
+        });
+      }
+  
+      document.getElementById("total-price").innerHTML = count;
+});
+
+    })
+})
 
 
 </script>
