@@ -334,7 +334,8 @@ $('input[type="checkbox"]').on("change", function() {
         });
       }
   
-      document.getElementById("total-price").innerHTML = count;
+    //   document.getElementById("total-price").innerHTML = count.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      document.getElementById("total-price").innerHTML = Number((count).toFixed(1)).toLocaleString()
 });
 
     })

@@ -27,23 +27,26 @@ class HomeController extends Controller
     {
         $fiveStars = Pitches::limit(6)->get();
         $product = Product::limit(6)->get();
-        return view('frontend.index', compact('fiveStars','product'));
+        return view('frontend.index', compact('fiveStars', 'product'));
     }
-    public function service(){
+    public function service()
+    {
         $stadiums = Pitches::all();
         return view('frontend.service', compact('stadiums'));
     }
-    public function product(){
+    public function product()
+    {
         $products = Product::all();
         return view('frontend.product', compact('products'));
     }
-    public  function  detail($id){
-        $pitches = Pitches::where('id',$id)->get();
+    public  function  detail($id)
+    {
+        $pitches = Pitches::where('id', $id)->get();
         $times = Pitches::find($id)->pitchBookingTimes;
-        foreach ($times as $item){
+        foreach ($times as $item) {
             $day_year = $item->day_year;
         }
-//        dd($pitches);
-        return view('frontend.detail',compact('pitches', 'times', 'day_year'));
+        //        dd($pitches);
+        return view('frontend.detail', compact('pitches', 'times', 'day_year'));
     }
 }
