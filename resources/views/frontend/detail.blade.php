@@ -165,15 +165,11 @@
                                     <div  style="width: 100px">
                                             <div  style="width: 200px; text-align: center; line-height: 50px; margin-left: -40px"  class="seat">{{$day_year}}</div>
                                     </div>
-{{--                                    <div class="row">--}}
-{{--                                        <div class="seat premium-seat">Thứ 6</div>--}}
-{{--                                        <div class="seat">Thứ 7</div>--}}
-{{--                                        <div class="seat">Chủ nhật</div>--}}
-{{--                                    </div>--}}
+
                                     <div class="text-choose">
                                         <h1>Chọn giờ</h1>
                                     </div>
-                                    <!-- Normal seats -->
+
                                     <div class="row">
                                         @foreach($times as $value)
                                         <div style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
@@ -182,30 +178,11 @@
                                                 <label id="value-label" for="{{$value->id}}">{{$value['time_start']}} - {{$value['time_end']}}</label>
                                             </div>
                                         </div>
-{{--                                            <div class="seat seat-standard active" onclick="selectedseats(this)" zone="Thường" loc="00401001" price="120000">C2</div>--}}
                                         @endforeach
-{{--                                        <div class="seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat premium-seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat premium-seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat premium-seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat">15:00-16:00</div>--}}
+
                                     </div>
                                 </div>
-{{--                                    <div class="text-choose">--}}
-{{--                                        <h1>Chọn sân</h1>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="row">--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                        <div class="seat premium-seat">Sân 1</div>--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                        <div class="seat premium-seat">Sân 1</div>--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                    </div>--}}
+
                                     <div class="col-md-12">
                                         <div>
                                             <p>Giờ mà bạn chọn sân là : <span id="selectedtext"></span></p>
@@ -215,11 +192,11 @@
                                 </div>
                                 <div class="showcase">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                        ĐẶT SÂN
-                                    </button>
-
+                                    <button type="button" class="btn btn-primary add-to-modal" data-toggle="modal"
+                                            data-target="#exampleModal" data-url="{{ route('add.to.cart', $value->pivot->pitches_id) }}">
+                                            {{-- <a href="{{ route('add.to.cart', $value->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> --}}
+                                            ĐẶT SÂN 
+                                        </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -339,6 +316,16 @@ $('input[type="checkbox"]').on("change", function() {
 });
 
     })
+})
+
+function addToCart(event){
+    event.preventDefault();
+    let $url = $(this).data('url');
+    alert($url);
+}
+
+$(function(){
+    $('.add-to-modal').on('click', addToCart);
 })
 
 

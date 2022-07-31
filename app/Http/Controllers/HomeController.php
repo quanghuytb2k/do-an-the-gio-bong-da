@@ -49,4 +49,24 @@ class HomeController extends Controller
         //        dd($pitches);
         return view('frontend.detail', compact('pitches', 'times', 'day_year'));
     }
+    
+    
+    public function addToCart($id)
+    {
+        $pitch = Pitches::findOrFail($id);
+          
+        $cart = session()->get('cart', []);
+  
+        if(isset($cart[$id])) {
+            $cart[$id];
+        } else {
+            $cart[$id] = [
+                "name" => $pitch->name,
+                "price" => $pitch->price,
+
+            ];
+        }
+        session()->put('cart', $cart);
+        return redirect()->back();
+    }
 }
