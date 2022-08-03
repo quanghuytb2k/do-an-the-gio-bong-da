@@ -165,58 +165,38 @@
                                     <div  style="width: 100px">
                                             <div  style="width: 200px; text-align: center; line-height: 50px; margin-left: -40px"  class="seat">{{$day_year}}</div>
                                     </div>
-{{--                                    <div class="row">--}}
-{{--                                        <div class="seat premium-seat">Thứ 6</div>--}}
-{{--                                        <div class="seat">Thứ 7</div>--}}
-{{--                                        <div class="seat">Chủ nhật</div>--}}
-{{--                                    </div>--}}
+
                                     <div class="text-choose">
                                         <h1>Chọn giờ</h1>
                                     </div>
-                                    <!-- Normal seats -->
+
                                     <div class="row">
                                         @foreach($times as $value)
                                         <div style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
-                                            <div id="time" class="seat time <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="ratio" style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">{{$value['time_start']}} - {{$value['time_end']}}</div>
+                                            <div id="time" class="time <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="ratio" style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">
+                                                <input id="{{$value->id}}" type="checkbox" class="input" value="{{$value->price}}" name="apple" />
+                                                <label id="value-label" for="{{$value->id}}">{{$value['time_start']}} - {{$value['time_end']}}</label>
+                                            </div>
                                         </div>
-{{--                                            <div class="seat seat-standard active" onclick="selectedseats(this)" zone="Thường" loc="00401001" price="120000">C2</div>--}}
                                         @endforeach
-{{--                                        <div class="seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat premium-seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat premium-seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat premium-seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat">15:00-16:00</div>--}}
-{{--                                        <div class="seat">15:00-16:00</div>--}}
+
                                     </div>
                                 </div>
-{{--                                    <div class="text-choose">--}}
-{{--                                        <h1>Chọn sân</h1>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="row">--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                        <div class="seat premium-seat">Sân 1</div>--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                        <div class="seat premium-seat">Sân 1</div>--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                        <div class="seat">Sân 1</div>--}}
-{{--                                    </div>--}}
+
                                     <div class="col-md-12">
                                         <div>
-                                            <p>Giờ mà bạn chọn sân là : <spana>1</spana> <spana>2</spana> </p>
-                                            <p>Số tiền là:  <spana>1</spana> <spana>2</spana> </p>
+                                            <p>Giờ mà bạn chọn sân là : <span id="selectedtext"></span></p>
+                                            <p>Số tiền là:   <span id="total-price"></span></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="showcase">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModal">
-                                        ĐẶT SÂN
-                                    </button>
-
+                                    <button type="button" class="btn btn-primary add-to-modal" data-toggle="modal"
+                                            data-target="#exampleModal" data-url="{{ route('add.to.cart', $value->pivot->pitches_id) }}">
+                                            {{-- <a href="{{ route('add.to.cart', $value->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> --}}
+                                            ĐẶT SÂN 
+                                        </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -304,6 +284,49 @@
     $('.checked').toggleClass('checked');
     $(this).toggleClass('checked');
 });
+$(document).ready(function(){
+    $('.input').click(function(){
+        var text = "";
+        $('.input:checked').each(function(){
+            text +=document.getElementById('value-label').innerHTML +', ';
+        });
+        text=text.substring(0,text.length-1);
+        document.getElementById("selectedtext").innerHTML = text;
+
+$('input[type="checkbox"]').on("change", function() {
+   count = 0;
+    if($(this).hasClass('check_all')){
+      
+      $('input[type="checkbox"][class=".input"]').prop('checked',true);
+       $('input[type="checkbox"][class=".input"]').each(function(){
+      
+          count += parseInt($(this).val());
+         
+        });
+      
+      }else{
+        $('input[type="checkbox"]:checked').each(function(){
+      
+          count += parseInt($(this).val());
+        });
+      }
+  
+    //   document.getElementById("total-price").innerHTML = count.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      document.getElementById("total-price").innerHTML = Number((count).toFixed(1)).toLocaleString()
+});
+
+    })
+})
+
+function addToCart(event){
+    event.preventDefault();
+    let $url = $(this).data('url');
+    alert($url);
+}
+
+$(function(){
+    $('.add-to-modal').on('click', addToCart);
+})
 
 
 </script>

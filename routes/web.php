@@ -26,6 +26,7 @@ Route::get('/home', 'HomeController@index')->name('index');
 Route::get('/service', 'HomeController@service')->name('service');
 Route::get('/product', 'HomeController@product')->name('product');
 Route::get('/detail-pitches/{id}', 'HomeController@detail')->name('detail-pitches');
+Route::get('add-to-cart/{id}', [HomeController::class, 'addToCart'])->name('add.to.cart');
 
 Route::get('/show', 'HomeController@show')->name('show');
 Route::get('/test', 'admin\UserController@create')->name('test');
