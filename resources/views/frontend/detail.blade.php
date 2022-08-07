@@ -174,7 +174,7 @@
                                         @foreach($times as $value)
                                         <div style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
                                             <div id="time" class="time <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="ratio" style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">
-                                                <input id="{{$value->id}}" type="checkbox" class="input" value="{{$value->price}}" name="apple" />
+                                                <input id="{{$value->id}}" data-id="{{$value->id}}"  type="checkbox" class="input time-pitches" value="{{$value->price}}" name="time" />
                                                 <label id="value-label" for="{{$value->id}}">{{$value['time_start']}} - {{$value['time_end']}}</label>
                                             </div>
                                         </div>
@@ -195,7 +195,7 @@
                                     <button type="button" class="btn btn-primary add-to-modal" data-toggle="modal"
                                             data-target="#exampleModal" data-url="{{ route('add.to.cart', $value->pivot->pitches_id) }}">
                                             {{-- <a href="{{ route('add.to.cart', $value->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> --}}
-                                            ĐẶT SÂN 
+                                            ĐẶT SÂN
                                         </button>
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -212,27 +212,37 @@
                                                 <div class="modal-body">
                                                     <form>
                                                         <div class="form-group">
-                                                            <label for="exampleInputEmail1">Tên </label>
+                                                            <label for="name">Tên </label>
                                                             <input type="text" class="form-control"
-                                                                   id="exampleInputEmail1" aria-describedby="emailHelp">
+                                                                   id="name" aria-describedby="emailHelp">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="exampleInputPassword1">Số điện thoại</label>
+                                                            <label for="phone">Số điện thoại</label>
                                                             <input type="text" class="form-control"
-                                                                   id="exampleInputPassword1">
+                                                                   id="phone">
                                                         </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                   name="flexRadioDefault" id="flexRadioDefault1">
-                                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                                Liên hệ </label>
+                                                        <div class="form-group">
+                                                            <label for="email">Email</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="email">
                                                         </div>
+                                                        <div class="form-group">
+                                                            <label for="address">Địa chỉ </label>
+                                                            <input type="text" class="form-control"
+                                                                   id="address">
+                                                        </div>
+{{--                                                        <div class="form-check">--}}
+{{--                                                            <input class="form-check-input" type="radio"--}}
+{{--                                                                   name="flexRadioDefault" id="flexRadioDefault1">--}}
+{{--                                                            <label class="form-check-label" for="flexRadioDefault1">--}}
+{{--                                                                Liên hệ </label>--}}
+{{--                                                        </div>--}}
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                   name="flexRadioDefault" id="flexRadioDefault2"
+                                                            <input class="momo" type="radio"
+                                                                   name="flexRadioDefault" id="momo" value="1"
                                                                    checked>
                                                             <label class="form-check-label" for="flexRadioDefault2">
-                                                                Đặt Online
+                                                                Đặt Online thanh toán qua momo
                                                             </label>
                                                         </div>
 
@@ -242,7 +252,7 @@
                                                     <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Close
                                                     </button>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="submit" class="btn-submit btn-primary">Submit</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -296,21 +306,21 @@ $(document).ready(function(){
 $('input[type="checkbox"]').on("change", function() {
    count = 0;
     if($(this).hasClass('check_all')){
-      
+
       $('input[type="checkbox"][class=".input"]').prop('checked',true);
        $('input[type="checkbox"][class=".input"]').each(function(){
-      
+
           count += parseInt($(this).val());
-         
+
         });
-      
+
       }else{
         $('input[type="checkbox"]:checked').each(function(){
-      
+
           count += parseInt($(this).val());
         });
       }
-  
+
     //   document.getElementById("total-price").innerHTML = count.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, '$&,');
       document.getElementById("total-price").innerHTML = Number((count).toFixed(1)).toLocaleString()
 });
@@ -318,18 +328,54 @@ $('input[type="checkbox"]').on("change", function() {
     })
 })
 
-function addToCart(event){
-    event.preventDefault();
-    let $url = $(this).data('url');
-    alert($url);
-}
+// function addToCart(event){
+//     event.preventDefault();
+//     let $url = $(this).data('url');
+//     alert($url);
+// }
 
 $(function(){
     $('.add-to-modal').on('click', addToCart);
 })
-
-
 </script>
+<script type="text/javascript">
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+    $(".btn-submit").click(function(e){
+        e.preventDefault();
+        console.log('123')
+        var name = $('#name').val();
+        var name = $('#phone').val();
+        var name = $('#email').val();
+        var momo = $('#momo').val();
+        var address = $('#address').val();
+        var text = [];
+        $('.input:checked').each(function(){
+            // text +=document.getElementById('value-label').innerHTML +', ';
+            text +=$('.time-pitches').attr('data-id');
+        });
+        console.log(text);
+        {{--var name = $("input[name=name]").val();--}}
+        {{--var password = $("input[name=password]").val();--}}
+        {{--var email = $("input[name=email]").val();--}}
+
+        {{--$.ajax({--}}
+        {{--    type:'POST',--}}
+        {{--    url:"{{ route('ajaxRequest.post') }}",--}}
+        {{--    data:{name:name, password:password, email:email},--}}
+        {{--    success:function(data){--}}
+        {{--        alert(data.success);--}}
+        {{--    }--}}
+        {{--});--}}
+
+    });
+</script>
+
 </body>
 <script src="{{ asset('asset/main.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
