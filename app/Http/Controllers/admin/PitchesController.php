@@ -42,7 +42,8 @@ class PitchesController extends Controller
                         'time_start' => $time_start[$i],
                         'time_end' => $time_end[$i],
                         'price' => $price[$i],
-                        'day_year'=>$request->date
+                        'day_year'=>$request->date,
+                        'pitch_id'=>$PitchesCreate->id,
                 ]);
                 $Pitches_time = DB::table('pitches_time')->insert([
                     'pitches_id' => $PitchesCreate->id,
