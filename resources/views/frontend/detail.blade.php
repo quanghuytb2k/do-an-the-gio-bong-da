@@ -174,7 +174,7 @@
                                         @foreach($times as $value)
                                         <div style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
                                             <div id="time" class="time <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="ratio" style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">
-                                                <input id="{{$value->id}}" data-id="{{$value->id}}"  type="checkbox" class="input time-pitches" value="{{$value->price}}" name="time" />
+                                                <input id="{{$value->id}}" data-id="{{$value->id}}" data-start="{{$value['time_start']}}" data-end="{{$value['time_end']}}"  type="checkbox" class="input time-pitches" value="{{$value->price}}" name="time" />
                                                 <label id="value-label" for="{{$value->id}}">{{$value['time_start']}} - {{$value['time_end']}}</label>
                                             </div>
                                         </div>
@@ -192,7 +192,7 @@
                                 </div>
                                 <div class="showcase">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary add-to-modal" data-toggle="modal"
+                                    <button type="button" class="btn btn-primary add-to-modal" data-toggle="modal" id="addCart"
                                             data-target="#exampleModal" data-url="{{ route('add.to.cart', $value->pivot->pitches_id) }}">
                                             {{-- <a href="{{ route('add.to.cart', $value->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> --}}
                                             ĐẶT SÂN
@@ -210,6 +210,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
+                                                    <h4>Array gio da chon : <span id="chk_values">--</span></h4>
                                                     <form>
                                                         <div class="form-group">
                                                             <label for="name">Tên </label>
@@ -336,7 +337,36 @@ $('input[type="checkbox"]').on("change", function() {
 
 $(function(){
     $('.add-to-modal').on('click', addToCart);
-})
+});
+
+/** 
+ * Get value when checked
+ * 
+ * **/
+    $('#addCart').click(function () {
+    const selected = new Array();
+    // var time_id = [];
+    // var time_start = [];
+    // var time_end = [];
+
+    $("input[type=checkbox]:checked").each(function () {
+
+        selected.push($(this).data());
+        // time_id.push($(this).data('id'));
+        // time_start.push($(this).data('start'));
+        // time_end.push($(this).data('end'));
+        // console.log("id",time_id);
+        // console.log("start",time_start);
+        // console.log("end",time_end);
+        console.log("data",selected);
+    });
+
+    if (selected.length > 0) {
+        document.getElementById("chk_values").innerHTML = JSON.stringify(selected);
+    }
+});
+
+
 </script>
 <script type="text/javascript">
 
@@ -348,7 +378,6 @@ $(function(){
 
     $(".btn-submit").click(function(e){
         e.preventDefault();
-        console.log('123')
         var name = $('#name').val();
         var name = $('#phone').val();
         var name = $('#email').val();
@@ -371,7 +400,7 @@ $(function(){
         {{--    success:function(data){--}}
         {{--        alert(data.success);--}}
         {{--    }--}}
-        {{--});--}}
+        });
 
     });
 </script>
