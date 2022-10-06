@@ -35,6 +35,16 @@ Route::post('/store', 'admin\UserController@store')->name('store');
 //pitches
 Route::get('/create-pitches', 'admin\PitchesController@create')->name('create-pitches');
 Route::post('/store-pitches', 'admin\PitchesController@store')->name('store-pitches');
+Route::post('/create-oder', 'admin\PitchesController@create_oder')->name('create-oder');
+
+//district
+Route::post('select_district','admin\PitchesController@district')->name('district');
+Route::post('select_commune','admin\PitchesController@commune')->name('commune');
+
+//admin
+Route::get('/admin/dashboard', 'admin\DashboardController@dashboard')->name('dashboard');
+
+Route::get('/admin/pitches', 'admin\PitchesController@admin_pitches')->name('admin-pitches');
 
 // product
 Route::get('/add-product', 'admin\ProductController@create')->name('add-product');
@@ -43,4 +53,5 @@ Route::get('/list-product', 'admin\ProductController@list')->name('list-product'
 Route::get('/delete-product/{id}', 'admin\ProductController@delete')->name('delete-product');
 Route::get('/edit-product/{id}', 'admin\ProductController@edit')->name('edit-product');
 Route::post('/update-product/{id}', 'admin\ProductController@update')->name('update-product');
+
 

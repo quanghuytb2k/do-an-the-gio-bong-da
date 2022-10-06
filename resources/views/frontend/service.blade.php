@@ -69,6 +69,7 @@
 
 
 <!-- Navbar Start -->
+
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
     <a href="{{route('index')}}" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
         <h2 class="m-0 text-primary">Thethao24h</h2>
@@ -117,8 +118,53 @@
 
 <div class="container-xxl py-5">
     <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <div class="text-center  mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             <h1 class="mb-4">Tất cả sân bóng</h1>
+            <nav class="navbar navbar-expand-lg bg-light" style="margin-right: -416px;">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent"   >
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <div class="form-col " style="width: 100%;
+                            padding-right: 0;">
+                                    <label for="province">Tỉnh/Thành Phố</label>
+                                    <select name="province" class="province form-control" id="province">
+                                        <option value="">-- Chọn Tỉnh/Thành Phố--</option>
+{{--                                        @foreach($provinces as $province)--}}
+{{--                                            <option value="{{$province->name}}">{{$province->name}}</option>--}}
+{{--                                        @endforeach--}}
+                                    </select>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="form-col " style="width: 100%;
+                            padding-right: 0;">
+                                    <label for="district">Quận/Huyện</label>
+                                    <select name="district" class="district form-control" id="district">
+                                        <option value="">-- Chọn Quận/Huyện --</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <div class="form-col fl-left" style="width: 100%;
+                            padding-right: 0;">
+                                    <label for="commune">Xã/Phường</label>
+                                    <select name="commune" class="commune form-control">
+                                        <option value="">-- Chọn Xã/Phường --</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
         </div>
         <div class="row g-4">
             @foreach ($stadiums as $stadium)

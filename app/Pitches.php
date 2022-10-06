@@ -14,4 +14,7 @@ class Pitches extends Model
     function orders(){
         return $this->belongsToMany('App\OrderPitches', 'football_pitches_order', 'pitches_id', 'order_id');
     }
+    function oder_pitchs(){
+        return $this->belongsTo('App\OrderPitches',  'id', 'pitch_id');
+    }
 }

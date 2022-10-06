@@ -14,12 +14,35 @@
                         <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="address">Nhập địa chỉ</label>
-                        <input type="text" name="address" class="form-control" placeholder='Nhập địa chỉ'>
-                        @error('address')
-                        <small class="form-text text-danger">{{$message}}</small>
-                        @enderror
+
+                        <div class="form-col " style="width: 100%;
+                        padding-right: 0;">
+                            <label for="addres">Địa chỉ</label>
+                            <div class="form-col " style="width: 100%;
+                            padding-right: 0;">
+                                <label for="province">Tỉnh/Thành Phố</label>
+                                <select name="province" class="province form-control" id="province">
+                                    <option value="">-- Chọn Tỉnh/Thành Phố--</option>
+                                    @foreach($provinces as $province)
+                                        <option value="{{$province->name}}">{{$province->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-col " style="width: 100%;
+                            padding-right: 0;">
+                                <label for="district">Quận/Huyện</label>
+                                <select name="district" class="district form-control" id="district">
+                                    <option value="">-- Chọn Quận/Huyện --</option>
+                                </select>
+                            </div>
+                            <div class="form-col fl-left" style="width: 100%;
+                            padding-right: 0;">
+                                <label for="commune">Xã/Phường</label>
+                                <select name="commune" class="commune form-control">
+                                    <option value="">-- Chọn Xã/Phường --</option>
+                                </select>
+                            </div>
+
                     </div>
                     <div class="form-group">
                         <label for="images">Hình ảnh sân bóng</label>
@@ -112,6 +135,37 @@
             // let posstion_tr_add_tr  = $("#" + use_code_select ).last().closest("#time-pitches");
             // posstion_tr_add_tr.after(html);
 
+        });
+
+        $("#province").change(function (){
+            var _token = $('input[name="_token"]').val();
+            var province = $(this).val();
+            var data = {province: province, _token:_token};
+            console.log(data);
+            $.ajax({
+                url: "{{route('district')}}",
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                success:function(data){
+                    $('.district').html(data);
+                    // alert(data);
+                }
+            });
+        });
+        $("#district").change(function(){
+            var _token = $('input[name="_token"]').val();
+            var commune = $(this).val();
+            var data = {commune:commune, _token:_token};
+            $.ajax({
+                url:"{{route('commune')}}",
+                method :'POST',
+                data:data,
+                dataType: 'json',
+                success:function(data){
+                    $('.commune').html(data);
+                }
+            });
         });
 
     </script>
