@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap"
         rel="stylesheet">
@@ -31,11 +32,16 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('asset/css.css') }}">
     <link rel="stylesheet prefetch" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"/>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Chi tiet san</title>
 </head>
 
 <body>
+<style>
+    .premium-seat{
+        background-color: yellow !important;
+    }
+</style>
 {{--<div class="container-fluid bg-dark p-2">--}}
 {{--    <div class="row gx-0 d-none d-lg-flex">--}}
 {{--        <div class="col-lg-7 px-5 text-start">--}}
@@ -59,6 +65,11 @@
 {{--</div>--}}
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+        @if (session('status'))
+            <div class="alert alert-danger">
+                {{session('status')}}
+            </div>
+        @endif
     <a href="{{route('index')}}" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
         <h2 class="m-0 text-primary">Thethao24h</h2>
     </a>
@@ -83,7 +94,8 @@
             </div> -->
             <a href="{{route('product')}}" class="nav-item nav-link">Sản phẩm</a>
         </div>
-        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng nhập <i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng nhập <i
+                class="fa-solid fa-arrow-right-to-bracket"></i></a>
     </div>
 </nav>
 <!-- Navbar End -->
@@ -162,8 +174,10 @@
                                     <div class="text-choose">
                                         <h1>Ngày đặt sân</h1>
                                     </div>
-                                    <div  style="width: 100px">
-                                            <div  style="width: 200px; text-align: center; line-height: 50px; margin-left: -40px"  class="seat">{{$day_year}}</div>
+                                    <div style="width: 100px">
+                                        <div
+                                            style="width: 200px; text-align: center; line-height: 50px; margin-left: -40px"
+                                            class="seat">{{$day_year}}</div>
                                     </div>
 
                                     <div class="text-choose">
@@ -172,89 +186,103 @@
 
                                     <div class="row">
                                         @foreach($times as $value)
-                                        <div style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
-                                            <div id="time" class="time <?php if($value['status'] == 0) echo "premium-seat"; ?>" type="ratio" style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">
-                                                <input id="{{$value->id}}" data-id="{{$value->id}}" data-start="{{$value['time_start']}}" data-end="{{$value['time_end']}}"  type="checkbox" class="input time-pitches" value="{{$value->price}}" name="time" />
-                                                <label id="value-label" for="{{$value->id}}">{{$value['time_start']}} - {{$value['time_end']}}</label>
+                                            <div
+                                                style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
+                                                <div id="time"
+                                                     class="time "
+                                                     type="ratio"
+                                                     style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">
+                                                    <input id="{{$value->id}}" data-id="{{$value->id}}"  <?php if($value['status'] == '0') echo "disabled"; ?>
+                                                           data-start="{{$value['time_start']}}"
+                                                           data-end="{{$value['time_end']}}" type="checkbox"
+                                                           class="input time-pitches" value="{{$value->price}}"
+                                                           name="time"/>
+                                                    <label class="<?php if($value['status'] == '0') echo "premium-seat"; ?>" id="value-label"
+                                                           for="{{$value->id}}">{{$value['time_start']}}
+                                                        - {{$value['time_end']}}</label>
+                                                </div>
                                             </div>
-                                        </div>
                                         @endforeach
 
                                     </div>
                                 </div>
 
-                                    <div class="col-md-12">
-                                        <div>
-                                            <p>Giờ mà bạn chọn sân là : <span id="selectedtext"></span></p>
-                                            <p>Số tiền là:   <span id="total-price"></span></p>
-                                        </div>
+                                <div class="col-md-12">
+                                    <div>
+                                        <p>Giờ mà bạn chọn sân là : <span id="selectedtext"></span></p>
+                                        <p>Số tiền là: <span id="total-price"></span></p>
                                     </div>
                                 </div>
-                                <div class="showcase">
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary add-to-modal" data-toggle="modal" id="addCart"
-                                            data-target="#exampleModal" data-url="{{ route('add.to.cart', $value->pivot->pitches_id) }}">
-                                            {{-- <a href="{{ route('add.to.cart', $value->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> --}}
-                                            ĐẶT SÂN
-                                        </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Thanh toán</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h4>Array gio da chon : <span id="chk_values">--</span></h4>
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <label for="name">Tên </label>
-                                                            <input type="text" class="form-control"
-                                                                   id="name" aria-describedby="emailHelp">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="phone">Số điện thoại</label>
-                                                            <input type="text" class="form-control"
-                                                                   id="phone">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="email">Email</label>
-                                                            <input type="text" class="form-control"
-                                                                   id="email">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="address">Địa chỉ </label>
-                                                            <input type="text" class="form-control"
-                                                                   id="address">
-                                                        </div>
-{{--                                                        <div class="form-check">--}}
-{{--                                                            <input class="form-check-input" type="radio"--}}
-{{--                                                                   name="flexRadioDefault" id="flexRadioDefault1">--}}
-{{--                                                            <label class="form-check-label" for="flexRadioDefault1">--}}
-{{--                                                                Liên hệ </label>--}}
-{{--                                                        </div>--}}
-                                                        <div class="form-check">
-                                                            <input class="momo" type="radio"
-                                                                   name="flexRadioDefault" id="momo" value="1"
-                                                                   checked>
-                                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                                Đặt Online thanh toán qua momo
-                                                            </label>
-                                                        </div>
+                            </div>
+                            <div class="showcase">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary add-to-modal" data-toggle="modal"
+                                        id="addCart"
+                                        data-target="#exampleModal"
+                                        data-url="{{ route('add.to.cart', $value->pivot->pitches_id) }}">
+                                    {{-- <a href="{{ route('add.to.cart', $value->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> --}}
+                                    ĐẶT SÂN
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Thanh toán</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{--                                                    <h4>Array gio da chon : <span id="chk_values">--</span></h4>--}}
+                                                <form>
+                                                    <input  id="pich_id" type="hidden" name="star" value="{{$item->id}}"/>
+                                                    <div class="form-group">
+                                                        <label for="name">Tên </label>
+                                                        <input type="text" class="form-control"
+                                                               id="name" aria-describedby="emailHelp">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="phone">Số điện thoại</label>
+                                                        <input type="text" class="form-control"
+                                                               id="phone">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="email">Email</label>
+                                                        <input type="text" class="form-control"
+                                                               id="email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="address">Địa chỉ </label>
+                                                        <input type="text" class="form-control"
+                                                               id="address">
+                                                    </div>
+                                                    {{--                                                        <div class="form-check">--}}
+                                                    {{--                                                            <input class="form-check-input" type="radio"--}}
+                                                    {{--                                                                   name="flexRadioDefault" id="flexRadioDefault1">--}}
+                                                    {{--                                                            <label class="form-check-label" for="flexRadioDefault1">--}}
+                                                    {{--                                                                Liên hệ </label>--}}
+                                                    {{--                                                        </div>--}}
+                                                    <div class="form-check">
+                                                        <input class="momo" type="radio"
+                                                               name="flexRadioDefault" id="momo" value="1"
+                                                               checked>
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            Đặt Online thanh toán qua momo
+                                                        </label>
+                                                    </div>
 
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Close
-                                                    </button>
-                                                    <button type="submit" class="btn-submit btn-primary">Submit</button>
-                                                </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close
+                                                </button>
+                                                <button type="submit" id="btn-submit" class="btn-submit btn-primary">
+                                                    Submit
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -262,153 +290,149 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <h2>Các đối đặt sân</h2>
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <td>Wifi</td>
-                                <td>Căng tin</td>
-                                <td>Giữ xe</td>
-                            </tr>
-                            <tr>
-                                <td>Tìm đối</td>
-                                <td>Shop thể thao</td>
-                                <td>Livestream</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                </div>
+                <div>
+                    <h2>Các đối đặt sân</h2>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Wifi</td>
+                            <td>Căng tin</td>
+                            <td>Giữ xe</td>
+                        </tr>
+                        <tr>
+                            <td>Tìm đối</td>
+                            <td>Shop thể thao</td>
+                            <td>Livestream</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        @endforeach
     </div>
+    @endforeach
 </div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+
 <script>
     // $("#time").click(function(){
     //     document.getElementById('time').style.backgroundColor = "green";
     //     if($('#time').hasClass('premium-seat')) {
     //     }
     // });
-    $('.time').click(function() {
-    $('.checked').toggleClass('checked');
-    $(this).toggleClass('checked');
-});
-$(document).ready(function(){
-    $('.input').click(function(){
-        var text = "";
-        $('.input:checked').each(function(){
-            text +=document.getElementById('value-label').innerHTML +', ';
-        });
-        text=text.substring(0,text.length-1);
-        document.getElementById("selectedtext").innerHTML = text;
+    $('.time').click(function () {
+        $('.checked').toggleClass('checked');
+        $(this).toggleClass('checked');
+    });
+    var price = '';
+    $(document).ready(function () {
+        $('.input').click(function () {
+            var text = "";
+            $('.input:checked').each(function () {
+                text += document.getElementById('value-label').innerHTML + ', ';
+            });
+            text = text.substring(0, text.length - 1);
+            document.getElementById("selectedtext").innerHTML = text;
 
-$('input[type="checkbox"]').on("change", function() {
-   count = 0;
-    if($(this).hasClass('check_all')){
+            $('input[type="checkbox"]').on("change", function () {
+                count = 0;
+                if ($(this).hasClass('check_all')) {
 
-      $('input[type="checkbox"][class=".input"]').prop('checked',true);
-       $('input[type="checkbox"][class=".input"]').each(function(){
+                    $('input[type="checkbox"][class=".input"]').prop('checked', true);
+                    $('input[type="checkbox"][class=".input"]').each(function () {
 
-          count += parseInt($(this).val());
+                        count += parseInt($(this).val());
 
-        });
+                    });
 
-      }else{
-        $('input[type="checkbox"]:checked').each(function(){
+                } else {
+                    $('input[type="checkbox"]:checked').each(function () {
 
-          count += parseInt($(this).val());
-        });
-      }
+                        count += parseInt($(this).val());
+                    });
+                }
+                price = Number((count).toFixed(1)).toLocaleString();
+                //   document.getElementById("total-price").innerHTML = count.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                document.getElementById("total-price").innerHTML = Number((count).toFixed(1)).toLocaleString()
+            });
 
-    //   document.getElementById("total-price").innerHTML = count.toFixed(3).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-      document.getElementById("total-price").innerHTML = Number((count).toFixed(1)).toLocaleString()
-});
-
+        })
     })
-})
 
-// function addToCart(event){
-//     event.preventDefault();
-//     let $url = $(this).data('url');
-//     alert($url);
-// }
+    // function addToCart(event){
+    //     event.preventDefault();
+    //     let $url = $(this).data('url');
+    //     alert($url);
+    // }
 
-$(function(){
-    $('.add-to-modal').on('click', addToCart);
-});
-
-/** 
- * Get value when checked
- * 
- * **/
-    $('#addCart').click(function () {
-    const selected = new Array();
-    // var time_id = [];
-    // var time_start = [];
-    // var time_end = [];
-
-    $("input[type=checkbox]:checked").each(function () {
-
-        selected.push($(this).data());
-        // time_id.push($(this).data('id'));
-        // time_start.push($(this).data('start'));
-        // time_end.push($(this).data('end'));
-        // console.log("id",time_id);
-        // console.log("start",time_start);
-        // console.log("end",time_end);
-        console.log("data",selected);
+    $(function () {
+        $('.add-to-modal').on('click', addToCart);
     });
 
-    if (selected.length > 0) {
-        document.getElementById("chk_values").innerHTML = JSON.stringify(selected);
-    }
-});
+    /**
+     * Get value when checked
+     *
+     * **/
+    var selected = new Array();
+    $('#addCart').click(function () {
+         selected = new Array();
+        // var time_id = [];
+        // var time_start = [];
+        // var time_end = [];
+
+        $("input[type=checkbox]:checked").each(function () {
+
+            selected.push($(this).data());
+            // time_id.push($(this).data('id'));
+            // time_start.push($(this).data('start'));
+            // time_end.push($(this).data('end'));
+            // console.log("id",time_id);
+            // console.log("start",time_start);
+            // console.log("end",time_end);
+        });
+        console.log("data", selected);
+        // if (selected.length > 0) {
+        //     document.getElementById("chk_values").innerHTML = JSON.stringify(selected);
+        // }
+    });
 
 
 </script>
-<script type="text/javascript">
+<script>
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $("#btn-submit").click(function () {
+        var pich_id = $('#pich_id').val();
+        var name = $('#name').val();
+        var phone = $('#phone').val();
+        var email = $('#email').val();
+        var address = $('#address').val();
+        var total_price = price;
+        var time = new Array();
+        $.each(selected, function (index, value) {
+            time.push(value.id)
+        });
+        $.ajax({
+            url: "http://localhost:8080/create-oder",
+            method: 'POST',
+            data: {name: name, phone: phone, email: email, address:address, time:time, pich_id:pich_id, total_price : total_price },
+            dataType: 'json',
+            success: function (data) {
+                alert(data);
+                window.location="http://localhost:8080/home";
             }
         });
-
-    $(".btn-submit").click(function(e){
-        e.preventDefault();
-        var name = $('#name').val();
-        var name = $('#phone').val();
-        var name = $('#email').val();
-        var momo = $('#momo').val();
-        var address = $('#address').val();
-        var text = [];
-        $('.input:checked').each(function(){
-            // text +=document.getElementById('value-label').innerHTML +', ';
-            text +=$('.time-pitches').attr('data-id');
-        });
-        console.log(text);
-        {{--var name = $("input[name=name]").val();--}}
-        {{--var password = $("input[name=password]").val();--}}
-        {{--var email = $("input[name=email]").val();--}}
-
-        {{--$.ajax({--}}
-        {{--    type:'POST',--}}
-        {{--    url:"{{ route('ajaxRequest.post') }}",--}}
-        {{--    data:{name:name, password:password, email:email},--}}
-        {{--    success:function(data){--}}
-        {{--        alert(data.success);--}}
-        {{--    }--}}
-        });
-
     });
 </script>
 
 </body>
 <script src="{{ asset('asset/main.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>
