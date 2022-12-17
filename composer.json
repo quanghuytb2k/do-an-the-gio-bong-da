@@ -12,10 +12,12 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
+        "hardevine/shoppingcart": "^3.1",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.4",
-        "phpviet/laravel-omnipay": "^1.1"
+        "phpviet/laravel-omnipay": "^1.1",
+        "phpviet/omnipay-momo": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

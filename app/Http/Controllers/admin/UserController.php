@@ -38,7 +38,6 @@ class UserController extends Controller
                     $redirectUrl = $response->getRedirectUrl();
                     return redirect($redirectUrl);
                     // TODO: chuyển khách sang trang MoMo để thanh toán
-                    
                 }
     }
 }

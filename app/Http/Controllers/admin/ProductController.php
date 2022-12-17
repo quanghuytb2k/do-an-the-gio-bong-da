@@ -4,7 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Product_cats;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProductController extends Controller
 {
@@ -148,5 +150,90 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
         return redirect('list-product')->with('status','xoa san pham thanh cong');
+    }
+
+    function action(Request $request){
+        $list_check = $request->input('list_check');
+
+        if($list_check){
+
+
+            $act = $request->input('act');
+            if($act =='delete'){
+                Product::destroy($list_check);
+                return redirect('admin/product/list')->with('status','Bạn xóa thành công ');
+            }
+            if($act =='restore'){
+                Product::withTrashed()
+                    ->whereIn('id',$list_check)
+                    ->restore();
+                return redirect('admin/product/list')->with('status','Bạn đã khôi phục thành công ');
+            }
+            if($act == 'forceDelete'){
+                Product::withTrashed()
+                    ->whereIn('id',$list_check)
+                    ->forceDelete();
+                return redirect('admin/product/list')->with('status','bạn đã xõa vĩnh viễn tài khoản thành công');
+            }
+
+
+        }
+        else{
+            return redirect('admin/product/list')->with('status','bạn cần chọn phần tử để thực hiện');
+        }
+
+    }
+
+    function show_product(){
+        $products = Product::where('old_price','!=',NULL)->orderBy('id','desc')->get();
+        $products_best = Product::where('old_price','!=',NULL)->orderBy('id','desc')->limit(8)->get();
+        $product_cats = Product_cats::where('parent_id','=',NULL)->get();
+        $cats = Product_cats::all();
+        return view('welcome',compact('products','products_best','product_cats','cats'));
+
+    }
+    function detail_product($id){
+        $products = Product::find($id);
+
+
+        return view('backend.product.detail_product',compact('products'));
+    }
+
+    function list_filter(){
+        $products = Product::where('old_price','!=',NULL)->orderBy('id','desc')->get();
+        $products_best = Product::where('old_price','!=',NULL)->orderBy('id','desc')->limit(8)->get();
+        $product_cats = Product_cats::where('parent_id','=',NULL)->get();
+        $cats = Product_cats::all();
+        return view('product.list-product',compact('products','products_best','product_cats','cats'));
+    }
+    function list_filter_products(Request $request){
+        $price = $request->input('r-price');
+        if($price == 0){
+            $products = Product::all()->simplePaginate(2);
+        }
+        if($price == 1){
+            $products = Product::where('price','<',5000000)->orderBy('id','desc')->simplePaginate(2);
+        }
+        if($price == 2){
+            $query[] = ['price', '>=', 500000];
+            $query[] = ['price', '<', 1000000];
+            $products = Product::where($query)->orderBy('id','desc')->simplePaginate(2);
+        }
+        if($price == 3){
+            $query[] = ['price', '>=', 1000000];
+            $query[] = ['price', '<', 5000000];
+            $products = Product::where($query)->orderBy('id','desc')->simplePaginate(2);
+        }
+        if($price == 4){
+            $query[] = ['price', '>=', 5000000];
+            $query[] = ['price', '<', 10000000];
+            $products = Product::where($query)->orderBy('id','desc')->simplePaginate(2);
+        }
+        if($price == 5){
+            $query[] = ['price', '>', 10000000];
+            $products = Product::where($query)->orderBy('id','desc')->simplePaginate(2);
+        }
+        //  dd($products);
+        return view('product.list-product',compact('products'));
     }
 }

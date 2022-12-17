@@ -41,6 +41,9 @@
     .premium-seat{
         background-color: yellow !important;
     }
+    .form-check-input{
+        margin-left: 10px;
+    }
 </style>
 {{--<div class="container-fluid bg-dark p-2">--}}
 {{--    <div class="row gx-0 d-none d-lg-flex">--}}
@@ -220,7 +223,7 @@
                                         id="addCart"
                                         data-target="#exampleModal"
                                         data-url="{{ route('add.to.cart', $value->pivot->pitches_id) }}">
-                                    {{-- <a href="{{ route('add.to.cart', $value->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> --}}
+                                    <!-- {{-- <a href="{{ route('add.to.cart', $value->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> --}} -->
                                     ĐẶT SÂN
                                 </button>
                                 <!-- Modal -->
@@ -259,18 +262,24 @@
                                                         <input type="text" class="form-control"
                                                                id="address">
                                                     </div>
-                                                    {{--                                                        <div class="form-check">--}}
-                                                    {{--                                                            <input class="form-check-input" type="radio"--}}
-                                                    {{--                                                                   name="flexRadioDefault" id="flexRadioDefault1">--}}
-                                                    {{--                                                            <label class="form-check-label" for="flexRadioDefault1">--}}
-                                                    {{--                                                                Liên hệ </label>--}}
-                                                    {{--                                                        </div>--}}
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" value="1"
+                                                            name="pay" id="pay">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Thanh toán tại sân </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" value="2"
+                                                            name="pay" id="pay">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            Thanh toán qua VNPay </label>
+                                                    </div>
                                                     <div class="form-check">
                                                         <input class="momo" type="radio"
-                                                               name="flexRadioDefault" id="momo" value="1"
+                                                               name="pay" id="pay" value="3"
                                                                checked>
                                                         <label class="form-check-label" for="flexRadioDefault2">
-                                                            Đặt Online thanh toán qua momo
+                                                            Thanh toán qua momo
                                                         </label>
                                                     </div>
 
@@ -280,9 +289,15 @@
                                                 <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">Close
                                                 </button>
-                                                <button type="submit" id="btn-submit" class="btn-submit btn-primary">
+                                                <!-- <button type="submit" id="btn-submit" class="btn-submit btn-primary">
                                                     Submit
-                                                </button>
+                                                </button> -->
+                                                <!-- <form action="{{url('/vnpay')}}" method="POST">
+                                                    @csrf -->
+                                                    <button type="submit" id="btn-submit" class="btn-submit btn-primary" name="redirect">
+                                                        Submit
+                                                    </button>
+                                                <!-- </form> -->
                                             </div>
                                         </div>
                                     </div>
@@ -407,24 +422,32 @@
     });
 
     $("#btn-submit").click(function () {
+        var _token = $('input[name="_token"]').val();
         var pich_id = $('#pich_id').val();
         var name = $('#name').val();
         var phone = $('#phone').val();
         var email = $('#email').val();
         var address = $('#address').val();
         var total_price = price;
+        var radios = document.getElementsByName('pay');
+        for (var i = 0, length = radios.length; i < length; i++) {
+            if (radios[i].checked) {
+                var pay = radios[i].value;
+                break;
+            }
+        }
         var time = new Array();
         $.each(selected, function (index, value) {
             time.push(value.id)
         });
         $.ajax({
-            url: "http://localhost:8080/create-oder",
-            method: 'POST',
-            data: {name: name, phone: phone, email: email, address:address, time:time, pich_id:pich_id, total_price : total_price },
+            url: '{{route("create-oder")}}',
+            type: 'post',
+            data: {name: name, phone: phone, email: email, address:address, time:time, pich_id:pich_id, total_price : total_price, pay:pay, _token:_token },
             dataType: 'json',
             success: function (data) {
                 alert(data);
-                window.location="http://localhost:8080/home";
+                window.location="http://localhost/the-gioi-bong-da/home";
             }
         });
     });

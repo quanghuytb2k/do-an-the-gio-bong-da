@@ -126,14 +126,14 @@
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s" for>
                     <div class="service-item rounded overflow-hidden">
                         <div class="service-item-img">
-                            <a href="" class="img-link">
+                            <a href="{{route('product/show', $item->id)}}" class="img-link">
                                 <img class="img-fluid" src="{{asset($item->thumbnail)}}" alt="">
                             </a>
                         </div>
                         <div class="position-relative p-4 pt-4">
                             <h4 class="mb-3">{{$item->name}}</h4>
                             <p>{{number_format($item->price).'đ'}}</p>
-                            <a class="small fw-medium" href="">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
+                            <a class="small fw-medium" href="{{route('product/show', $item->id)}}">Chi tiết<i class="fa fa-arrow-right ms-2"></i></a>
                         </div>
                     </div>
                 </div>
