@@ -11,7 +11,15 @@ use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     function dashboard(){
-        return view('backend.admin.dashboard');
+        $count_orders_process = OrderPitches::where('status', 1)->count();
+        $count_orders_transport = OrderPitches::where('status', 0)->count();
+        $count_orders_success= OrderPitches::count();
+
+        $proceeds = OrderPitches::where('status', 1)->sum('price');
+        // dd($proceeds);
+        // return $proceeds;
+        $count = [$count_orders_process, $count_orders_transport, $count_orders_success];
+        return view('backend.admin.dashboard', compact('count_orders_process', 'count_orders_transport','count_orders_success','proceeds'));
     }
     function dashboard2(){
         return view('backend.admin.dashboard2');

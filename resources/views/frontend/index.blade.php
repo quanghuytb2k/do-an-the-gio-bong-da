@@ -62,7 +62,11 @@
 {{--</div>--}}
 <!-- Topbar End -->
 
-
+@if(session('status'))
+<div class="alert alert-success">
+    {{session('status')}}
+</div>
+@endif
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
     <a href="{{route('index')}}" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
@@ -89,7 +93,7 @@
             </div> -->
             <a href="{{route('product')}}" class="nav-item nav-link">Sản phẩm</a>
         </div>
-        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng nhập <i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+        <a href="{{route('login')}}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng nhập <i class="fa-solid fa-arrow-right-to-bracket"></i></a>
     </div>
 </nav>
 <!-- Navbar End -->
@@ -123,14 +127,24 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h1 class="mb-4">Sân nổi bật</h1>
+            <h1 class="mb-4">Các sân bóng nổi bật</h1>
+        </div>
+        <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
+            <div class="col-12 text-center">
+                <ul class="list-inline mb-5" id="portfolio-flters">
+                    <li class="mx-2 "data-filter="*"><a href="{{route('service')}}" style="text-decoration: none; color: black"> Tất cả </></li>
+                    <li class="mx-2" data-filter=".first"><a href="{{route('service')}}" style="text-decoration: none; color: black">Tìm kiếm sân bóng</></li>
+                    <li class="mx-2" data-filter=".second">Quần áo bóng đá</li>
+                    <li class="mx-2" data-filter=".third">Các dụng cụ liên quan</li>
+                </ul>
+            </div>
         </div>
         <div class="row g-4">
             @foreach ($fiveStars as $item)
             <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item rounded overflow-hidden">
                     <div class="service-item-img">
-                        <a href="" class="img-link">
+                        <a href="{{ route('detail-pitches',$item->id)}}" class="img-link">
                             <img src="{{ asset($item->images)}}" alt="">
                         </a>
                     </div>
@@ -156,8 +170,8 @@
         <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
             <div class="col-12 text-center">
                 <ul class="list-inline mb-5" id="portfolio-flters">
-                    <li class="mx-2 active" data-filter="*">Tất cả</li>
-                    <li class="mx-2" data-filter=".first">Giày bóng đá</li>
+                    <li class="mx-2 active" data-filter="*"><a href="{{route('product')}}" style="text-decoration: none; color: black">Tất cả</></li>
+                    <li class="mx-2" data-filter=".first"><a href="{{route('product')}}" style="text-decoration: none; color: black">Tìm kiếm sản phẩm</></li>
                     <li class="mx-2" data-filter=".second">Quần áo bóng đá</li>
                     <li class="mx-2" data-filter=".third">Các dụng cụ liên quan</li>
                 </ul>
@@ -165,13 +179,15 @@
         </div>
         <div class="row g-4 portfolio-container wow fadeInUp" data-wow-delay="0.5s">
             @foreach($product as $item)
-            <div class="col-lg-4 col-md-6 portfolio-item first">
-                <div class="portfolio-img rounded overflow-hidden">
+            <div class="col-lg-4 col-md-6 portfolio-item ">
+                <div class="portfolio-img rounded">
+                    <a href="{{route('product/show', $item->id)}}">
                     <img class="img-fluid" src="{{ asset($item->thumbnail)}}" alt="">
-                    <div class="portfolio-btn">
-                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href="{{ asset('img/img-600x400-6.jpg')}}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                </a>
+                    {{-- <div class="portfolio-btn">
+                        <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href="{{ route('detail-pitches',$item->id)}}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-lg-square btn-outline-light rounded-circle mx-1" href=""><i class="fa fa-link"></i></a>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="pt-3">
                     <p class="text-primary mb-0">{{$item->name}}</p>

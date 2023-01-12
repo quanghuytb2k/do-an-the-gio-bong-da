@@ -161,12 +161,14 @@
                                     <p id="total-price"> Mã giảm : <span class=''> {{$value['coupon_feature']}} %</span></p>
                                 </div>
                                 @php
-                                    $total = str_replace('.','',Cart::total());
+                                    $total = str_replace(',','',Cart::total());
                                     $total_coupon = ($total*$value['coupon_feature'])/100;
                                     echo '<div class="">
                                             <p id="total-price" class="">Tổng giảm là : <span>' .number_format($total_coupon,0,',','.').'đ</span></p>
                                             </div>';
                                 @endphp
+                                    <input type="hidden" name="total_coupon" value="{{number_format($total_coupon,0,',','.')}}">
+                                    <input type="hidden" name="total_pay" value="{{number_format($total-$total_coupon,0,',','.')}}">
                                 <div class="">
                                     <p id="total-price" class="">Tổng giá tiền sau khi giảm là: <span class=''>{{number_format($total-$total_coupon,0,',','.')}}đ</span></p>
                                 </div>
@@ -177,7 +179,7 @@
                                     <p id="total-price" class=""> Mã giảm : <span class=''> {{$value['coupon_feature']}} k</span></p>
                                 </div>
                                 @php
-                                    $total = str_replace('.','',Cart::total());
+                                    $total = str_replace(',','',Cart::total());
                                     $total_coupon = $total-$value['coupon_feature'];
                                     echo '<div >
                                             <p id="total-price" class="">Tổng giảm là : <span>' .number_format($value['coupon_feature'],0,',','.').'đ</span></p>

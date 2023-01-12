@@ -11,4 +11,8 @@ class PitchBookingTime extends Model
     function pitches(){
         return $this->belongsToMany('App\Pitches', 'pitches_time', 'time_id', 'pitches_id');
     }
+    function orders(){
+        return $this->belongsToMany('App\PitchBookingTime', 'pitch_time_order', 'order_id', 'time_id');
+    }
 }
+ 

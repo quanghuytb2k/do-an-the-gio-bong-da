@@ -348,15 +348,15 @@
     transition: .5s;
 }
 
-.portfolio-img::before {
+/* .portfolio-img::before {
     left: 50%;
 }
 
 .portfolio-img::after {
     right: 50%;
-}
+} */
 
-.portfolio-item:hover .portfolio-img::before {
+/* .portfolio-item:hover .portfolio-img::before {
     width: 51%;
     left: 0;
 }
@@ -364,7 +364,7 @@
 .portfolio-item:hover .portfolio-img::after {
     width: 51%;
     right: 0;
-}
+} */
 
 .portfolio-btn {
     position: absolute;

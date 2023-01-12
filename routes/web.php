@@ -20,8 +20,53 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/', 'HomeController@index')->name('index');
 
+Route::middleware('auth')->group(function(){
+    Route::get('dashboard','DashboardController@dashboard')->name('dashboard');
+
+    //pitches
+Route::get('/create-pitches', 'admin\PitchesController@create')->name('create-pitches');
+Route::post('/store-pitches', 'admin\PitchesController@store')->name('store-pitches');
+
+Route::get('/admin/pitches', 'admin\PitchesController@admin_pitches')->name('admin-pitches');
+Route::get('/admin/detail/order/{id}', 'admin\PitchesController@detail_order')->name('admin-detail-order');
+
+// product
+Route::get('/add-product', 'admin\ProductController@create')->name('add-product');
+Route::post('/store-product', 'admin\ProductController@store')->name('store-product');
+Route::get('/list-product', 'admin\ProductController@list')->name('list-product');
+Route::get('/delete-product/{id}', 'admin\ProductController@delete')->name('delete-product');
+Route::get('/edit-product/{id}', 'admin\ProductController@edit')->name('edit-product');
+Route::post('/update-product/{id}', 'admin\ProductController@update')->name('update-product');
+
+Route::get('admin/user/list-user','admin\AdminController@list')->name('admin/user/list-user');
+Route::get('admin/user/add-user','admin\AdminController@add')->name('admin/user/add-user');
+Route::post('admin/user/store','admin\AdminController@store');
+Route::get('admin/user/delete/{id}','admin\AdminController@delete')->name('admin/user/delete');
+Route::get('admin/user/action','admin\AdminController@action');
+Route::get('admin/user/edit/{id}','admin\AdminController@edit')->name('admin/edit');
+Route::post('admin/user/update/{id}','admin\AdminController@update')->name('admin/update');
+
+//update_order
+Route::post('update_admin_order/{id}','admin\AdminOderController@update_order')->name('update_order');
+
+//admin
+Route::get('/admin/dashboard', 'admin\DashboardController@dashboard')->name('dashboard');
+Route::get('detail_dashboard/{id}','admin\DashboardController@detail')->name('detail');
+Route::get('/admin/dashboard2', 'admin\DashboardController@dashboard2')->name('dashboard2');
+
+Route::get('/admin/list-pitches', 'admin\PitchesController@listPitches')->name('list-pitches');
+
+Route::get('/admin/detail/pitches/{id}', 'admin\PitchesController@adminDetailPitches')->name('admin-list-pitches');
+
+Route::get('/edit/pitches/{id}', 'admin\PitchesController@editPitches')->name('edit-pitches');
+
+
+});
+
+Route::post('/create-oder', 'admin\PitchesController@create_oder')->name('create-oder');
 Route::get('/home', 'HomeController@index')->name('index');
 Route::get('/service', 'HomeController@service')->name('service');
 Route::get('/product', 'HomeController@product')->name('product');
@@ -33,37 +78,29 @@ Route::get('/test', 'admin\UserController@create')->name('test');
 Route::post('/store', 'admin\UserController@store')->name('store');
 
 //pitches
-Route::get('/create-pitches', 'admin\PitchesController@create')->name('create-pitches');
-Route::post('/store-pitches', 'admin\PitchesController@store')->name('store-pitches');
-Route::post('/create-oder', 'admin\PitchesController@create_oder')->name('create-oder');
+// Route::get('/create-pitches', 'admin\PitchesController@create')->name('create-pitches');
+// Route::post('/store-pitches', 'admin\PitchesController@store')->name('store-pitches');
+// Route::post('/create-oder', 'admin\PitchesController@create_oder')->name('create-oder');
+Route::post('/search-pitches', 'admin\PitchesController@search')->name('search-pitches');
 
 //district
 Route::post('select_district','admin\PitchesController@district')->name('district');
 Route::post('select_commune','admin\PitchesController@commune')->name('commune');
 
-//admin
-Route::get('/admin/dashboard', 'admin\DashboardController@dashboard')->name('dashboard');
-Route::get('detail_dashboard/{id}','admin\DashboardController@detail')->name('detail');
-Route::get('/admin/dashboard2', 'admin\DashboardController@dashboard2')->name('dashboard2');
+
+Route::get('/checkout/pitches', 'admin\PitchesController@checkout')->name('checkout-pitches');
+
+Route::get('/checked/{id}', 'admin\PitchesController@checked')->name('checked-pitches');
+
+Route::post('/order/pitches', 'admin\PitchesController@orderPitches')->name('order-pitches');
 
 
-Route::get('/admin/pitches', 'admin\PitchesController@admin_pitches')->name('admin-pitches');
+Route::post('/pay/{id}', 'admin\PitchesController@pay')->name('pay');
 
-// product
-Route::get('/add-product', 'admin\ProductController@create')->name('add-product');
-Route::post('/store-product', 'admin\ProductController@store')->name('store-product');
-Route::get('/list-product', 'admin\ProductController@list')->name('list-product');
-Route::get('/delete-product/{id}', 'admin\ProductController@delete')->name('delete-product');
-Route::get('/edit-product/{id}', 'admin\ProductController@edit')->name('edit-product');
-Route::post('/update-product/{id}', 'admin\ProductController@update')->name('update-product');
+Route::get('/admin/edit/{id}', 'admin\PitchesController@edit')->name('admin-edit-pitches');
 
-Route::get('admin/user/list-user','AdminController@list')->name('admin/user/list-user');
-Route::get('admin/user/add-user','AdminController@add')->name('admin/user/add-user');
-Route::post('admin/user/store','AdminController@store');
-Route::get('admin/user/delete/{id}','AdminController@delete')->name('admin/user/delete');
-Route::get('admin/user/action','AdminController@action');
-Route::get('admin/user/edit/{id}','AdminController@edit')->name('admin/edit');
-Route::post('admin/user/update/{id}','AdminController@update')->name('admin/update');
+Route::post('/admin/store_pitches/{id}', 'admin\PitchesController@store_pitches')->name('admin-store-pitches');
+
 
 Route::get('cart/show','admin\CartController@show')->name('cart/show');
 Route::get('cart/add/{id}','admin\CartController@add')->name('cart/add');
@@ -93,17 +130,15 @@ Route::post('num_order','CheckoutController@num_order')->name('num_order');
 //admin order
 Route::get('admin_order/{id}','admin\AdminOderController@admin_order')->name('admin_order');
 
-Route::resource('coupon','CouponController');
+Route::resource('coupon','admin\CouponController');
 
 // coupon
-Route::post('check-coupon', 'CouponController@checkCoupon')->name('check/coupon');
-Route::get('delete-coupon', 'CouponController@delete')->name('delete/coupon');
+Route::post('check-coupon', 'admin\CouponController@checkCoupon')->name('check/coupon');
+Route::get('delete-coupon', 'admin\CouponController@delete')->name('delete/coupon');
 
 Route::get('list-filter','ProductController@list_filter')->name('list-filter');
 Route::post('list-filter-products','ProductController@list_filter_products')->name('list-filter-products');
 
-//update_order
-Route::post('update_admin_order/{id}','admin\AdminOderController@update_order')->name('update_order');
 
 //payment
 Route::post('/vnpay', 'HomeController@PaymentVNPay')->name('vnpay');

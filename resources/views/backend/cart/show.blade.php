@@ -84,7 +84,7 @@
                         <tr>
                             <td colspan="7">
                                 <div class="clearfix">
-                                    <p id="total-price" class="fl-right">Tổng giá: <span class='abcd2'>{{Cart::total()}}đ </span></p>
+                                    <p id="total-price" class="fl-right">Tổng giá: <span class='abcd2'>{{str_replace('.00','',Cart::total())}}đ </span></p>
                                 </div>
                             </td>
                         </tr>
@@ -105,7 +105,8 @@
                                                     <p id="total-price" class="fl-right"> Mã giảm : <span class=''> {{$value['coupon_feature']}} %</span></p>
                                                 </div>
                                                 @php
-                                                    $total = str_replace('.','',Cart::total());
+                                                    $total = str_replace(',','',Cart::total());
+//                                                    dd($total);
                                                     $total_coupon = ($total*$value['coupon_feature'])/100;
                                                     echo '<div class="clearfix">
                                                             <p id="total-price" class="fl-right">Tổng giảm là : <span>' .number_format($total_coupon,0,',','.').'đ</span></p>

@@ -146,23 +146,23 @@
                             <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
                                     frameborder="0" style="border: 0" allowfullscreen></iframe>
                         </div>
-                        <div>
-                            <h2>Tiện ích</h2>
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <td>Wifi</td>
-                                    <td>Căng tin</td>
-                                    <td>Giữ xe</td>
-                                </tr>
-                                <tr>
-                                    <td>Tìm đối</td>
-                                    <td>Shop thể thao</td>
-                                    <td>Livestream</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+{{--                        <div>--}}
+{{--                            <h2>Tiện ích</h2>--}}
+{{--                            <table class="table">--}}
+{{--                                <tbody>--}}
+{{--                                <tr>--}}
+{{--                                    <td>Wifi</td>--}}
+{{--                                    <td>Căng tin</td>--}}
+{{--                                    <td>Giữ xe</td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td>Tìm đối</td>--}}
+{{--                                    <td>Shop thể thao</td>--}}
+{{--                                    <td>Livestream</td>--}}
+{{--                                </tr>--}}
+{{--                                </tbody>--}}
+{{--                            </table>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -185,7 +185,7 @@
                                     </div>
 
                                     <div class="text-choose">
-                                        <h1>Chọn giờ</h1>
+                                        <h1>Giờ sân</h1>
                                     </div>
 
                                     <div class="row">
@@ -211,23 +211,23 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div>
-                                        <p>Giờ mà bạn chọn sân là : <span id="selectedtext"></span></p>
-                                        <p>Số tiền là: <span id="total-price"></span></p>
-                                    </div>
-                                </div>
+{{--                                <div class="col-md-12">--}}
+{{--                                    <div>--}}
+{{--                                        <p>Giờ mà bạn chọn sân là : <span id="selectedtext"></span></p>--}}
+{{--                                        <p>Số tiền là: <span id="total-price"></span></p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             </div>
                             <div class="showcase">
                                 <!-- Button trigger modal -->
                                 {{-- <button type="button" class="btn btn-primary add-to-modal" data-toggle="modal" --}}
-                                <button type="button" class="btn btn-primary addPitches"
-                                        id="addCart"
-                                        data-target="#exampleModal"
-                                        data-url="{{ route('add.to.cart', $value->pivot->pitches_id) }}">
-                                    <!-- {{-- <a href="{{ route('add.to.cart', $value->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> --}} -->
-                                    ĐẶT SÂN
-                                </button>
+{{--                                <button type="button" class="btn btn-primary addPitches"--}}
+{{--                                        id="addCart"--}}
+{{--                                        data-target="#exampleModal"--}}
+{{--                                        data-url="{{ route('add.to.cart', $value->pivot->pitches_id) }}">--}}
+{{--                                    <!-- --}}{{-- <a href="{{ route('add.to.cart', $value->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> --}}{{-- -->--}}
+{{--                                    ĐẶT SÂN--}}
+{{--                                </button>--}}
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -308,23 +308,23 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <h2>Các đối đặt sân</h2>
-                    <table class="table">
-                        <tbody>
-                        <tr>
-                            <td>Wifi</td>
-                            <td>Căng tin</td>
-                            <td>Giữ xe</td>
-                        </tr>
-                        <tr>
-                            <td>Tìm đối</td>
-                            <td>Shop thể thao</td>
-                            <td>Livestream</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+{{--                <div>--}}
+{{--                    <h2>Các đối đặt sân</h2>--}}
+{{--                    <table class="table">--}}
+{{--                        <tbody>--}}
+{{--                        <tr>--}}
+{{--                            <td>Wifi</td>--}}
+{{--                            <td>Căng tin</td>--}}
+{{--                            <td>Giữ xe</td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                            <td>Tìm đối</td>--}}
+{{--                            <td>Shop thể thao</td>--}}
+{{--                            <td>Livestream</td>--}}
+{{--                        </tr>--}}
+{{--                        </tbody>--}}
+{{--                    </table>--}}
+{{--                </div>--}}
             </div>
     </div>
     @endforeach

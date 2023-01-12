@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Coupon;
-use Session;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Session;
 session_start();
 
 class CouponController extends Controller
@@ -17,11 +18,11 @@ class CouponController extends Controller
             $keyword =$request->input('keyword');
         }
         $coupon=Coupon::where('name','LIKE',"%{$keyword}%")->paginate(5);
-        return view('coupon.index', with(compact('coupon')));
+        return view('backend.coupon.index', with(compact('coupon')));
     }
 
     function create(){
-        return view('coupon.create');
+        return view('backend.coupon.create');
     }
 
     function store(Request $request){
@@ -52,7 +53,7 @@ class CouponController extends Controller
         }
 
     }
-    
+
     function delete(){
         $coupon = Session::get('coupon');
         if($coupon == true){

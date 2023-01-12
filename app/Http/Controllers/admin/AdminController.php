@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ class AdminController extends Controller
         if($status == 'trash'){
             $list_act=['restore'=>'khôi phục',
             'forceDelete'=>'xóa vĩnh viễn'];
-            $users =User::onlyTrashed()->paginate(2);
+            $users =User::paginate(2);
         }
         else{
         $keyword ="";
@@ -34,14 +35,14 @@ class AdminController extends Controller
         $users=User::where('name','LIKE',"%{$keyword}%")->paginate(2);
     }
     $count_active = User::count();
-    $count_trash = User::onlyTrashed()->count();
+    $count_trash = User::count();
     $count =[$count_active,$count_trash];
 
 
-        return view('admin.list-user',compact('users','count','list_act'));
+        return view('backend.admin.list-user',compact('users','count','list_act'));
     }
     function add(){
-        return view('admin.add-user');
+        return view('backend.admin.add-user');
     }
     function store(Request $request){
         $request->validate([

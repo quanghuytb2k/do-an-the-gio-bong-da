@@ -95,7 +95,7 @@
             </div> -->
             <a href="{{route('product')}}" class="nav-item nav-link">Sản phẩm</a>
         </div>
-        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng nhập <i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+        <a href="{{route('login')}}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Đăng nhập <i class="fa-solid fa-arrow-right-to-bracket"></i></a>
     </div>
 </nav>
 <!-- Navbar End -->
@@ -120,6 +120,8 @@
     <div class="container">
         <div class="text-center  mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             <h1 class="mb-4">Tất cả sân bóng</h1>
+            <form action="{{route('search-pitches')}}" method="POST">
+                @csrf
             <nav class="navbar navbar-expand-lg bg-light" style="margin-right: -416px;">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,9 +135,9 @@
                                     <label for="province">Tỉnh/Thành Phố</label>
                                     <select name="province" class="province form-control" id="province">
                                         <option value="">-- Chọn Tỉnh/Thành Phố--</option>
-{{--                                        @foreach($provinces as $province)--}}
-{{--                                            <option value="{{$province->name}}">{{$province->name}}</option>--}}
-{{--                                        @endforeach--}}
+                                       @foreach($provinces as $province)
+                                           <option value="{{$province->name}}">{{$province->name}}</option>
+                                       @endforeach
                                     </select>
                                 </div>
                             </li>
@@ -158,13 +160,14 @@
                                 </div>
                             </li>
                         </ul>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <div class="d-flex" role="search">
+                            <input class="form-control me-2" name="name_search" type="search" placeholder="Nhập tên sân" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </nav>
+            </form>
         </div>
         <div class="row g-4">
             @foreach ($stadiums as $stadium)
@@ -254,7 +257,42 @@
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
+        <script type="text/javascript">
+       $("#province").change(function (){
+            var _token = $('input[name="_token"]').val();
+            var province = $(this).val();
+            var data = {province: province, _token:_token};
+            console.log(data);
+            $.ajax({
+                url: "{{route('district')}}",
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                success:function(data){
+                    $('.district').html(data);
+                    // alert(data);
+                }
+            });
+        });
+        $("#district").change(function(){
+            var _token = $('input[name="_token"]').val();
+            var commune = $(this).val();
+            var data = {commune:commune, _token:_token};
+            $.ajax({
+                url:"{{route('commune')}}",
+                method :'POST',
+                data:data,
+                dataType: 'json',
+                success:function(data){
+                    $('.commune').html(data);
+                }
+            });
+        });
+
+
+</script>
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

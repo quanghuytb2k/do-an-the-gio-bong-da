@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/solid.min.css">
 
-    <link rel="stylesheet" href="{{asset('public/css/style.css')}} ">
+    <link rel="stylesheet" href="{{asset('css/style.css')}} ">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
@@ -52,6 +52,14 @@
 </head>
 
 <body>
+    <style>
+        #wp-content {
+    flex: auto;
+    min-height: 100vh;
+    padding-top: 3.625rem;
+    padding-left: 15rem;
+        }
+    </style>
 <div id="warpper" class="nav-fixed">
     <nav class="topnav shadow navbar-light bg-white d-flex">
         @include('layouts.backend.header')
@@ -77,7 +85,7 @@
 </div>
 @yield('scripts')
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="{{asset('public/js/app.js')}} "></script>
+<script src="{{asset('/js/app.js')}} "></script>
 <script type=”text/javascript” src=”http://code.jquery.com/jquery-2.0.3.min.js”></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

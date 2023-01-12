@@ -1,12 +1,15 @@
 <ul id="sidebar-menu">
     <li class="nav-link {{ $module_active == 'dashboard'?'active':''}}">
-        <a href="">
+        <a href="{{route('dashboard')}}">
             <div class="nav-link-icon d-inline-flex">
                 <i class="far fa-folder"></i>
             </div>
             Dashboard
         </a>
         <i class="arrow fas fa-angle-right"></i>
+        <ul class="sub-menu">
+            <li><a href="{{route('dashboard2')}}">Dashboard-Products</a></li>
+        </ul>
     </li>
     <li class="nav-link">
         <a href="?view=list-post">
@@ -72,8 +75,8 @@
         <i class="arrow fas fa-angle-right"></i>
 
         <ul class="sub-menu">
-            <li class=" "><a href="">Thêm mới</a></li>
-            <li><a href="">Danh sách</a></li>
+            <li class=" "><a href="{{route('admin/user/add-user')}}">Thêm mới</a></li>
+            <li><a href="{{route('admin/user/list-user')}}">Danh sách</a></li>
         </ul>
     </li>
     <li class="nav-link">
@@ -86,8 +89,22 @@
         <i class="arrow fas fa-angle-right"></i>
 
         <ul class="sub-menu">
-            <li class=""><a href="">Thêm mới</a></li>
-            <li><a href=" ">Danh sách</a></li>
+            <li class=""><a href="{{route('coupon.create')}}">Thêm mới</a></li>
+            <li><a href="{{route('coupon.index')}}">Danh sách</a></li>
+        </ul>
+    </li>
+    <li class="nav-link">
+        <a href="{{route('list-pitches')}}" >
+            <div class="nav-link-icon d-inline-flex">
+                <i class="far fa-folder"></i>
+            </div>
+            Sân bóng
+        </a>
+        <i class="arrow fas fa-angle-right"></i>
+
+        <ul class="sub-menu">
+            {{--                        <li class=""><a href="{{route('coupon.create')}}">Thêm mới</a></li>--}}
+            <li><a href="{{route('list-pitches')}}">Danh sách</a></li>
         </ul>
     </li>
 

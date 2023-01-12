@@ -40,7 +40,7 @@
                         <div class="num-product">
 
                             <span class="title">Sản phẩm: </span>
-                            @if($products->soluong > 0)
+                            @if($products->amount > 0)
                             <span class="status">Còn hàng</span>
                             @else
                             <span class="status">hết hàng</span>
@@ -145,7 +145,7 @@
         </div>
         <div class="sidebar fl-left">
             <div class="section" id="category-product-wp">
-                
+
             <div class="section" id="banner-wp">
                 <div class="section-detail">
                     <a href="" title="" class="thumb">

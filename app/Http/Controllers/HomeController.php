@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Commune;
+use App\District;
 use App\Pitches;
 use App\Product;
+use App\Province;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -32,7 +35,10 @@ class HomeController extends Controller
     public function service()
     {
         $stadiums = Pitches::all();
-        return view('frontend.service', compact('stadiums'));
+        $provinces = Province::all();
+        $district = District::all();
+        $commune = Commune::all();
+        return view('frontend.service', compact('stadiums','provinces', 'district'));
     }
     public function product()
     {

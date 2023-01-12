@@ -36,7 +36,7 @@ class CheckoutController extends Controller
             // dd($array);
             foreach($array as $key=>$item){
                 if($item['coupon_condition'] == 1){
-                    $total = str_replace('.','',Cart::total());
+                    $total = str_replace(',','',Cart::total());
                     $total_coupon = $total*$item['coupon_feature']/100;
                     $total_amount = $total-$total_coupon;
                 }
@@ -80,6 +80,8 @@ class CheckoutController extends Controller
                 'giatri'=>Cart::total(0,0,''),
                 'status'=>'đang sử lý',
                 'coupon_id'=>$request->input('coupon_id'),
+                "total_pay" => $request->input('total_pay'),
+                "total_coupon" => $request->input('total_coupon'),
             ]);
             $coupon = Session::get('coupon');
             if($coupon == true){

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.backend.master')
 @section('content')
 <div id="content" class="container-fluid">
     <div class="card">
