@@ -110,7 +110,7 @@ class AdminController extends Controller
 
     function edit($id){
         $user = User::find($id);
-        return view('admin.edit',compact('user'));
+        return view('backend.admin.edit',compact('user'));
     }
     function update(Request $request, $id){
         $request->validate([

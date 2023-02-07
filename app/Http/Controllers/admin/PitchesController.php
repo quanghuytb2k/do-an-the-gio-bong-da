@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Commune;
 use App\District;
 use App\Http\Controllers\Controller;
+use App\Mail\MailPitches;
 use App\OrderPitches;
 use App\PitchBookingTime;
 use App\Pitches;
@@ -12,6 +13,7 @@ use App\Province;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mail;
 
 class PitchesController extends Controller
 {
@@ -100,7 +102,7 @@ class PitchesController extends Controller
             'description' => $request->input('description'),
             'address' => $request->input('province').','.$request->input('district').','.$request->input('commune'),
             'phone_number' => $request->input('telephone'),
-            'name_pitches' => $request->input('name_pitches'),
+            'name_pitch' => $request->input('name_pitches'),
             'province' => $request->input('province'),
             'district' => $request->input('district'),
             'commune' => $request->input('commune'),
@@ -366,6 +368,7 @@ class PitchesController extends Controller
 
     function checked($id){
         $time = OrderPitches::find($id)->pitchTimes;
+        $pitch = OrderPitches::find($id)->pitches;
         $pitches = OrderPitches::where('id',$id)->first();
         foreach ($time as $value){
         $booking_time = PitchBookingTime::where('id', $value['id'])->update([
@@ -376,6 +379,7 @@ class PitchesController extends Controller
             'status' => 1,
         ]);
         $message = "Khách hàng $pitches->name_customer đã đặt sân bóng";
+        Mail::to($pitches->email)->send(new MailPitches($pitches,$pitch));
         $a = $this->sendMessage($message);
         return redirect('/home')->with('status', 'Đặt sân và thanh toán thành công!');
     }

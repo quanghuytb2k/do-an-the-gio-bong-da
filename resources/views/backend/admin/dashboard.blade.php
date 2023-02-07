@@ -169,6 +169,7 @@
                     <ul class="sub-menu">
 {{--                        <li class=""><a href="{{route('coupon.create')}}">Thêm mới</a></li>--}}
                         <li><a href="{{route('list-pitches')}}">Danh sách</a></li>
+                        <li><a href="{{route('create-pitches')}}">Tạo sân bóng</a></li>
                     </ul>
                 </li>
 
