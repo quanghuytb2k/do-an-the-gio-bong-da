@@ -103,9 +103,6 @@ class PitchesController extends Controller
             'address' => $request->input('province').','.$request->input('district').','.$request->input('commune'),
             'phone_number' => $request->input('telephone'),
             'name_pitch' => $request->input('name_pitches'),
-            'province' => $request->input('province'),
-            'district' => $request->input('district'),
-            'commune' => $request->input('commune'),
         ]);
         $time_start = $request->time_start;
         $time_end = $request->time_end;

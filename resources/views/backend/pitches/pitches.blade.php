@@ -120,10 +120,6 @@
     <script>
         $('#add-time').on('click', function () {
             var input_time = document.getElementsByName("time");
-            // let add_line = input_time.length;
-            // let add_line = $(this).parent().find('#time-pitches').val(); //add số dong
-            // var add_line =  document.getElementById('5').getElementsByTagName('input').length;
-            // console.log(add_line);
             let html = '';
             html += `
                         <hr>
@@ -136,16 +132,6 @@
 
                     `;
             $("#pitches-price").after(html);
-            // for (let i = 1; i <= add_line; i++) {
-            //     html += `
-            //         <input class="time-pitches" type="time" id="time-pitches" name="time[]" >
-            //         `;
-            // }
-            // let tr = $(this).closest("#5")
-            // var use_code_select = tr.find( "#time-pitches" ).attr("class");
-            // console.log(use_code_select);
-            // let posstion_tr_add_tr  = $("#" + use_code_select ).last().closest("#time-pitches");
-            // posstion_tr_add_tr.after(html);
 
         });
 
@@ -161,7 +147,6 @@
                 dataType: 'json',
                 success:function(data){
                     $('.district').html(data);
-                    // alert(data);
                 }
             });
         });
@@ -181,20 +166,5 @@
         });
 
     </script>
-    {{--    <script>--}}
-    {{--        $("#district").click(function(){--}}
-    {{--            var _token = $('input[name="_token"]').val();--}}
-    {{--            var commune = $(this).val();--}}
-    {{--            var data = {commune:commune, _token:_token};--}}
-    {{--            $.ajax({--}}
-    {{--                url:"{{route('commune')}}",--}}
-    {{--                method :'POST',--}}
-    {{--                data:data,--}}
-    {{--                dataType: 'json',--}}
-    {{--                success:function(data){--}}
-    {{--                    $('.commune').html(data);--}}
-    {{--                }--}}
-    {{--            });--}}
-    {{--        });--}}
-    {{--    </script>--}}
+
 @endsection
