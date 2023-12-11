@@ -268,9 +268,9 @@
                             </td>
                             <td><a href="#">{{$item->address}}</a></td>
                             <td>{{$item->email}}</td>
-                            <td>{{$pitches->name_pitch }}</td>
-                            <td>{{$pitches->name}}</td>
-                            <td>{{$item->price}}</td>
+                            <td>{{$pitches->name_pitch ?? null }}</td>
+                            <td>{{$pitches->name ?? null}}</td>
+                            <td>{{$item->price ?? null}}</td>
                             <td><a href="{{route('admin-detail-order',$item->id)}}">Chi tiết</a></td>
                             <td><span class="badge badge-warning">Đang xử lý</span></td>
                             <td>
