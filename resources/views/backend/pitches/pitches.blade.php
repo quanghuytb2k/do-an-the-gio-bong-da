@@ -79,18 +79,22 @@
                         <input type="file" name="file" class="form-control-file">
                     </div>
                 </div>
-                <div class="col-md-12">
+                {{-- <div class="col-md-12">
                     <label for="images">Lịch đá</label>
                     <div id='calendar'></div>
 
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" onclick="createStadium()" name="sm-add" class="fbtn btn-danger" value="Thêm mới">
+                </div> --}}
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        {{-- <input type="submit" onclick="createStadium()" name="sm-add" class="fbtn btn-danger" value="Thêm mới"> --}}
+                        <input type="submit" name="sm-add" class="fbtn btn-danger" value="Thêm mới">
+                    </div>
                 </div>
             </div>
         </form>
-        <div class="modal" id="insertForm" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel"
+        {{-- <div class="modal" id="insertForm" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
                 <div class="modal-content">
@@ -132,7 +136,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <script>
@@ -185,7 +189,7 @@
 
     </script>
 
-<script>
+{{-- <script>
     var list_data;
     var list_new_data;
     document.addEventListener('DOMContentLoaded', function () {
@@ -675,6 +679,6 @@
         { id: 9, name: "04:00" },
     ];
 
-</script>
+</script> --}}
 
 @endsection

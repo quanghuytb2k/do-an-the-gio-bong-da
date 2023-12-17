@@ -62,7 +62,10 @@ Route::get('/admin/list-pitches', 'admin\PitchesController@listPitches')->name('
 Route::get('/admin/detail/pitches/{id}', 'admin\PitchesController@adminDetailPitches')->name('admin-list-pitches');
 
 Route::get('/edit/pitches/{id}', 'admin\PitchesController@editPitches')->name('edit-pitches');
-
+Route::get('/add/soccer-schedule/{id}', 'admin\PitchesController@addSchedule')->name('add-soccer-schedule');
+Route::get('/get-soccer-schedule/{id}', 'admin\PitchesController@getScheduleForPitches')->name('get-schedules-for-pitches');
+Route::post('/add-soccer-schedule', 'admin\PitchesController@addScheduleForPitches')->name('add-schedules-for-pitches');
+Route::post('/edit-soccer-schedule', 'admin\PitchesController@editScheduleForPitches')->name('edit-schedules-for-pitches');
 
 });
 

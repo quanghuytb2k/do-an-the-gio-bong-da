@@ -27,6 +27,110 @@ class PitchesController extends Controller
         return view('backend.admin.list-pitches', compact('pitches'));
     }
 
+    function addSchedule()
+    {
+        return view('backend.pitches.add-schedule');
+    }
+
+    function getScheduleForPitches($id)
+    {
+        $pitches = Pitches::where('id', $id)->with(['pitchBookingTimes'])->first();
+        $data = null;
+        if (!empty($pitches)) {
+            $data['id'] = $pitches->id;
+            $data['name'] = $pitches->name;
+            $data['address'] = $pitches->address;
+            $schedules = [];
+            if ($pitches->pitchBookingTimes) {
+                foreach ($pitches->pitchBookingTimes as $key => $value) {
+                    $color = $value->status == 1 ? 'gray' : ($value->status == 2 ? 'green' : ($value->status == 3 ? 'orange' : 'gray'));
+                    $schedules[] = [
+                        "id" => $value->id,
+                        "title" => $value->time_start . ' - ' . $value->time_end,
+                        "start" => $value->day_year . ' ' . $value->time_start,
+                        "end" => $value->day_year . ' ' . $value->time_end,
+                        "backgroundColor" => $color,
+                        "borderColor" => $color,
+                        "extendedProps" => [
+                            "type" => 1,
+                            "status" => $value->status,
+                            "day" => $value->day_year,
+                            "price" => $value->price,
+                            "start" => $value->time_start,
+                            "end" => $value->time_end,
+                        ],
+                    ];
+                }
+            }
+            $data['schedules'] = $schedules;
+        }
+        echo json_encode($data);
+    }
+
+    function addScheduleForPitches(Request $req){
+        try {
+            DB::beginTransaction();
+            $data = $req->all();
+            $pitch_id = $data['id'];
+            $day_year = $data['day_year'];
+            $type = $data['type'];
+            $data_time = $data['data'];
+            if(isset($data_time) && count($data_time)){
+                foreach ($data_time as $key => $value) {
+                    $time = PitchBookingTime::create([
+                        'time_start' => $value['time_from'],
+                        'time_end' => $value['time_to'],
+                        'price' => $value['price'],
+                        'day_year'=> $day_year,
+                        'pitch_id'=> $pitch_id,
+                    ]);
+                    DB::table('pitches_time')->insert([
+                        'pitches_id' => $pitch_id,
+                        'time_id' => $time->id
+                    ]);
+                }
+            }
+            DB::commit();
+            echo json_encode(200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            echo json_encode(500);
+        }
+    }
+
+    function editScheduleForPitches(Request $req){
+        try {
+            DB::beginTransaction();
+            $data = $req->all();
+            $id = $data['id'];
+            $type = $data['type'];
+            $status = $data['status'];
+            $data_time = $data['data'];
+
+            $getSchedule = PitchBookingTime::where('id', $id)->first();
+            if(empty($getSchedule)){
+                echo json_encode(404);
+                return;
+            }
+
+            if(isset($data_time) && count($data_time)){
+                foreach ($data_time as $key => $value) {
+                    $getSchedule->update([
+                        'time_start' => $value['time_from'],
+                        'time_end' => $value['time_to'],
+                        'price' => $value['price'],
+                        'status' => $status,
+                    ]);
+                }
+            }
+            DB::commit();
+            echo json_encode(200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            echo json_encode(500);
+        }
+    }
+
     function adminDetailPitches(Request $request, $id){
         $pitches = Pitches::where('id', $id)->get();
         $times = Pitches::find($id)->pitchBookingTimes;

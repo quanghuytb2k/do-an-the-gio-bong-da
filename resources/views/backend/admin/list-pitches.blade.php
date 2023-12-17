@@ -80,6 +80,10 @@
                         <td>{{$item->name}}</td>
                         <td><a href="{{route("admin-list-pitches",$item->id)}}">Chi tiết</a></td>
                         <td>
+                            <a href="{{ route('add-soccer-schedule', $item->id) }}"
+                                class="btn btn-info btn-sm rounded-0 text-white" type="button"
+                                data-toggle="tooltip" data-placement="top" title="Add calendar"><i
+                                    class="fa fa-plus"></i></a>
                             <a href="{{route("edit-pitches",$item->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
                             <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
                         </td>
