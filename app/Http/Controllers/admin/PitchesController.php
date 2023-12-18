@@ -45,15 +45,16 @@ class PitchesController extends Controller
             if ($pitches->pitchBookingTimes) {
                 foreach ($pitches->pitchBookingTimes as $key => $value) {
                     $color = $value->status == 1 ? 'gray' : ($value->status == 2 ? 'green' : ($value->status == 3 ? 'orange' : 'gray'));
+                    $type = $value->type ? PitchBookingTime::getTypeName($value->type) : null;
                     $schedules[] = [
                         "id" => $value->id,
-                        "title" => $value->time_start . ' - ' . $value->time_end,
+                        "title" => $value->time_start . ' - ' . $value->time_end . ' (' . $type . ')',
                         "start" => $value->day_year . ' ' . $value->time_start,
                         "end" => $value->day_year . ' ' . $value->time_end,
                         "backgroundColor" => $color,
                         "borderColor" => $color,
                         "extendedProps" => [
-                            "type" => 1,
+                            "type" => $value->type,
                             "status" => $value->status,
                             "day" => $value->day_year,
                             "price" => $value->price,
@@ -84,6 +85,7 @@ class PitchesController extends Controller
                         'price' => $value['price'],
                         'day_year'=> $day_year,
                         'pitch_id'=> $pitch_id,
+                        'type'=> $type,
                     ]);
                     DB::table('pitches_time')->insert([
                         'pitches_id' => $pitch_id,
@@ -121,6 +123,7 @@ class PitchesController extends Controller
                         'time_end' => $value['time_to'],
                         'price' => $value['price'],
                         'status' => $status,
+                        'type'=> $type,
                     ]);
                 }
             }
