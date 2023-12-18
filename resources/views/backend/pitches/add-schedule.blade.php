@@ -171,10 +171,10 @@
                     var default_time_start = info.event.extendedProps.start;
                     var default_time_end = info.event.extendedProps.end;
 
-                    if (moment(start_time).format('YYYY-MM-DD H:mm') < moment().format('YYYY-MM-DD H:mm')) {
-                        alertError("Không thể sửa lịch đá trước " + moment().format('YYYY-MM-DD H:mm'));
-                        return;
-                    }
+                    // if (moment(end_time).format('YYYY-MM-DD H:mm') < moment().format('YYYY-MM-DD H:mm')) {
+                    //     alertError("Không thể sửa lịch đá trước " + moment().format('YYYY-MM-DD H:mm'));
+                    //     return;
+                    // }
                     $('#date-start-edit').val(day_year);
                     $('#stadium-status-edit').val(status);
                     $('#stadium-type-edit').val(type);
@@ -358,13 +358,19 @@
                     if(data == 200){
                         alertSuccess("");
                         display_event();
+                        $("#insertForm").modal('hide');
                     }else{
                         alertError("");
                     }
 
                 },
+            }).catch(error=>{
+                if(error && error.responseJSON){
+                    error.responseJSON.errors['data'].forEach(el => {
+                        alertError(el);
+                    });
+                }
             });
-            $("#insertForm").modal('hide');
         });
 
         // Cập nhật lịch đá
@@ -394,6 +400,7 @@
                     return;
                 }
                 form_data.push({
+                    'date_start': $('#date-start-edit').val(),
                     'time_from': $('#time_from-' + child.id).val(),
                     'time_to': $('#time_to-' + child.id).val(),
                     'price': $('#price-' + child.id).val(),
@@ -404,15 +411,18 @@
                 type: "post",
                 dataType: "json",
                 data: {
-                    id: schedule_id,
+                    id: id,
+                    schedule_id: schedule_id,
                     type: stadium_type,
                     status: stadium_status,
-                    data: form_data
+                    data: form_data,
+                    is_update: true,
                 },
                 success: function(data) {
                     if(data == 200){
                         alertSuccess("");
                         display_event();
+                        $("#editForm").modal('hide');
                     }else if(data == 404){
                         alertError("Không tìm thấy");
                     }else{
@@ -420,8 +430,13 @@
                     }
 
                 },
+            }).catch(error=>{
+                if(error && error.responseJSON){
+                    error.responseJSON.errors['data'].forEach(el => {
+                        alertError(el);
+                    });
+                }
             });
-            $("#editForm").modal('hide');
         });
 
         function alertSuccess(message) {

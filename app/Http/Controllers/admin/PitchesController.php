@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Commune;
 use App\District;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PitchesRequest;
 use App\Mail\MailPitches;
 use App\OrderPitches;
 use App\PitchBookingTime;
@@ -67,7 +68,7 @@ class PitchesController extends Controller
         echo json_encode($data);
     }
 
-    function addScheduleForPitches(Request $req){
+    function addScheduleForPitches(PitchesRequest $req){
         try {
             DB::beginTransaction();
             $data = $req->all();
@@ -98,11 +99,11 @@ class PitchesController extends Controller
         }
     }
 
-    function editScheduleForPitches(Request $req){
+    function editScheduleForPitches(PitchesRequest $req){
         try {
             DB::beginTransaction();
             $data = $req->all();
-            $id = $data['id'];
+            $id = $data['schedule_id'];
             $type = $data['type'];
             $status = $data['status'];
             $data_time = $data['data'];
@@ -208,25 +209,25 @@ class PitchesController extends Controller
             'phone_number' => $request->input('telephone'),
             'name_pitch' => $request->input('name_pitches'),
         ]);
-        $time_start = $request->time_start;
-        $time_end = $request->time_end;
-        $price = $request->price;
-        $c = count($time_end);
-        if (isset($time_start) && isset($time_end)) {
-            for($i=0; $i<$c; $i ++) {
-                    $timeCreate = PitchBookingTime::create([
-                        'time_start' => $time_start[$i],
-                        'time_end' => $time_end[$i],
-                        'price' => $price[$i],
-                        'day_year'=>$request->date,
-                        'pitch_id'=>$PitchesCreate->id,
-                ]);
-                $Pitches_time = DB::table('pitches_time')->insert([
-                    'pitches_id' => $PitchesCreate->id,
-                    'time_id' => $timeCreate->id
-                ]);
-            }
-        }
+        // $time_start = $request->time_start;
+        // $time_end = $request->time_end;
+        // $price = $request->price;
+        // $c = count($time_end);
+        // if (isset($time_start) && isset($time_end)) {
+        //     for($i=0; $i<$c; $i ++) {
+        //             $timeCreate = PitchBookingTime::create([
+        //                 'time_start' => $time_start[$i],
+        //                 'time_end' => $time_end[$i],
+        //                 'price' => $price[$i],
+        //                 'day_year'=>$request->date,
+        //                 'pitch_id'=>$PitchesCreate->id,
+        //         ]);
+        //         $Pitches_time = DB::table('pitches_time')->insert([
+        //             'pitches_id' => $PitchesCreate->id,
+        //             'time_id' => $timeCreate->id
+        //         ]);
+        //     }
+        // }
         // dd(123);
         return redirect('create-pitches')->with('status','thêm sân thành công');
     }
