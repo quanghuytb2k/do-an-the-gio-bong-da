@@ -148,9 +148,10 @@ class PitchesController extends Controller
     function editPitches(Request $request, $id){
         $pitches = Pitches::where('id', $id)->first();
         $times = Pitches::find($id)->pitchBookingTimes;
-        foreach ($times as $item) {
-            $day_year = $item->day_year;
-        }
+        $day_year = null;
+        // foreach ($times as $item) {
+        //     $day_year = $item->day_year;
+        // }
         $provinces = Province::all();
         $district = District::all();
         $commune = Commune::all();

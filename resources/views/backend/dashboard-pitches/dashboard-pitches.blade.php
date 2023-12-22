@@ -1,4 +1,5 @@
-@extends('layouts.backend.master')
+{{-- @extends('layouts.backend.master') --}}
+@extends('layouts.dashboard.app')
 @section('content')
 
     <div class="container-fluid py-5">

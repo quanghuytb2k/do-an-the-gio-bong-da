@@ -1,4 +1,5 @@
-@extends('layouts.backend.master')
+{{-- @extends('layouts.backend.master') --}}
+@extends('layouts.dashboard.app')
 @section('content')
     @if(session('status'))
         <div class="alert alert-success">
@@ -94,7 +95,7 @@
 {{--                        <small class="form-text text-danger">{{$message}}</small>--}}
 {{--                        @enderror--}}
 {{--                    </div>--}}
-                    @foreach($times as $key=>$item)
+                    {{-- @foreach($times as $key=>$item)
                     <div class="form-group booking-date" id="5">
                         <label for="">Khung giờ đá của sân</label><br>
                         <label for="start">Ngày chọn sân</label>
@@ -108,11 +109,10 @@
                         <hr>
                         <p id="add-time"><i class="fa fa-plus" aria-hidden="true"></i></p>
                     </div>
-                    @endforeach
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" name="sm-add" class="fbtn btn-danger" value="Thêm mới">
+                    @endforeach --}}
+                    <div class="form-group">
+                        <input type="submit" name="sm-add" class="fbtn btn-danger" value="Cập nhật">
+                    </div>
                 </div>
             </div>
         </form>

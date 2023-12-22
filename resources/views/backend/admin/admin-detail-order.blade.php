@@ -1,4 +1,5 @@
-@extends('layouts.backend.master')
+{{-- @extends('layouts.backend.master') --}}
+@extends('layouts.dashboard.app')
 @section('content')
 
 <div id="main-content-wp" class="list-product-page">
@@ -43,7 +44,7 @@
                                 @endif>Đã thanh toán</option>
                                 <option value=0 @if($order_pitches->status =='0')
                                     selected='selected'
-                                @endif>Chưa thanh toán</option>                           
+                                @endif>Chưa thanh toán</option>
                             </select>
                             <input type="submit" name="sm_status" value="Cập nhật thanh toán" class="btn btn-primary">
                         </li>
@@ -55,7 +56,7 @@
                 @endif
                 </ul>
             </div>
-            
+
         </div>
     </div>
 </div>

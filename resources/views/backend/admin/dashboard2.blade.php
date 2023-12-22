@@ -1,10 +1,11 @@
-@extends('layouts.backend.master')
+{{-- @extends('layouts.backend.master') --}}
+@extends('layouts.dashboard.app')
 @section('content')
 
     <div class="container-fluid py-5">
         <div class="row">
-            <div class="col">
-                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="col-lg-3">
+                <div class="card text-white bg-primary mb-3" style="padding: 10px !important">
                     <div class="card-header">ĐƠN HÀNG THÀNH CÔNG</div>
                     <div class="card-body">
                         <h5 class="card-title">2.680</h5>
@@ -12,8 +13,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+            <div class="col-lg-3">
+                <div class="card text-white bg-danger mb-3" style="padding: 10px !important">
                     <div class="card-header">ĐANG XỬ LÝ</div>
                     <div class="card-body">
                         <h5 class="card-title">10</h5>
@@ -22,8 +23,8 @@
                 </div>
             </div>
 
-            <div class="col">
-                <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+            <div class="col-lg-3">
+                <div class="card text-white bg-success mb-3" style="padding: 10px !important">
                     <div class="card-header">DOANH SỐ</div>
                     <div class="card-body">
                         <h5 class="card-title">2.5 tỷ</h5>
@@ -31,8 +32,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="col-lg-3">
+                <div class="card text-white bg-dark mb-3" style="padding: 10px !important">
                     <div class="card-header">ĐƠN HÀNG HỦY</div>
                     <div class="card-body">
                         <h5 class="card-title">125</h5>
@@ -43,10 +44,10 @@
         </div>
         <!-- end analytic  -->
         <div class="card">
-            <div class="card-header font-weight-bold">
+            <div class="header font-weight-bold">
                 ĐƠN HÀNG MỚI
             </div>
-            <div class="card-body">
+            <div class="content">
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -97,7 +98,7 @@
 
                     </tbody>
                 </table>
-                <nav aria-label="Page navigation example">
+                {{-- <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">
@@ -115,10 +116,29 @@
                             </a>
                         </li>
                     </ul>
-                </nav>
+                </nav> --}}
             </div>
         </div>
 
     </div>
 @endsection
 
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.table').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, "Tất cả"]
+                ],
+                responsive: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Tìm kiếm",
+                }
+
+            });
+        });
+    </script>
+@endpush
