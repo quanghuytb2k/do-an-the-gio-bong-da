@@ -6,7 +6,7 @@
         </div>
     @endif
     <div class="container">
-        <h1>Thêm lịch đá</h1>
+        <h1 class="text-bold">Thêm lịch đá</h1>
         <div class="row">
             <div class="col-md-12">
                 <div id='calendar'></div>
@@ -17,7 +17,11 @@
             <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-block">
-                        <h4 class="modal-title">Thêm mới lịch đá</h4>
+                        <h4 class="modal-title">
+                            <b>
+                                Thêm mới lịch đá
+                            </b>    
+                        </h4>
                     </div>
                     <div class="modal-body overflow-auto">
                         <div class="content">
@@ -62,7 +66,11 @@
             <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-block">
-                        <h4 class="modal-title">Cập nhật lịch đá</h4>
+                        <h4 class="modal-title text-bold">
+                            <b>
+                                Cập nhật lịch đá
+                            </b>
+                        </h4>
                     </div>
                     <div class="modal-body overflow-auto">
                         <div class="content">
@@ -90,7 +98,6 @@
                                     <div class="form-group">
                                         <label>Chọn loại sân:</label>
                                         <select class="form-control" id="stadium-type-edit">
-                                            <option value="1">Sân 5</option>
                                             <option value="2">Sân 7</option>
                                             <option value="3">Sân 11</option>
                                         </select>

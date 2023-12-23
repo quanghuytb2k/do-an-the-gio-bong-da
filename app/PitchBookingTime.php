@@ -22,7 +22,7 @@ class PitchBookingTime extends Model
     const MAP_TYPE = [
         self::pitch_type_5 => 'Sân 5',
         self::pitch_type_7 => 'Sân 7',
-        self::pitch_type_11 => 'Sân 7',
+        self::pitch_type_11 => 'Sân 11',
     ];
 
     static function getTypeName($type){
