@@ -146,3 +146,10 @@ Route::post('list-filter-products','ProductController@list_filter_products')->na
 
 //payment
 Route::post('/vnpay', 'HomeController@PaymentVNPay')->name('vnpay');
+
+//service
+Route::get('/choose-service', 'Auth\ChooseServiceController@index')->name('choose-service');
+
+Route::get('choose-service-pack/{id}','Auth\ChooserServicePackController@index')->name('choose-service-pack');
+Route::get('choose-service-pack/next/{id}','Auth\ChooserServicePackController@next')->name('choose-service-pack/next');
+// Route::get('/choose-service-pack', 'Auth\ChooserServicePackController@index')->name('choose-service-pack');

@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\ServicePack;
-use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterController extends Controller
+class ChooserServicePackController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -23,14 +19,11 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
-
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -39,7 +32,6 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
     }
 
     /**
@@ -48,13 +40,10 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    public function index($id)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+       $services = ServicePack::where('service_id',$id)->with(['service'])->get();
+       return view('service.choose_service_pack' , compact('services'));
     }
 
     /**
@@ -63,16 +52,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function next($id)
     {
-        $servicePack = ServicePack::where('id',$data['servicePackId'])->first();
-        $validUntil = strtotime('+'.$servicePack->time_to_use_value.' ' .$servicePack->time_to_use_unit);
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'valid_until' => date('Y-m-d H:m:s', $validUntil),
-            'role' => User::USER_CUSTOMER_ROLE
-        ]);
+        $servicePackId = $id;
+        return view('auth.register' , compact('servicePackId'));
     }
 }
