@@ -22,7 +22,7 @@
             <div class="d-flex justify-content-around align-item-center">
                 @foreach($services as $service)
                 <a href="{{route('choose-service-pack', $service->id)}}">
-                    <div class="d-flex flex-column p-3 m-3 service-card">
+                    <div class="d-flex flex-column p-3 m-3 service-card" style="height: 20vh;">
                         <h3>{{$service->name}}</h3>
                         <p class="mt-2">{{$service->description}}</p>
                     </div>
