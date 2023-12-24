@@ -63,7 +63,7 @@ Route::get('/admin/detail/pitches/{id}', 'admin\PitchesController@adminDetailPit
 
 Route::get('/edit/pitches/{id}', 'admin\PitchesController@editPitches')->name('edit-pitches');
 Route::get('/add/soccer-schedule/{id}', 'admin\PitchesController@addSchedule')->name('add-soccer-schedule');
-Route::get('/get-soccer-schedule/{id}', 'admin\PitchesController@getScheduleForPitches')->name('get-schedules-for-pitches');
+// Route::get('/get-soccer-schedule/{id}', 'admin\PitchesController@getScheduleForPitches')->name('get-schedules-for-pitches');
 Route::post('/add-soccer-schedule', 'admin\PitchesController@addScheduleForPitches')->name('add-schedules-for-pitches');
 Route::post('/edit-soccer-schedule', 'admin\PitchesController@editScheduleForPitches')->name('edit-schedules-for-pitches');
 
@@ -85,6 +85,7 @@ Route::post('/store', 'admin\UserController@store')->name('store');
 // Route::post('/store-pitches', 'admin\PitchesController@store')->name('store-pitches');
 // Route::post('/create-oder', 'admin\PitchesController@create_oder')->name('create-oder');
 Route::post('/search-pitches', 'admin\PitchesController@search')->name('search-pitches');
+Route::get('/get-soccer-schedule/{id}', 'admin\PitchesController@getScheduleForPitches')->name('get-schedules-for-pitches');
 
 //district
 Route::post('select_district','admin\PitchesController@district')->name('district');
