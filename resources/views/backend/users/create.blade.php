@@ -1,4 +1,5 @@
-@extends('layouts.backend.master')
+{{-- @extends('layouts.backend.master') --}}
+@extends('layouts.dashboard.app')
 @section('content')
 <div class="app" style="margin: 10% 30% ; border: 1px solid blue">
     <form action="{{route('store')}}" method="POST">

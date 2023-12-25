@@ -1,4 +1,5 @@
-@extends('layouts.backend.master')
+{{-- @extends('layouts.backend.master') --}}
+@extends('layouts.dashboard.app')
 @section('content')
 
 <div id="content" class="container-fluid">
@@ -8,7 +9,7 @@
                 {{session('status')}}
             </div>
         @endif
-        <div class="card-header font-weight-bold d-flex justify-content-between align-items-center">
+        <div class="header font-weight-bold d-flex justify-content-between align-items-center">
             <h5 class="m-0 ">Danh sách mã khuyến mãi</h5>
             <div class="form-search form-inline">
                 <form action="#">
@@ -17,62 +18,64 @@
                 </form>
             </div>
         </div>
-        <div class="card-body">
-            <form action="{{url('admin/user/action')}} " method="">
-            <table class="table table-striped table-checkall  " id="countryList">
-                <thead>
-                    <tr>
-                        <th>
-                            <input type="checkbox" name="checkall">
-                        </th>
-                        <th scope="col">#</th>
-                        <th scope="col">Tên mã khuyến mãi</th>
-                        <th scope="col">Mã khuyến mãi</th>
-                        <th scope="col">Số lượng</th>
-                        <th scope="col">Số tiền hoặc số % giảm</th>
-                        <th scope="col">Loại tính năng khuyến mãi</th>
-                        <th scope="col">Thời gian bắt đầu</th>
-                        <th scope="col">Thời gian kết thúc</th>
-                    </tr>
-                </thead>
-                <tbody class="ajax" id="ajax">
-                    @if ($coupon->count() > 0)
-                        @php
-                            $stt = 0;
-                        @endphp
-                        @foreach ($coupon as $item)
-                        @php
-                        $stt ++;
-                        @endphp
-                        <div >
-                        <tr >
-                        <td>
-                            <input name="list_check[]" value="{{$item->id}} " type="checkbox">
-                        </td>
-                        <th scope="row">{{$stt}} </th>
-                        <td id="name">{{$item->name}} </td>
-                        <td>{{$item->code}} </td>
-                        <td>{{$item->quantily}} </td>
-                        <td> <?php if ($item->condition == 1) echo $item->feature."%"; else echo $item->feature."k"; ?> </td>
-                        <td> <?php if ($item->condition == 1) echo "Giảm giá theo phần trăm"; else echo"Giảm giá theo tiền mặt" ; ?></td>
-                        <td>{{$item->time_start}} </td>
-                        <td>{{$item->time_end}} </td>
-                        </tr>
-                        </div>
-                        @endforeach
+        <div class="content">
+            <div class="fresh-datatables">
 
-                    @else
+
+                <form action="{{url('admin/user/action')}} " method="">
+                <table class="table table-striped table-checkall  " id="countryList">
+                    <thead>
                         <tr>
-                            <th colspan="7">không tìm thấy bản ghi nào</th>
+                            <th>
+                                <input type="checkbox" name="checkall">
+                            </th>
+                            <th scope="col">#</th>
+                            <th scope="col">Tên mã khuyến mãi</th>
+                            <th scope="col">Mã khuyến mãi</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Số tiền hoặc số % giảm</th>
+                            <th scope="col">Loại tính năng khuyến mãi</th>
+                            <th scope="col">Thời gian bắt đầu</th>
+                            <th scope="col">Thời gian kết thúc</th>
                         </tr>
-                    @endif
+                    </thead>
+                    <tbody class="ajax" id="ajax">
+                        @if ($coupon->count() > 0)
+                            @php
+                                $stt = 0;
+                            @endphp
+                            @foreach ($coupon as $item)
+                            @php
+                            $stt ++;
+                            @endphp
+                            <div >
+                            <tr >
+                            <td>
+                                <input name="list_check[]" value="{{$item->id}} " type="checkbox">
+                            </td>
+                            <th scope="row">{{$stt}} </th>
+                            <td id="name">{{$item->name}} </td>
+                            <td>{{$item->code}} </td>
+                            <td>{{$item->quantily}} </td>
+                            <td> <?php if ($item->condition == 1) echo $item->feature."%"; else echo $item->feature."k"; ?> </td>
+                            <td> <?php if ($item->condition == 1) echo "Giảm giá theo phần trăm"; else echo"Giảm giá theo tiền mặt" ; ?></td>
+                            <td>{{$item->time_start}} </td>
+                            <td>{{$item->time_end}} </td>
+                            </tr>
+                            </div>
+                            @endforeach
 
-                </tbody>
-            </table>
-            </form>
-            {{$coupon->links()}}
+                        @else
+                            <tr>
+                                <th colspan="7">không tìm thấy bản ghi nào</th>
+                            </tr>
+                        @endif
 
-
+                    </tbody>
+                </table>
+                </form>
+                {{$coupon->links()}}
+            </div>
         </div>
     </div>
 </div>
@@ -121,3 +124,22 @@
 //      });
 //   </script>
 @endsection
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.table').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, "Tất cả"]
+                ],
+                responsive: true,
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Tìm kiếm",
+                }
+
+            });
+        });
+    </script>
+@endpush

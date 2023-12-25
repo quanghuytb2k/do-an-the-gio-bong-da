@@ -148,9 +148,10 @@ class PitchesController extends Controller
     function editPitches(Request $request, $id){
         $pitches = Pitches::where('id', $id)->first();
         $times = Pitches::find($id)->pitchBookingTimes;
-        foreach ($times as $item) {
-            $day_year = $item->day_year;
-        }
+        $day_year = null;
+        // foreach ($times as $item) {
+        //     $day_year = $item->day_year;
+        // }
         $provinces = Province::all();
         $district = District::all();
         $commune = Commune::all();
@@ -534,5 +535,32 @@ class PitchesController extends Controller
 
     function admin_pitches(){
         return view('backend.admin.admin-pitches');
+    }
+
+    // remove pitches
+    public function removePitches(Request $req){
+        $data = $req->all();
+        if(!isset($data['id'])){
+            echo json_encode(["code" => 422, "message" => 'Không có sân bóng cần xóa']);
+            return;
+        }
+        try {
+            DB::beginTransaction();
+            $getPitches = Pitches::where('id', $data['id'])->withCount(['orders', 'pitchBookingTimes' => function ($q) {
+                $q->where('status',  '<>', PitchBookingTime::STATUS_NORMAL);
+            }])->first();
+            if($getPitches->orders_count || $getPitches->pitch_booking_times_count){
+                echo json_encode(["code" => 422, "message" => "Không thể xóa sân bóng đã phát sinh đặt sân"]);
+                return;
+            }
+            $getPitches->delete();
+            DB::commit();
+            echo json_encode(["code" => 200]);
+            return;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            echo json_encode(["code" => 500, "message" => $th->getMessage()]);
+            return;
+        }
     }
 }
