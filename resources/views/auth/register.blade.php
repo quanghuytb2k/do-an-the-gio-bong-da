@@ -38,7 +38,12 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row d-none">
 
+                            <div class="col-md-6">
+                                <input id="servicePackId" type="number" name="servicePackId" value="{{ $servicePackId }}">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 

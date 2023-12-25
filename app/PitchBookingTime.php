@@ -14,6 +14,9 @@ class PitchBookingTime extends Model
     function orders(){
         return $this->belongsToMany('App\PitchBookingTime', 'pitch_time_order', 'order_id', 'time_id');
     }
+    const STATUS_NORMAL = 1;
+    const STATUS_CHOOSING = 2;
+    const STATUS_ORDERED = 3;
 
     const pitch_type_5 = 1;
     const pitch_type_7 = 2;
@@ -22,7 +25,7 @@ class PitchBookingTime extends Model
     const MAP_TYPE = [
         self::pitch_type_5 => 'Sân 5',
         self::pitch_type_7 => 'Sân 7',
-        self::pitch_type_11 => 'Sân 7',
+        self::pitch_type_11 => 'Sân 11',
     ];
 
     static function getTypeName($type){

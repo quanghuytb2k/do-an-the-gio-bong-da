@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap"
         rel="stylesheet">
@@ -107,18 +110,41 @@
 <div class="container">
     <div class="row">
         @foreach($pitches as $item)
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="mySlides">
                     <img src="{{asset($item->images)}}" style="width:100%">
                 </div>
-                {{--            <div class="row">--}}
-                {{--                <div class="column col-md-4">--}}
-                {{--                    <img class="demo cursor"--}}
-                {{--                         src="https://www.sanbongconhantao.vn/image/data/kich-thuoc-san-bong.jpg" style="width:100%"--}}
-                {{--                         onclick="currentSlide(1)" alt="Anh 1">--}}
-                {{--                </div>--}}
-
-                {{--            </div>--}}
+                <div class="pt-3 mt-3">
+                    <div>
+                        <div class="stars">
+                            <div>
+                                <p class="card-title">Tên sân : {{$item->name_pitch}}</p>
+                                <p class="card-title">Địa chỉ : {{$item->address}}</p>
+                                <p class="card-title">Số điện thoại : {{$item->phone_number}}</p>
+                                <p class="card-title">Đánh giá : {{$item->star_rating}}</p>
+                            </div>
+                            <form action="">
+                                <div>
+                                    <input class="star star-5" id="star-5" type="radio" name="star"/>
+                                    <label class="star star-5" for="star-5"></label>
+                                    <input class="star star-4" id="star-4" type="radio" name="star"/>
+                                    <label class="star star-4" for="star-4"></label>
+                                    <input class="star star-3" id="star-3" type="radio" name="star"/>
+                                    <label class="star star-3" for="star-3"></label>
+                                    <input class="star star-2" id="star-2" type="radio" name="star"/>
+                                    <label class="star star-2" for="star-2"></label>
+                                    <input class="star star-1" id="star-1" type="radio" name="star"/>
+                                    <label class="star star-1" for="star-1"></label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-6">
+                <div class="mySlides">
+                    <img src="{{asset($item->images)}}" style="width:100%">
+                </div>
                 <div class="pt-3 mt-3">
                     <div>
                         <div class="stars">
@@ -143,239 +169,61 @@
                                 </div>
                             </form>
                         </div>
-                        <div id="map-container-google-1" class="z-depth-1-half map-container" style="width: 550px; ">
-                            <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                    frameborder="0" style="border: 0" allowfullscreen></iframe>
-                        </div>
-                        <div>
-                            <h2>Tiện ích</h2>
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <td>Wifi</td>
-                                    <td>Căng tin</td>
-                                    <td>Giữ xe</td>
-                                </tr>
-                                <tr>
-                                    <td>Tìm đối</td>
-                                    <td>Shop thể thao</td>
-                                    <td>Livestream</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- left-content -->
-            <div class=" col-md-6">
-                <div class="row">
-                    <div class="col-md" style="background-color:rgb(234, 220, 220) ;">
-                        <div>
-                            <div>
-
-                                <div>
-                                    <div style="width: 100px;">
-                                        <label for="province">Năm</label>
-                                        <select name="province" class="province form-control">
-                                            <option value="">2023</option>
-                                        </select>
-                                    </div>
-                                    <div style="width: 100px; margin-left: 114px; margin-top: -70px;">
-                                        <label for="province">Tháng</label>
-                                        <select name="province" class="province form-control">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="text-choose">
-                                    <h1>Chọn ngày</h1>
-                                </div>
-
-                                <div class="row">
-                                    @foreach($times as $value)
-                                        <div
-                                            style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
-                                            <div id="time"
-                                                 class="time "
-                                                 type="ratio"
-                                                 style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">
-                                                <input id="{{$value->id}}" data-id="{{$value->id}}"
-                                                       <?php if ($value['status'] == '0') echo "disabled"; ?>
-                                                       data-start="{{$value['time_start']}}"
-                                                       data-end="{{$value['time_end']}}" type="checkbox"
-                                                       class="input time-pitches" value="{{$value->price}}"
-                                                       name="time"/>
-                                                <label class="<?php if($value['status'] == '0') echo "premium-seat"; ?>"
-                                                       id="value-label"
-                                                       for="{{$value->id}}">{{$value['time_start']}}
-                                                    - {{$value['time_end']}}</label>
-                                            </div>
-                                        </div>
-                                    @endforeach
-
-                                </div>
-
-
-
-
-                                <div class="text-choose">
-                                    <h1>Chọn giờ</h1>
-                                </div>
-
-                                <div class="row">
-                                    @foreach($times as $value)
-                                        <div
-                                            style="line-height: 50px; width: 120px; height: 60px; margin-right: 10px">
-                                            <div id="time"
-                                                 class="time "
-                                                 type="ratio"
-                                                 style="text-align: center; font-size: 15px;width: 120px; height: 50px; margin-right: 10px">
-                                                <input id="{{$value->id}}" data-id="{{$value->id}}"
-                                                       <?php if ($value['status'] == '0') echo "disabled"; ?>
-                                                       data-start="{{$value['time_start']}}"
-                                                       data-end="{{$value['time_end']}}" type="checkbox"
-                                                       class="input time-pitches" value="{{$value->price}}"
-                                                       name="time"/>
-                                                <label class="<?php if($value['status'] == '0') echo "premium-seat"; ?>"
-                                                       id="value-label"
-                                                       for="{{$value->id}}">{{$value['time_start']}}
-                                                    - {{$value['time_end']}}</label>
-                                            </div>
-                                        </div>
-                                    @endforeach
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div>
-                                    <p>Giờ mà bạn chọn sân là : <span id="selectedtext"></span></p>
-                                    <p>Số tiền là: <span id="total-price"></span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="showcase">
-                            <!-- Button trigger modal -->
-                            {{-- <button type="button" class="btn btn-primary add-to-modal" data-toggle="modal" --}}
-                            <button type="button" class="btn btn-primary addPitches"
-                                    id="addCart"
-                                    data-target="#exampleModal"
-                                    data-url="{{ route('add.to.cart', $value->pivot->pitches_id) }}">
-                                <!-- {{-- <a href="{{ route('add.to.cart', $value->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> --}} -->
-                                ĐẶT SÂN
-                            </button>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Thanh toán</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            {{--                                                    <h4>Array gio da chon : <span id="chk_values">--</span></h4>--}}
-                                            <form>
-                                                <input id="pich_id" type="hidden" name="star" value="{{$item->id}}"/>
-                                                <div class="form-group">
-                                                    <label for="name">Tên </label>
-                                                    <input type="text" class="form-control"
-                                                           id="name" aria-describedby="emailHelp">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="phone">Số điện thoại</label>
-                                                    <input type="text" class="form-control"
-                                                           id="phone">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="email">Email</label>
-                                                    <input type="text" class="form-control"
-                                                           id="email">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="address">Địa chỉ </label>
-                                                    <input type="text" class="form-control"
-                                                           id="address">
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value="1"
-                                                           name="pay" id="pay">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        Thanh toán tại sân </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" value="2"
-                                                           name="pay" id="pay">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        Thanh toán qua VNPay </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="momo" type="radio"
-                                                           name="pay" id="pay" value="3"
-                                                           checked>
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        Thanh toán qua momo
-                                                    </label>
-                                                </div>
-
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close
-                                            </button>
-                                            <!-- <button type="submit" id="btn-submit" class="btn-submit btn-primary">
-                                                Submit
-                                            </button> -->
-                                            <!-- <form action="{{url('/vnpay')}}" method="POST">
-                                                    @csrf -->
-                                            <button type="submit" id="btn-submit" class="btn-submit btn-primary"
-                                                    name="redirect">
-                                                Submit
-                                            </button>
-                                            <!-- </form> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <h2>Các đối đặt sân</h2>
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td>Wifi</td>
-                        <td>Căng tin</td>
-                        <td>Giữ xe</td>
-                    </tr>
-                    <tr>
-                        <td>Tìm đối</td>
-                        <td>Shop thể thao</td>
-                        <td>Livestream</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="col-md-9">
+                <h1>Lịch đá</h1>
+                <div id='calendar'></div>
             </div>
     </div>
+    <div class="row pt-4">
+        <div class="col-md-6">
+            <h2>Tiện ích</h2>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>Wifi</td>
+                    <td>Căng tin</td>
+                    <td>Giữ xe</td>
+                </tr>
+                <tr>
+                    <td>Tìm đối</td>
+                    <td>Shop thể thao</td>
+                    <td>Livestream</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h2>Các đối đặt sân</h2>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>Wifi</td>
+                    <td>Căng tin</td>
+                    <td>Giữ xe</td>
+                </tr>
+                <tr>
+                    <td>Tìm đối</td>
+                    <td>Shop thể thao</td>
+                    <td>Livestream</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row pt-4">
+        <div class="col-md-12">
+            <div id="map-container-google-1" class="z-depth-1-half map-container" style="width: 100%; ">
+                <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                frameborder="0" style="border: 0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
 </div>
 @endforeach
 </div>
@@ -517,7 +365,91 @@
         });
     });
 </script>
+<script>
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
+        });
+        var list_schedules;
+        var list_new_data;
+        const id = location.pathname.split('/').pop();
+        document.addEventListener('DOMContentLoaded', function() {
+            display_event();
+        });
 
+        // Lấy dữ liệu lịch đá
+        async function display_event() {
+            $.ajax({
+                url: "/get-soccer-schedule/" + id,
+                type: "get",
+                dataType: "json",
+                data: {},
+                success: function(data) {
+                    if (data.schedules) {
+                        list_schedules = data.schedules;
+                    }
+                    renderCalendar();
+                },
+            });
+        }
+
+        // Hiển thị dữ liệu theo lịch đá
+        function renderCalendar(){
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: "vi",
+                events: list_schedules,
+                editable: true,
+                selectable: true,
+                dayMaxEvents: true,
+                displayEventTime: false,
+                eventDisplay: 'block',
+                eventClick: function(info) {
+                    info.jsEvent.preventDefault();
+                    var event_id = info.event.id;
+                    var price = info.event.extendedProps.price;
+                    var status = info.event.extendedProps.status;
+                    if(status != 1) {
+                        alertError('Thời gian đang không trống');
+                        return;
+                    }
+                    $.ajax({
+                        url: '{{route("create-oder")}}',
+                        type: 'post',
+                        data: {
+                            time: [event_id],
+                            pich_id: id,
+                            total_price: price,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data != "") {
+                                alert(data);
+                            } else {
+                                // window.location = "http://localhost/the-gioi-bong-da/checkout/pitches";
+                                window.location.replace("/checkout/pitches");
+                            }
+                        }
+                    });
+                },
+            });
+            calendar.render();
+        }
+
+
+        function alertSuccess(message) {
+            swal("Thành công", message, "success");
+        }
+
+        function alertError(message){
+            swal("Đã xảy ra lỗi!", message, "warning");
+        }
+
+    </script>
 </body>
 <script src="{{ asset('asset/main.js') }}"></script>
 

@@ -1,4 +1,5 @@
-@extends('layouts.backend.master')
+{{-- @extends('layouts.backend.master') --}}
+@extends('layouts.dashboard.app')
 @section('content')
 
 
@@ -13,7 +14,7 @@
 
 
         @endif
-        <div class="card-header font-weight-bold d-flex justify-content-between align-items-center">
+        <div class="header font-weight-bold d-flex justify-content-between align-items-center">
             <h5 class="m-0 ">Danh sách thành viên</h5>
             <div class="form-search form-inline">
                 <form action="#">
@@ -22,7 +23,7 @@
                 </form>
             </div>
         </div>
-        <div class="card-body">
+        <div class="content">
             <div class="analytic">
                 <a href="{{request()->fullUrlWithQuery(['status'=>'active'])}}" class="text-primary">kích hoạt <span class="text-muted">{{$count[0]}}</span></a>
                 <a href="{{request()->fullUrlWithQuery(['status'=>'trash'])}}" class="text-primary"> chưa kích hoạt <span class="text-muted">{{$count[1]}}</span></a>

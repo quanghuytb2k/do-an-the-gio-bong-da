@@ -148,9 +148,10 @@ class PitchesController extends Controller
     function editPitches(Request $request, $id){
         $pitches = Pitches::where('id', $id)->first();
         $times = Pitches::find($id)->pitchBookingTimes;
-        foreach ($times as $item) {
-            $day_year = $item->day_year;
-        }
+        $day_year = null;
+        // foreach ($times as $item) {
+        //     $day_year = $item->day_year;
+        // }
         $provinces = Province::all();
         $district = District::all();
         $commune = Commune::all();
@@ -237,128 +238,27 @@ class PitchesController extends Controller
 
     function create_oder(Request  $request)
     {
-        $pich_id = $request->get('pich_id');
-        $name = $request->get('name');
-        $email = $request->get('email');
-        $address = $request->get('address');
-        $phone = $request->get('phone');
-        $time = $request->get('time');
-        $total_price = $request->get('total_price');
-        $pay = $request->get('pay');
+        $data = $request->all();
+        $pich_id = $data['pich_id'];
+        $time = $data['time'];
+        $total_price = $data['total_price'];
         if($time == null){
             $data = 'Vui lòng chọn giờ đặt sân';
             return response()->json($data);
         }
         $order_pitch = OrderPitches::create([
             'pitch_id'=>$pich_id,
-           'name_customer' => $name,
-           'email' => $email,
-           'phone' => $phone,
-            'address' =>  $address,
-            'price' => str_replace( ',', '',  $total_price),
+            'price' => $total_price,
         ]);
         foreach ($time as $value){
             $pitch_time_order = DB::table('pitch_time_order')->insert([
                 'order_id' => $order_pitch->id,
                 'time_id'=>$value
             ]);
-            // $booking_time = PitchBookingTime::where('id', $value)->update([
-            //     'status'=>'0'
-            // ]);
         }
         $pitches = OrderPitches::where('id', $order_pitch->id)->first();
-        // dd('123',$pitches);
         $data = "";
         return response()->json($data);
-        // $code = rand(1,50);
-        // if($pay == 3){
-        //     $response = \MoMoAIO::purchase([
-        //         // 'amount' => $input['amount'],
-        //         'amount' => 10000,
-        //         'returnUrl' => 'http://localhost/the-gioi-bong-da',
-        //         'notifyUrl' => 'http://localhost/the-gioi-bong-da/ipn/',
-        //         'orderId' =>  $code,
-        //         'requestId' => $code,
-        //     ])->send();
-        //     // dd($response);
-        //     if ($response->isRedirect()) {
-        //         $redirectUrl = $response->getRedirectUrl();
-        //         return redirect($redirectUrl);
-
-        //     }
-        //     dd(34);
-
-        //     $data = 'Đặt sân thành công';
-        //     return response()->json($data);
-        // }
-        // if($pay == 2){
-        //     $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        //     $vnp_Returnurl = "http://localhost/the-gioi-bong-da";
-        //     $vnp_TmnCode = "V6BP0S5P"; //Mã website tại VNPAY
-        //     $vnp_HashSecret = "MYOCNMNQPLFAVFAWWNVZAZCTPXWQAOWE"; //Chuỗi bí mật
-
-        //     $vnp_TxnRef = 12346781; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        //     $vnp_OrderInfo = 13223;
-        //     $vnp_OrderType = 'billpayment';
-        //     // $vnp_Amount = $_POST['amount'] * 100;
-        //     $vnp_Amount = 10000 * 100;
-        //     $vnp_Locale = 'vn';
-        //     // $vnp_BankCode = 'VNPAYQR';
-        //     $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-        //     $inputData = array(
-        //         "vnp_Version" => "2.1.0",
-        //         "vnp_TmnCode" => $vnp_TmnCode,
-        //         "vnp_Amount" => $vnp_Amount,
-        //         "vnp_Command" => "pay",
-        //         "vnp_CreateDate" => date('YmdHis'),
-        //         "vnp_CurrCode" => "VND",
-        //         "vnp_IpAddr" => $vnp_IpAddr,
-        //         "vnp_Locale" => $vnp_Locale,
-        //         "vnp_OrderInfo" => $vnp_OrderInfo,
-        //         "vnp_OrderType" => $vnp_OrderType,
-        //         "vnp_ReturnUrl" => $vnp_Returnurl,
-        //         "vnp_TxnRef" => $vnp_TxnRef,
-        //     );
-
-        //     if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-        //         $inputData['vnp_BankCode'] = $vnp_BankCode;
-        //     }
-        //     if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
-        //         $inputData['vnp_Bill_State'] = $vnp_Bill_State;
-        //     }
-
-        //     ksort($inputData);
-        //     $query = "";
-        //     $i = 0;
-        //     $hashdata = "";
-        //     foreach ($inputData as $key => $value) {
-        //         if ($i == 1) {
-        //             $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
-        //         } else {
-        //             $hashdata .= urlencode($key) . "=" . urlencode($value);
-        //             $i = 1;
-        //         }
-        //         $query .= urlencode($key) . "=" . urlencode($value) . '&';
-        //     }
-
-        //     $vnp_Url = $vnp_Url . "?" . $query;
-        //     if (isset($vnp_HashSecret)) {
-        //         $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
-        //         $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
-        //     }
-        //     $returnData = array(
-        //         'code' => '00', 'message' => 'success', 'data' => $vnp_Url
-        //     );
-        //     if (isset($_POST['redirect'])) {
-        //         header('Location: ' . $vnp_Url);
-        //         die();
-        //     } else {
-        //         echo json_encode($returnData);
-        //     }
-        // }else{
-        //     $data = 'Đặt sân thành công';
-        //     return response()->json($data);
-        // }
     }
 
     function checkout(){
@@ -635,5 +535,32 @@ class PitchesController extends Controller
 
     function admin_pitches(){
         return view('backend.admin.admin-pitches');
+    }
+
+    // remove pitches
+    public function removePitches(Request $req){
+        $data = $req->all();
+        if(!isset($data['id'])){
+            echo json_encode(["code" => 422, "message" => 'Không có sân bóng cần xóa']);
+            return;
+        }
+        try {
+            DB::beginTransaction();
+            $getPitches = Pitches::where('id', $data['id'])->withCount(['orders', 'pitchBookingTimes' => function ($q) {
+                $q->where('status',  '<>', PitchBookingTime::STATUS_NORMAL);
+            }])->first();
+            if($getPitches->orders_count || $getPitches->pitch_booking_times_count){
+                echo json_encode(["code" => 422, "message" => "Không thể xóa sân bóng đã phát sinh đặt sân"]);
+                return;
+            }
+            $getPitches->delete();
+            DB::commit();
+            echo json_encode(["code" => 200]);
+            return;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            echo json_encode(["code" => 500, "message" => $th->getMessage()]);
+            return;
+        }
     }
 }

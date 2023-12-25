@@ -62,8 +62,9 @@ Route::get('/admin/list-pitches', 'admin\PitchesController@listPitches')->name('
 Route::get('/admin/detail/pitches/{id}', 'admin\PitchesController@adminDetailPitches')->name('admin-list-pitches');
 
 Route::get('/edit/pitches/{id}', 'admin\PitchesController@editPitches')->name('edit-pitches');
+Route::post('/remove-pitches', 'admin\PitchesController@removePitches')->name('remove-pitches');
 Route::get('/add/soccer-schedule/{id}', 'admin\PitchesController@addSchedule')->name('add-soccer-schedule');
-Route::get('/get-soccer-schedule/{id}', 'admin\PitchesController@getScheduleForPitches')->name('get-schedules-for-pitches');
+// Route::get('/get-soccer-schedule/{id}', 'admin\PitchesController@getScheduleForPitches')->name('get-schedules-for-pitches');
 Route::post('/add-soccer-schedule', 'admin\PitchesController@addScheduleForPitches')->name('add-schedules-for-pitches');
 Route::post('/edit-soccer-schedule', 'admin\PitchesController@editScheduleForPitches')->name('edit-schedules-for-pitches');
 
@@ -85,6 +86,7 @@ Route::post('/store', 'admin\UserController@store')->name('store');
 // Route::post('/store-pitches', 'admin\PitchesController@store')->name('store-pitches');
 // Route::post('/create-oder', 'admin\PitchesController@create_oder')->name('create-oder');
 Route::post('/search-pitches', 'admin\PitchesController@search')->name('search-pitches');
+Route::get('/get-soccer-schedule/{id}', 'admin\PitchesController@getScheduleForPitches')->name('get-schedules-for-pitches');
 
 //district
 Route::post('select_district','admin\PitchesController@district')->name('district');
@@ -145,3 +147,10 @@ Route::post('list-filter-products','ProductController@list_filter_products')->na
 
 //payment
 Route::post('/vnpay', 'HomeController@PaymentVNPay')->name('vnpay');
+
+//service
+Route::get('/choose-service', 'Auth\ChooseServiceController@index')->name('choose-service');
+
+Route::get('choose-service-pack/{id}','Auth\ChooserServicePackController@index')->name('choose-service-pack');
+Route::get('choose-service-pack/next/{id}','Auth\ChooserServicePackController@next')->name('choose-service-pack/next');
+// Route::get('/choose-service-pack', 'Auth\ChooserServicePackController@index')->name('choose-service-pack');
