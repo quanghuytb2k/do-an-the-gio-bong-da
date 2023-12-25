@@ -27,6 +27,18 @@ class DashboardController extends Controller
     function __construct(){
         $this->middleware(function($request, $next){
             session(['module_active'=>'dashboard']);
+            $user = auth()->user();
+            $now = strtotime("today");
+            $validUntil = strtotime($user->valid_until);
+            $dateDiff = $validUntil - $now;
+            $dayOfDataDiff = round($dateDiff / (60 * 60 * 24));
+
+            if($dayOfDataDiff <= 7){
+                session(['jsAlert'=>'Tài khoản của bạn sẽ hạn hạn trong '.$dayOfDataDiff . ' ngày nữa vui lòng gia hạn để tiếp tục sử dụng dịch vụ']);
+            }else if($dayOfDataDiff <= 0){
+                return redirect('login');
+            }
+            
             return $next($request);
         });
     }

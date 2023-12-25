@@ -55,6 +55,14 @@
     {{session('status')}}
 </div>
 @endif
+@if(session()->has('jsAlert'))
+<script type="text/javascript" >
+    let msg = '{{Session::get('jsAlert')}}';;
+    alert(msg);
+</script>
+@endif 
+
+
 <div id="warpper" class="nav-fixed">
     <nav class="topnav shadow navbar-light bg-white d-flex">
 
