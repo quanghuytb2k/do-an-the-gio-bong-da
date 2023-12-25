@@ -48,56 +48,58 @@
                 ĐƠN HÀNG MỚI
             </div>
             <div class="content">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Mã</th>
-                        <th scope="col">Khách hàng</th>
-                        <th scope="col">Sản phẩm</th>
-                        <th scope="col">Số lượng</th>
-                        <th scope="col">Giá trị</th>
-                        <th scope="col">Trạng thái</th>
-                        <th scope="col">Thời gian</th>
-                        <th scope="col"> Chi tết </th>
-                        <th scope="col">Tác vụ</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @php
-                        $items = DB::table('checkouts')->get();
-                        $stt = 0;
-                    @endphp
-                    @foreach ($items as $item ) @php
-                        $stt ++ ;
-                    @endphp
+                <div class="fresh-datatables">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Mã</th>
+                            <th scope="col">Khách hàng</th>
+                            <th scope="col">Sản phẩm</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Giá trị</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Thời gian</th>
+                            <th scope="col"> Chi tết </th>
+                            <th scope="col">Tác vụ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @php
+                            $items = DB::table('checkouts')->get();
+                            $stt = 0;
+                        @endphp
+                        @foreach ($items as $item ) @php
+                            $stt ++ ;
+                        @endphp
 
 
 
-                    <tr>
-                        <th scope="row">{{$stt}} </th>
-                        <td>{{$item->code}}</td>
-                        <td>
-                            {{$item->name}} <br>
-                            {{$item->phonenumber}}
-                        </td>
-                        <td><a href="#">{{$item->product}}</a></td>
-                        <td>{{$item->soluong}}</td>
-                        <td>{{$item->giatri}}</td>
-                        <td><span class="badge badge-warning">{{$item->status}}</span></td>
-                        <td>{{$item->created_at}}</td>
-                        <td><a href="{{route('detail',$item->id)}}">Chi tiết</a></td>
-                        <td>
-                            <a href="{{route('admin_order',$item->id)}} " class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    @endforeach
+                        <tr>
+                            <th scope="row">{{$stt}} </th>
+                            <td>{{$item->code}}</td>
+                            <td>
+                                {{$item->name}} <br>
+                                {{$item->phonenumber}}
+                            </td>
+                            <td><a href="#">{{$item->product}}</a></td>
+                            <td>{{$item->soluong}}</td>
+                            <td>{{$item->giatri}}</td>
+                            <td><span class="badge badge-warning">{{$item->status}}</span></td>
+                            <td>{{$item->created_at}}</td>
+                            <td><a href="{{route('detail',$item->id)}}">Chi tiết</a></td>
+                            <td>
+                                <a href="{{route('admin_order',$item->id)}} " class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        @endforeach
 
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
                 {{-- <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item">

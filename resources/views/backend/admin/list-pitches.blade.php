@@ -76,7 +76,8 @@
 
 
                         <tr>
-                            <th scope="row">{{$stt}} </th>
+                            {{-- <th scope="row">{{$stt}} </th> --}}
+                            <th scope="row"></th>
                             <td>{{$item->name_pitch}}</td>
                             <td>
                                 {{$item->address}}
@@ -90,7 +91,7 @@
                                     data-toggle="tooltip" data-placement="top" title="Add calendar"><i
                                         class="fa fa-plus"></i></a>
                                 <a href="{{route("edit-pitches",$item->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
+                                <a href="javascript:void(0)" onclick="removePitches({{$item->id}})" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -105,6 +106,11 @@
 @push('js')
     <script>
         $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
             $('.table').DataTable({
                 "pagingType": "full_numbers",
                 "lengthMenu": [
@@ -119,6 +125,41 @@
 
             });
         });
+
+        function removePitches(id){
+            $.ajax({
+                url: "/remove-pitches",
+                type: "post",
+                dataType: "json",
+                data: {
+                    id: id,
+                },
+                success: function(data) {
+                    let message = data.message ? data.message : null;
+                    if(data.code == 200){
+                        location.reload();
+                        alertSuccess(message);
+                    }else{
+                        alertError(message);
+                    }
+
+                },
+            }).catch(error=>{
+                if(error && error.responseJSON){
+                    error.responseJSON.errors['data'].forEach(el => {
+                        alertError(el);
+                    });
+                }
+            });
+        }
+
+        function alertSuccess(message) {
+            swal("Thành công", message, "success");
+        }
+
+        function alertError(message){
+            swal("Đã xảy ra lỗi!", message, "warning");
+        }
     </script>
 @endpush
 
