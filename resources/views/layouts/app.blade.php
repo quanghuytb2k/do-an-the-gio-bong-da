@@ -23,6 +23,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+@if(session()->has('jsAlert'))
+<script type="text/javascript" >
+    let msg = '{{Session::get('jsAlert')}}';;
+    alert(msg);
+</script>
+@endif 
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
