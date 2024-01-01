@@ -23,7 +23,7 @@ Auth::routes();
 Auth::routes(['verify' => true]);
 Route::get('/', 'HomeController@index')->name('index');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','auth.user'])->group(function(){
     Route::middleware(['authorization'])->group(function () {
         Route::get('admin/user/list-user', 'admin\AdminController@list')->name('admin/user/list-user');
         Route::get('admin/user/add-user', 'admin\AdminController@add')->name('admin/user/add-user');
@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('admin/user/edit/{id}', 'admin\AdminController@edit')->name('admin/edit');
         Route::post('admin/user/update/{id}', 'admin\AdminController@update')->name('admin/update');
     });
-    Route::get('dashboard', 'DashboardController@dashboard')->name('dashboard');
+    Route::get('dashboard','DashboardController@dashboard')->name('dashboard');
 
     //pitches
     Route::get('/create-pitches', 'admin\PitchesController@create')->name('create-pitches');
@@ -152,6 +152,7 @@ Route::post('/vnpay', 'HomeController@PaymentVNPay')->name('vnpay');
 //service
 Route::get('/choose-service', 'Auth\ChooseServiceController@index')->name('choose-service');
 
-Route::get('choose-service-pack/{id}', 'Auth\ChooserServicePackController@index')->name('choose-service-pack');
-Route::get('choose-service-pack/next/{id}', 'Auth\ChooserServicePackController@next')->name('choose-service-pack/next');
-// Route::get('/choose-service-pack', 'Auth\ChooserServicePackController@index')->name('choose-service-pack');
+Route::get('choose-service-pack/{id}','Auth\ChooserServicePackController@index')->name('choose-service-pack');
+Route::get('choose-service-pack/next/{id}','Auth\ChooserServicePackController@next')->name('choose-service-pack/next');
+Route::post('/choose-service-pack/payment', 'Auth\ChooserServicePackController@payment')->name('choose-service-pack/payment');
+Route::post('choose-service-pack/check/{id}', 'Auth\ChooserServicePackController@payment')->name('choose-service-pack/check');
