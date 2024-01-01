@@ -6,14 +6,20 @@
             {{session('status')}}
         </div>
     @endif
+    @if(session('status-error'))
+        <div class="alert alert-warning">
+            {{session('status-error')}}
+        </div>
+    @endif
     <div class="container">
         <h1>Sửa sân bóng</h1>
-        <form action="{{route('store-pitches')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('update-pitches')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="name">Nhập tên sân bóng</label>
+                        <input type="hidden" name="id_pitches" value="{{$pitches->id}}" class="form-control">
                         <input type="text" name="name_pitches" value="{{$pitches->name_pitch}}" class="form-control" placeholder='Nhập tên sân bóng'>
                         @error('name_pitches')
                         <small class="form-text text-danger">{{$message}}</small>
@@ -111,7 +117,7 @@
                     </div>
                     @endforeach --}}
                     <div class="form-group">
-                        <input type="submit" name="sm-add" class="fbtn btn-danger" value="Cập nhật">
+                        <input type="submit" name="sm-add" class="fbtn btn-success" value="Cập nhật">
                     </div>
                 </div>
             </div>
