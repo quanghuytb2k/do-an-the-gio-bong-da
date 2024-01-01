@@ -19,7 +19,7 @@
         <div class="user">
             <div class="info">
                 <div class="photo">
-                    <img src="{{ asset('img/AngelRosé.jpg') }}"/>
+                    <img src="{{ asset('img/AngelRosé.jpg') }}" />
                 </div>
 
                 <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -37,8 +37,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Đăng xuất') }}
                             </a>
@@ -52,6 +51,80 @@
             </div>
         </div>
         <ul class="nav">
+            @if(Auth::user()->role == App\User::USER_ADMIN_ROLE)
+            <li>
+                <a data-toggle="collapse" href="#users">
+                    <i class="pe-7s-note2"></i>
+                    <p>Users
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="users">
+                    <ul class="nav">
+                        <li>
+                            <a href="{{route('admin/user/add-user')}}">
+                                <span class="sidebar-mini">NUR</span>
+                                <span class="sidebar-normal">Thêm mới</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin/user/list-user')}}">
+                                <span class="sidebar-mini">LUR</span>
+                                <span class="sidebar-normal">Danh sách</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a data-toggle="collapse" href="#serivce">
+                    <i class="pe-7s-note2"></i>
+                    <p>service
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="serivce">
+                    <ul class="nav">
+                        <li>
+                            <a href="">
+                                <span class="sidebar-mini">NSV</span>
+                                <span class="sidebar-normal">Thêm mới</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <span class="sidebar-mini">LSV</span>
+                                <span class="sidebar-normal">Danh sách</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a data-toggle="collapse" href="#service-pack">
+                    <i class="pe-7s-note2"></i>
+                    <p>Service pack
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="service-pack">
+                    <ul class="nav">
+                        <li>
+                            <a href="">
+                                <span class="sidebar-mini">NSVP</span>
+                                <span class="sidebar-normal">Thêm mới</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin/user/list-user')}}">
+                                <span class="sidebar-mini">LSVP</span>
+                                <span class="sidebar-normal">Danh sách</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            @else
             <li>
                 <a data-toggle="collapse" href="#chart">
                     <i class="pe-7s-note2"></i>
@@ -179,30 +252,6 @@
                 </div>
             </li>
             <li>
-                <a data-toggle="collapse" href="#users">
-                    <i class="pe-7s-note2"></i>
-                    <p>Users
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="users">
-                    <ul class="nav">
-                        <li>
-                            <a href="{{route('admin/user/add-user')}}">
-                                <span class="sidebar-mini">NUR</span>
-                                <span class="sidebar-normal">Thêm mới</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('admin/user/list-user')}}">
-                                <span class="sidebar-mini">LUR</span>
-                                <span class="sidebar-normal">Danh sách</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
                 <a data-toggle="collapse" href="#coupon">
                     <i class="pe-7s-note2"></i>
                     <p>Khuyễn mãi
@@ -250,11 +299,12 @@
                     </ul>
                 </div>
             </li>
+            @endif
         </ul>
     </div>
 </div>
 @push('js')
-    {{-- <script>
+{{-- <script>
         getInfo();
 
         function getInfo() {
