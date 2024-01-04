@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     //pitches
     Route::get('/create-pitches', 'admin\PitchesController@create')->name('create-pitches');
     Route::post('/store-pitches', 'admin\PitchesController@store')->name('store-pitches');
+    Route::post('/update-pitches', 'admin\PitchesController@updatePitches')->name('update-pitches');
 
     Route::get('/admin/pitches', 'admin\PitchesController@admin_pitches')->name('admin-pitches');
     Route::get('/admin/detail/order/{id}', 'admin\PitchesController@detail_order')->name('admin-detail-order');

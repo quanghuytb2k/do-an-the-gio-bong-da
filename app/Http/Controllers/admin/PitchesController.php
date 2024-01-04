@@ -138,6 +138,7 @@ class PitchesController extends Controller
     function adminDetailPitches(Request $request, $id){
         $pitches = Pitches::where('id', $id)->get();
         $times = Pitches::find($id)->pitchBookingTimes;
+        $day_year = null;
         foreach ($times as $item) {
             $day_year = $item->day_year;
         }
@@ -561,6 +562,39 @@ class PitchesController extends Controller
             DB::rollBack();
             echo json_encode(["code" => 500, "message" => $th->getMessage()]);
             return;
+        }
+    }
+
+    // update pitches
+    public function updatePitches(Request $req){
+        $data = $req->all();
+        if(!isset($data['id_pitches'])){
+            return redirect()->back()->with('status-error','Không có sân bóng cần cập nhật');
+        }
+        try {
+            DB::beginTransaction();
+            if($req->hasFile('file')){
+                $file= $req->file;
+                $filename= $file->getClientOriginalName();
+                $thumbnail = "uploads/".$filename;
+                $file->move('public/uploads/', $file->getClientOriginalName());
+
+            }else{
+                $thumbnail = '';
+            }
+            $updatePitches = Pitches::where('id', $data['id_pitches'])->update([
+                'name' => $data['name'],
+                'images' => $thumbnail ,
+                'description' => $data['description'],
+                'address' => $data['province'].','.$data['district'].','.$data['commune'],
+                'phone_number' => $data['telephone'],
+                'name_pitch' => $data['name_pitches'],
+            ]);
+            DB::commit();
+            return redirect()->back()->with('status','Cập nhật sân bóng thành công');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with('status-error','Cập nhật sân bóng thất bại');
         }
     }
 }
