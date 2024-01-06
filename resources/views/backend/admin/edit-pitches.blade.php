@@ -59,22 +59,6 @@
                         <label for="images">Hình ảnh sân bóng</label>
                         <input type="file" name="file" class="form-control-file">
                     </div>
-                    <div class="form-group">
-                        <label for="description">Miêu tả sân bóng</label>
-                        <textarea name="description" class="form-control" id="description" cols="30" value="{{$pitches->description}}"
-                                  rows="5">{{ old('description') }} </textarea>
-
-                        @error('description')
-                        <small class="form-text text-danger">{{$message}}</small>
-                        @enderror
-                    </div>
-                    {{--                    <div class="form-group">--}}
-                    {{--                        <label for="price">Gía sân</label>--}}
-                    {{--                        <input type="text" name="price" class="form-control" placeholder='giá sân bóng'>--}}
-                    {{--                        @error('price')--}}
-                    {{--                        <small class="form-text text-danger">{{$message}}</small>--}}
-                    {{--                        @enderror--}}
-                    {{--                    </div>--}}
                 </div>
 
                 <div class="col-md-6">
@@ -93,32 +77,20 @@
                         <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>
-{{--                    <div class="form-group">--}}
-{{--                        <label for="">Email chủ sân</label>--}}
-{{--                        <input type="email" name="email" class="form-control" value="{{$pitches->email}}"--}}
-{{--                               placeholder='Email điện thoại chủ sân '>--}}
-{{--                        @error('telephone')--}}
-{{--                        <small class="form-text text-danger">{{$message}}</small>--}}
-{{--                        @enderror--}}
-{{--                    </div>--}}
-                    {{-- @foreach($times as $key=>$item)
-                    <div class="form-group booking-date" id="5">
-                        <label for="">Khung giờ đá của sân</label><br>
-                        <label for="start">Ngày chọn sân</label>
-                        <input type="date" id="start" multiple="multiple" name="date" value="{{$item->day_year}}"><br><br>
-                        <label for="">Giờ bắt đầu sân đá</label>
-                        <input class="time-pitches" type="time" id="time-pitches-start" name="time_start[]" value="{{$item->time_start}}">
-                        <label for="">Giờ kết thúc sân đá</label>
-                        <input class="time-pitches" type="time" id="time-pitches-end" name="time_end[]" value="{{$item->time_end}}">
-                        <label for="" style="margin-left: 160px">Gía sân</label>
-                        <input class="pitches-price" type="text" id="pitches-price" name="price[]" value="{{$item->price}}">
-                        <hr>
-                        <p id="add-time"><i class="fa fa-plus" aria-hidden="true"></i></p>
-                    </div>
-                    @endforeach --}}
                     <div class="form-group">
-                        <input type="submit" name="sm-add" class="fbtn btn-success" value="Cập nhật">
+                        <label for="description">Miêu tả sân bóng</label>
+                        <textarea name="description" class="form-control" id="description" cols="30" value="{{$pitches->description}}"
+                                  rows="5">{{ old('description') }} </textarea>
+
+                        @error('description')
+                        <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <input type="submit" name="sm-add" class="btn btn-primary" value="Cập nhật">
                 </div>
             </div>
         </form>

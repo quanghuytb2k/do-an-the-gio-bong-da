@@ -67,16 +67,16 @@
                         <tbody>
                         @php
                             $items = DB::table('checkouts')->get();
-                            $stt = 0;
+                            // $stt = 0;
                         @endphp
                         @foreach ($items as $item ) @php
-                            $stt ++ ;
+                            // $stt ++ ;
                         @endphp
 
 
 
                         <tr>
-                            <th scope="row">{{$stt}} </th>
+                            <th scope="row"></th>
                             <td>{{$item->code}}</td>
                             <td>
                                 {{$item->name}} <br>
