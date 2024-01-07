@@ -82,14 +82,14 @@
         <div class="col-lg-4 service-card mt-3">
             <a href="{{route('choose-service-pack/next', $service->id)}}">
                 <div class="service-content">
-                    <span class="service-title {{ $index % 3 == 0 ? 'bg-info text-primary' : ($index % 2 == 0 ? 'bg-success' : ($index % 1 == 0 ? 'bg-warning text-danger' : ''))}}">
+                    <span class="service-title {{ $index % 3 == 0 ? 'bg-info' : ($index % 2 == 0 ? 'bg-success' : ($index % 1 == 0 ? 'bg-warning text-danger' : ''))}}">
                         {{$service->name}}
                     </span>
                     <p class="mt-2">{{$service->service->description}}</p>
                     @if($service->price == 0)
                         <h3>Miễn phí</h3>
                     @else
-                        <h3>@convert($service->price) đ / tháng</h3>
+                        <h3>{{number_format($service->price, 0, ',', '.')}} đ / tháng</h3>
                     @endif
                     <div class="py-2">
                         <i class="fa fa-check"></i> Không giới hạn tính năng

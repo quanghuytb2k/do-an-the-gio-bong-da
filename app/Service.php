@@ -11,4 +11,8 @@ class Service extends Model
         'name',
         'description'
     ];
+
+    const BOOKING = 1;
+    const SELL = 2;
+    const ALL = 3;
 }

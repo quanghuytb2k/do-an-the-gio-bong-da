@@ -60,7 +60,7 @@
         <div class="col-lg-4 service-card mt-3">
             <a href="{{route('choose-service-pack', $service->id)}}">
                 <div class="service-content">
-                    <span class="service-title {{ $index % 3 == 0 ? 'bg-info text-primary' : ($index % 2 == 0 ? 'bg-success' : ($index % 1 == 0 ? 'bg-warning text-danger' : ''))}}">
+                    <span class="service-title {{ $index % 3 == 0 ? 'bg-info' : ($index % 2 == 0 ? 'bg-success' : ($index % 1 == 0 ? 'bg-warning text-danger' : ''))}}">
                         {{$service->name}}
                     </span>
                     <p class="mt-2">{{$service->description}}</p>

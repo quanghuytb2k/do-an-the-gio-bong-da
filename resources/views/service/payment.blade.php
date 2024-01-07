@@ -56,7 +56,7 @@
                     <div id="payment-checkout-wp">
                         <ul id="payment_methods">
                             <li>
-                                <input type="radio" id="direct-payment" name="payment" value="1">
+                                <input type="radio" id="direct-payment" name="payment" value="1" checked>
                                 <label for="direct-payment">Thanh toán trực tiếp tại sân</label>
                             </li>
                             <li>
