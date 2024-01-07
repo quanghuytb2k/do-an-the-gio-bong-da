@@ -203,6 +203,7 @@
                     </ul>
                 </div>
             </li>
+            @if(Auth::user()->service_id == 2 || Auth::user()->service_id == 3)
             <li>
                 <a data-toggle="collapse" href="#products">
                     <i class="pe-7s-note2"></i>
@@ -232,7 +233,7 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li>            
             <li>
                 <a data-toggle="collapse" href="#orders">
                     <i class="pe-7s-note2"></i>
@@ -275,6 +276,8 @@
                     </ul>
                 </div>
             </li>
+            @endif
+            @if(Auth::user()->service_id == 1 || Auth::user()->service_id == 3)
             <li>
                 <a data-toggle="collapse" href="#stadium">
                     <i class="pe-7s-note2"></i>
@@ -299,6 +302,7 @@
                     </ul>
                 </div>
             </li>
+            @endif
             @endif
         </ul>
     </div>

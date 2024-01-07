@@ -87,6 +87,8 @@ class ChooserServicePackController extends Controller
                     'password' => Hash::make($password),
                     'valid_until' => date('Y-m-d H:m:s', $validUntil),
                     'role' => User::USER_CUSTOMER_ROLE,
+                    'service_pack_id' => $servicePack->id,
+                    'service_id' => $servicePack->service_id,
                     'status' => 0
                 ]);
             }
@@ -187,6 +189,8 @@ class ChooserServicePackController extends Controller
                     'password' => Hash::make($password),
                     'valid_until' => date('Y-m-d H:m:s', $validUntil),
                     'role' => User::USER_CUSTOMER_ROLE,
+                    'service_pack_id' => $servicePack->id,
+                    'service_id' => $servicePack->service_id,
                     'status' => 1
                 ]);
     
