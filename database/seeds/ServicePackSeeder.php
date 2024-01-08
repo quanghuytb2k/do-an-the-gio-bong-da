@@ -12,6 +12,7 @@ class ServicePackSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('service_packs')->truncate();
         DB::table('service_packs')->insert(
             [
                 [
@@ -59,21 +60,21 @@ class ServicePackSeeder extends Seeder
                 [
                     'name' => 'Gói dùng thử',
                     'price' => 0,
-                    'service_id' => 2,
+                    'service_id' => 3,
                     'time_to_use_value' => 1,
                     'time_to_use_unit' => 'week'
                 ],
                 [
                     'name' => 'Gói 1 tháng',
                     'price' => 300000,
-                    'service_id' => 2,
+                    'service_id' => 3,
                     'time_to_use_value' => 1,
                     'time_to_use_unit' => 'month'
                 ],
                 [
                     'name' => 'Gói 1 năm',
                     'price' => 3000000,
-                    'service_id' => 2,
+                    'service_id' => 3,
                     'time_to_use_value' => 1,
                     'time_to_use_unit' => 'year'
                 ],

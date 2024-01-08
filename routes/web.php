@@ -156,3 +156,6 @@ Route::get('choose-service-pack/{id}','Auth\ChooserServicePackController@index')
 Route::get('choose-service-pack/next/{id}','Auth\ChooserServicePackController@next')->name('choose-service-pack/next');
 Route::post('/choose-service-pack/payment', 'Auth\ChooserServicePackController@payment')->name('choose-service-pack/payment');
 Route::post('choose-service-pack/check/{id}', 'Auth\ChooserServicePackController@payment')->name('choose-service-pack/check');
+
+// cancel order
+Route::post('/cancel-order', 'admin\PitchesController@cancelOrder')->name('cancel-order');

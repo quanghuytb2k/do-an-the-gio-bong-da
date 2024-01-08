@@ -67,16 +67,16 @@
                         <tbody>
                         @php
                             $items = DB::table('checkouts')->get();
-                            $stt = 0;
+                            // $stt = 0;
                         @endphp
                         @foreach ($items as $item ) @php
-                            $stt ++ ;
+                            // $stt ++ ;
                         @endphp
 
 
 
                         <tr>
-                            <th scope="row">{{$stt}} </th>
+                            <th scope="row"></th>
                             <td>{{$item->code}}</td>
                             <td>
                                 {{$item->name}} <br>
@@ -84,7 +84,7 @@
                             </td>
                             <td><a href="#">{{$item->product}}</a></td>
                             <td>{{$item->soluong}}</td>
-                            <td>{{$item->giatri}}</td>
+                            <td>{{$item->giatri ? number_format($item->giatri, 0, ',', '.') : 0}}</td>
                             <td><span class="badge badge-warning">{{$item->status}}</span></td>
                             <td>{{$item->created_at}}</td>
                             <td><a href="{{route('detail',$item->id)}}">Chi tiết</a></td>

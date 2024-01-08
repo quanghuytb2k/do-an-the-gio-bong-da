@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\ServicePack;
+use App\ServiceUser;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -91,8 +92,12 @@ class ChooserServicePackController extends Controller
                     'service_id' => $servicePack->service_id,
                     'status' => 0
                 ]);
+                ServiceUser::create([
+                    'user_id' => $user->id,
+                    'service_id' => $servicePack->service_id
+                ]);
             }
-            
+
             $userId = $user->id;
 
             if ($pay == 2) {
@@ -193,7 +198,11 @@ class ChooserServicePackController extends Controller
                     'service_id' => $servicePack->service_id,
                     'status' => 1
                 ]);
-    
+                ServiceUser::create([
+                    'user_id' => $user->id,
+                    'service_id' => $servicePack->service_id
+                ]);
+
                 $this->guard()->login($user);
                 return redirect('/admin/dashboard')->with('status', 'Đăng ký thành công!');
             }

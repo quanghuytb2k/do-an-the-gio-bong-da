@@ -21,7 +21,7 @@
                         <h4 class="modal-title">
                             <b>
                                 Thêm mới lịch đá
-                            </b>    
+                            </b>
                         </h4>
                     </div>
                     <div class="modal-body overflow-auto">
@@ -176,9 +176,9 @@
                     var type = info.event.extendedProps.type;
                     var day_year = info.event.extendedProps.day;
                     var price = info.event.extendedProps.price;
+                    price = new Intl.NumberFormat('en-US').format(+price);
                     var default_time_start = info.event.extendedProps.start;
                     var default_time_end = info.event.extendedProps.end;
-
                     // if (moment(end_time).format('YYYY-MM-DD H:mm') < moment().format('YYYY-MM-DD H:mm')) {
                     //     alertError("Không thể sửa lịch đá trước " + moment().format('YYYY-MM-DD H:mm'));
                     //     return;
@@ -211,7 +211,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Giá:</label>
-                                            <input type="number" value="${price}" id="price-1" pattern="[0-9]*" class="form-control">
+                                            <input type="text" value="${price}" id="price-1" pattern="[0-9]*" class="form-control" onkeydown="keyDown(event)" oninput="localStringToNumber('price-1')">
                                             <span class="text-danger error-text price_error-1" style="font-size:15px"></span>
                                         </div>
                                     </div>
@@ -252,7 +252,7 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Giá:</label>
-                                            <input type="number" id="price-1" pattern="[0-9]*" class="form-control">
+                                            <input type="text" id="price-1" pattern="[0-9]*" class="form-control" oninput="localStringToNumber('price-1')">
                                             <span class="text-danger error-text price_error-1" style="font-size:15px"></span>
                                         </div>
                                     </div>
@@ -294,7 +294,7 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Giá:</label>
-                            <input type="number" id="price-${get_form.lastElementChild.id + 1}" pattern="[0-9]*" class="form-control">
+                            <input type="text" id="price-${get_form.lastElementChild.id + 1}" pattern="[0-9]*" class="form-control" oninput="localStringToNumber('price-${get_form.lastElementChild.id + 1}')">
                             <span class="text-danger error-text price_error-${get_form.lastElementChild.id + 1}" style="font-size:15px"></span>
                         </div>
                     </div>
@@ -348,7 +348,7 @@
                     'date_start': $('#date-start').val(),
                     'time_from': $('#time_from-' + child.id).val(),
                     'time_to': $('#time_to-' + child.id).val(),
-                    'price': $('#price-' + child.id).val(),
+                    'price': $('#price-' + child.id).val().replaceAll(",", ''),
                 })
             }
 
@@ -411,7 +411,7 @@
                     'date_start': $('#date-start-edit').val(),
                     'time_from': $('#time_from-' + child.id).val(),
                     'time_to': $('#time_to-' + child.id).val(),
-                    'price': $('#price-' + child.id).val(),
+                    'price': $('#price-' + child.id).val().replaceAll(",", ''),
                 })
             }
             $.ajax({
@@ -453,6 +453,19 @@
 
         function alertError(message){
             swal("Đã xảy ra lỗi!", message, "warning");
+        }
+
+        function keyDown(evt){
+            if((evt.keyCode < 48 || evt.keyCode > 57) && evt.keyCode != 8 && evt.keyCode != 13){
+                evt.preventDefault();
+            }
+        }
+
+        function localStringToNumber(id){
+            var number = $('#' + id).val();
+            number = number.replaceAll(",", '');
+            var format_number = new Intl.NumberFormat('en-US').format(+number);
+            $('#' + id).val(format_number);
         }
 
     </script>

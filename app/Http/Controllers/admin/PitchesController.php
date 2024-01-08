@@ -19,7 +19,7 @@ use Mail;
 class PitchesController extends Controller
 {
     function listPitches(){
-        $pitches = Pitches::all();
+        $pitches = Pitches::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
 //        $times = Pitches::find($id)->pitchBookingTimes;
 //        foreach ($times as $item) {
 //            $day_year = $item->day_year;
@@ -213,6 +213,7 @@ class PitchesController extends Controller
             'address' => $request->input('province').','.$request->input('district').','.$request->input('commune'),
             'phone_number' => $request->input('telephone'),
             'name_pitch' => $request->input('name_pitches'),
+            'user_id' => auth()->user() ? auth()->user()->id : null,
         ]);
         // $time_start = $request->time_start;
         // $time_end = $request->time_end;
@@ -367,19 +368,31 @@ class PitchesController extends Controller
                 return redirect($vnp_Url);
             }
         }else{
+            $time = DB::table('pitch_time_order')->where('order_id', $id)->pluck('time_id')->toArray();
+            if($time && count($time)){
+                DB::table('pitch_booking_time')->whereIn('id', $time)->update([
+                    'status' => PitchBookingTime::STATUS_ORDERED
+                ]);
+            }
             return redirect('/home')->with('status', 'Đặt sân thành công!');
         }
 
     }
 
     function checked($id){
-        $time = OrderPitches::find($id)->pitchTimes;
+        // $time = OrderPitches::find($id)->pitchTimes;
         $pitch = OrderPitches::find($id)->pitches;
         $pitches = OrderPitches::where('id',$id)->first();
-        foreach ($time as $value){
-        $booking_time = PitchBookingTime::where('id', $value['id'])->update([
-            'status'=>'0'
-        ]);
+        // foreach ($time as $value){
+        // $booking_time = PitchBookingTime::where('id', $value['id'])->update([
+        //     'status'=>'0'
+        // ]);
+        // }
+        $times = DB::table('pitch_time_order')->where('order_id', $id)->pluck('time_id')->toArray();
+        if($times && count($times)){
+            DB::table('pitch_booking_time')->whereIn('id', $times)->update([
+                'status' => PitchBookingTime::STATUS_ORDERED
+            ]);
         }
         $pitche = OrderPitches::where('id',$id)->update([
             'status' => 1,
@@ -595,6 +608,37 @@ class PitchesController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('status-error','Cập nhật sân bóng thất bại');
+        }
+    }
+
+    // cancel order
+    public function cancelOrder(Request $req){
+        $data = $req->all();
+        if(!isset($data['id'])){
+            echo json_encode(["code" => 422, "message" => 'Không có đơn hàng cần hủy']);
+            return;
+        }
+        try {
+            DB::beginTransaction();
+            $getOrder = OrderPitches::where('id', $data['id'])->first();
+            if($getOrder){
+                $getOrder->update([
+                    'status' => OrderPitches::STATUS_CANCEL
+                ]);
+                $times = DB::table('pitch_time_order')->where('order_id', $data['id'])->pluck('time_id')->toArray();
+                if($times && count($times)){
+                    DB::table('pitch_booking_time')->whereIn('id', $times)->update([
+                        'status' => PitchBookingTime::STATUS_NORMAL
+                    ]);
+                }
+                DB::commit();
+                echo json_encode(["code" => 200]);
+            }
+            return;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            echo json_encode(["code" => 500, "message" => $th->getMessage()]);
+            return;
         }
     }
 }

@@ -43,14 +43,14 @@ class PitchesRules implements Rule
             $schedule = PitchBookingTime::where('pitch_id', $this->pitch_id)
                         ->where(function ($q) use ($value){
                             $q->where([
-                                ['time_start', '<=', $value['time_from']],
-                                ['time_end', '>=', $value['time_from']],
+                                ['time_start', '<', $value['time_from']],
+                                ['time_end', '>', $value['time_from']],
                             ])->orWhere([
-                                ['time_start', '<=', $value['time_to']],
-                                ['time_end', '>=', $value['time_to']],
+                                ['time_start', '<', $value['time_to']],
+                                ['time_end', '>', $value['time_to']],
                             ])->orWhere([
-                                ['time_start', '>=', $value['time_from']],
-                                ['time_end', '<=', $value['time_to']],
+                                ['time_start', '>', $value['time_from']],
+                                ['time_end', '<', $value['time_to']],
                             ]);
                         })
                         ->where('day_year', $value['date_start']);

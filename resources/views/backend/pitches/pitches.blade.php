@@ -90,7 +90,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         {{-- <input type="submit" onclick="createStadium()" name="sm-add" class="fbtn btn-danger" value="Thêm mới"> --}}
-                        <input type="submit" name="sm-add" class="fbtn btn-success" value="Thêm mới">
+                        <input type="submit" name="sm-add" class="btn btn-primary" value="Thêm mới">
                     </div>
                 </div>
             </div>

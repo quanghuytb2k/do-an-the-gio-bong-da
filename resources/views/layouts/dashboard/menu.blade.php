@@ -31,11 +31,11 @@
 
                 <div class="collapse" id="collapseExample">
                     <ul class="nav">
-                        <li>
+                        {{-- <li>
                             <a href="javascript:void(0)">
                                 {{ __('Tài khoản') }}
                             </a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
@@ -125,184 +125,191 @@
                 </div>
             </li>
             @else
-            <li>
-                <a data-toggle="collapse" href="#chart">
-                    <i class="pe-7s-note2"></i>
-                    <p>Dashboard
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="chart">
-                    <ul class="nav">
-                        <li>
-                            <a href="{{route('dashboard')}}">
-                                <span class="sidebar-mini">DHB</span>
-                                <span class="sidebar-normal">Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('dashboard2')}}">
-                                <span class="sidebar-mini">DBP</span>
-                                <span class="sidebar-normal">Dashboard-Products</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <a data-toggle="collapse" href="#pages">
-                    <i class="pe-7s-note2"></i>
-                    <p>Trang
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="pages">
-                    <ul class="nav">
-                        <li>
-                            <a href="?view=add-post">
-                                <span class="sidebar-mini">NPG</span>
-                                <span class="sidebar-normal">Thêm mới</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="?view=list-post">
-                                <span class="sidebar-mini">LDB</span>
-                                <span class="sidebar-normal">Danh sách</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <a data-toggle="collapse" href="#posts">
-                    <i class="pe-7s-note2"></i>
-                    <p>Bài viết
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="posts">
-                    <ul class="nav">
-                        <li>
-                            <a href="?view=add-post">
-                                <span class="sidebar-mini">NPS</span>
-                                <span class="sidebar-normal">Thêm mới</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="?view=list-post">
-                                <span class="sidebar-mini">LPS</span>
-                                <span class="sidebar-normal">Danh sách</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="?view=cat">
-                                <span class="sidebar-mini">CAT</span>
-                                <span class="sidebar-normal">Danh mục</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            @if(Auth::user()->service_id == 2 || Auth::user()->service_id == 3)
-            <li>
-                <a data-toggle="collapse" href="#products">
-                    <i class="pe-7s-note2"></i>
-                    <p>Sản phẩm
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="products">
-                    <ul class="nav">
-                        <li>
-                            <a href="{{route('add-product')}}">
-                                <span class="sidebar-mini">NPD</span>
-                                <span class="sidebar-normal">Thêm mới</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('list-product')}}">
-                                <span class="sidebar-mini">LPD</span>
-                                <span class="sidebar-normal">Danh sách</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <span class="sidebar-mini">CAT</span>
-                                <span class="sidebar-normal">Danh mục</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>            
-            <li>
-                <a data-toggle="collapse" href="#orders">
-                    <i class="pe-7s-note2"></i>
-                    <p>Bán hàng
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="orders">
-                    <ul class="nav">
-                        <li>
-                            <a href="?view=list-order">
-                                <span class="sidebar-mini">ORD</span>
-                                <span class="sidebar-normal">Đơn hàng</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <a data-toggle="collapse" href="#coupon">
-                    <i class="pe-7s-note2"></i>
-                    <p>Khuyễn mãi
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="coupon">
-                    <ul class="nav">
-                        <li>
-                            <a href="{{route('coupon.create')}}">
-                                <span class="sidebar-mini">NCP</span>
-                                <span class="sidebar-normal">Thêm mới</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('coupon.index')}}">
-                                <span class="sidebar-mini">LCP</span>
-                                <span class="sidebar-normal">Danh sách</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            @endif
-            @if(Auth::user()->service_id == 1 || Auth::user()->service_id == 3)
-            <li>
-                <a data-toggle="collapse" href="#stadium">
-                    <i class="pe-7s-note2"></i>
-                    <p>Sân bóng
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="stadium">
-                    <ul class="nav">
-                        <li>
-                            <a href="{{route('list-pitches')}}">
-                                <span class="sidebar-mini">LST</span>
-                                <span class="sidebar-normal">Danh sách</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('create-pitches')}}">
-                                <span class="sidebar-mini">NST</span>
-                                <span class="sidebar-normal">Tạo sân bóng</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            @endif
+                @php
+                    $service = DB::table('service_users')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
+                    // $stt = 0;
+                @endphp
+                <li>
+                    <a data-toggle="collapse" href="#chart">
+                        <i class="pe-7s-note2"></i>
+                        <p>Dashboard
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="chart">
+                        <ul class="nav">
+                            @if($service && ($service->service_id == App\Service::BOOKING || $service->service_id == App\Service::ALL))
+                                <li>
+                                    <a href="{{route('dashboard')}}">
+                                        <span class="sidebar-mini">DHB</span>
+                                        <span class="sidebar-normal">Dashboard</span>
+                                    </a>
+                                </li>
+                            @elseif($service && ($service->service_id == App\Service::SELL || $service->service_id == App\Service::ALL))
+                                <li>
+                                    <a href="{{route('dashboard2')}}">
+                                        <span class="sidebar-mini">DBP</span>
+                                        <span class="sidebar-normal">Dashboard-Products</span>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
+                </li>
+                @if($service && ($service->service_id == App\Service::SELL || $service->service_id == App\Service::ALL))
+                    <li>
+                        <a data-toggle="collapse" href="#pages">
+                            <i class="pe-7s-note2"></i>
+                            <p>Trang
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="pages">
+                            <ul class="nav">
+                                <li>
+                                    <a href="?view=add-post">
+                                        <span class="sidebar-mini">NPG</span>
+                                        <span class="sidebar-normal">Thêm mới</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="?view=list-post">
+                                        <span class="sidebar-mini">LDB</span>
+                                        <span class="sidebar-normal">Danh sách</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" href="#posts">
+                            <i class="pe-7s-note2"></i>
+                            <p>Bài viết
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="posts">
+                            <ul class="nav">
+                                <li>
+                                    <a href="?view=add-post">
+                                        <span class="sidebar-mini">NPS</span>
+                                        <span class="sidebar-normal">Thêm mới</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="?view=list-post">
+                                        <span class="sidebar-mini">LPS</span>
+                                        <span class="sidebar-normal">Danh sách</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="?view=cat">
+                                        <span class="sidebar-mini">CAT</span>
+                                        <span class="sidebar-normal">Danh mục</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" href="#products">
+                            <i class="pe-7s-note2"></i>
+                            <p>Sản phẩm
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="products">
+                            <ul class="nav">
+                                <li>
+                                    <a href="{{route('add-product')}}">
+                                        <span class="sidebar-mini">NPD</span>
+                                        <span class="sidebar-normal">Thêm mới</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('list-product')}}">
+                                        <span class="sidebar-mini">LPD</span>
+                                        <span class="sidebar-normal">Danh sách</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <span class="sidebar-mini">CAT</span>
+                                        <span class="sidebar-normal">Danh mục</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" href="#orders">
+                            <i class="pe-7s-note2"></i>
+                            <p>Bán hàng
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="orders">
+                            <ul class="nav">
+                                <li>
+                                    <a href="?view=list-order">
+                                        <span class="sidebar-mini">ORD</span>
+                                        <span class="sidebar-normal">Đơn hàng</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" href="#coupon">
+                            <i class="pe-7s-note2"></i>
+                            <p>Khuyễn mãi
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="coupon">
+                            <ul class="nav">
+                                <li>
+                                    <a href="{{route('coupon.create')}}">
+                                        <span class="sidebar-mini">NCP</span>
+                                        <span class="sidebar-normal">Thêm mới</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('coupon.index')}}">
+                                        <span class="sidebar-mini">LCP</span>
+                                        <span class="sidebar-normal">Danh sách</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endif
+                @if($service && ($service->service_id == App\Service::BOOKING || $service->service_id == App\Service::ALL))
+                    <li>
+                        <a data-toggle="collapse" href="#stadium">
+                            <i class="pe-7s-note2"></i>
+                            <p>Sân bóng
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="stadium">
+                            <ul class="nav">
+                                <li>
+                                    <a href="{{route('list-pitches')}}">
+                                        <span class="sidebar-mini">LST</span>
+                                        <span class="sidebar-normal">Danh sách</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('create-pitches')}}">
+                                        <span class="sidebar-mini">NST</span>
+                                        <span class="sidebar-normal">Tạo sân bóng</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endif
             @endif
         </ul>
     </div>

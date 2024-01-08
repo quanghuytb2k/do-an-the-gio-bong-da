@@ -4,14 +4,14 @@
 
 <div id="content" class="container-fluid">
     <div class="card">
-        <div class="card-header font-weight-bold">
+        <div class="header font-weight-bold">
             Cập nhật đơn hàng
         </div>
-        <div class="card-body">
+        <div class="content">
             <form action='{{route('admin-store-pitches', $order->id)}}' method="POST" files = true enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-12">
                         <div class="form-group">
                             <label for="name_customer">Tên khách hàng</label>
                             <input class="form-control" type="text" name="name_customer" id="code" value="{{$order->name_customer}}" >
@@ -43,13 +43,13 @@
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
-
-
-                        </div>
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary" name="btn-update" value="Cập nhật">Cập nhật</button>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-primary" name="btn-update" value="Cập nhật">Cập nhật</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

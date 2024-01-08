@@ -3,10 +3,10 @@
 @section('content')
 <div id="content" class="container-fluid">
     <div class="card">
-        <div class="card-header font-weight-bold">
+        <div class="header font-weight-bold">
             Thêm người dùng
         </div>
-        <div class="card-body">
+        <div class="content">
             <form action="{{url('admin/user/store')}} " method="POST">
                 @csrf
                 <div class="form-group">
