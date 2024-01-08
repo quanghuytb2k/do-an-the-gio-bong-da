@@ -44,6 +44,9 @@
                             <label for="district">Quận/Huyện</label>
                             <select name="district" class="district form-control" id="district">
                                 <option value="">-- Chọn Quận/Huyện --</option>
+                                @foreach($district as $dist)
+                                    <option value="{{$dist->name}}" <?php if($pitches->district == $dist->name ) echo ('selected')?>>{{$dist->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-col fl-left" style="width: 100%;
@@ -51,6 +54,9 @@
                             <label for="commune">Xã/Phường</label>
                             <select name="commune" class="commune form-control">
                                 <option value="">-- Chọn Xã/Phường --</option>
+                                @foreach($commune as $com)
+                                    <option value="{{$com->name}}" <?php if($pitches->commune == $com->name ) echo ('selected')?>>{{$com->name}}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -140,6 +146,7 @@
                 dataType: 'json',
                 success:function(data){
                     $('.district').html(data);
+                    $('.commune').html(`<option value="">-- Chọn Xã/Phường --</option>`);
                     // alert(data);
                 }
             });
