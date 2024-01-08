@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pitches extends Model
 {
     protected $table= "football_pitches";
-    protected  $fillable = ['name', 'price', 'address' , 'note' , 'phone_number', 'name_pitch' , 'description', 'images','star_rating','province', 'district', 'commune', 'user_id'];
+    protected  $fillable = ['name', 'price', 'address' , 'note' , 'phone_number', 'name_pitch' , 'description', 'images','star_rating','province', 'district', 'commune', 'user_id', 'province', 'district', 'commune'];
     function pitchBookingTimes(){
         return $this->belongsToMany('App\PitchBookingTime', 'pitches_time', 'pitches_id', 'time_id');
     }

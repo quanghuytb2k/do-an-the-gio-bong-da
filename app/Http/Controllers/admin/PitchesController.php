@@ -214,6 +214,9 @@ class PitchesController extends Controller
             'phone_number' => $request->input('telephone'),
             'name_pitch' => $request->input('name_pitches'),
             'user_id' => auth()->user() ? auth()->user()->id : null,
+            'province' => $request->input('province'),
+            'district' => $request->input('district'),
+            'commune' => $request->input('commune'),
         ]);
         // $time_start = $request->time_start;
         // $time_end = $request->time_end;
@@ -602,6 +605,9 @@ class PitchesController extends Controller
                 'address' => $data['province'].','.$data['district'].','.$data['commune'],
                 'phone_number' => $data['telephone'],
                 'name_pitch' => $data['name_pitches'],
+                'province' => $data['province'],
+                'district' => $data['district'],
+                'commune' => $data['commune'],
             ]);
             DB::commit();
             return redirect()->back()->with('status','Cập nhật sân bóng thành công');
