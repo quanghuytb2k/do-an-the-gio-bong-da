@@ -19,7 +19,7 @@ use Mail;
 class PitchesController extends Controller
 {
     function listPitches(){
-        $pitches = Pitches::all();
+        $pitches = Pitches::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
 //        $times = Pitches::find($id)->pitchBookingTimes;
 //        foreach ($times as $item) {
 //            $day_year = $item->day_year;
@@ -213,6 +213,7 @@ class PitchesController extends Controller
             'address' => $request->input('province').','.$request->input('district').','.$request->input('commune'),
             'phone_number' => $request->input('telephone'),
             'name_pitch' => $request->input('name_pitches'),
+            'user_id' => auth()->user() ? auth()->user()->id : null,
         ]);
         // $time_start = $request->time_start;
         // $time_end = $request->time_end;

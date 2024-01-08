@@ -129,30 +129,33 @@
                     $service = DB::table('service_users')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
                     // $stt = 0;
                 @endphp
-            <li>
-                <a data-toggle="collapse" href="#chart">
-                    <i class="pe-7s-note2"></i>
-                    <p>Dashboard
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="chart">
-                    <ul class="nav">
-                        <li>
-                            <a href="{{route('dashboard')}}">
-                                <span class="sidebar-mini">DHB</span>
-                                <span class="sidebar-normal">Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('dashboard2')}}">
-                                <span class="sidebar-mini">DBP</span>
-                                <span class="sidebar-normal">Dashboard-Products</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+                <li>
+                    <a data-toggle="collapse" href="#chart">
+                        <i class="pe-7s-note2"></i>
+                        <p>Dashboard
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="chart">
+                        <ul class="nav">
+                            @if($service && ($service->service_id == App\Service::BOOKING || $service->service_id == App\Service::ALL))
+                                <li>
+                                    <a href="{{route('dashboard')}}">
+                                        <span class="sidebar-mini">DHB</span>
+                                        <span class="sidebar-normal">Dashboard</span>
+                                    </a>
+                                </li>
+                            @elseif($service && ($service->service_id == App\Service::SELL || $service->service_id == App\Service::ALL))
+                                <li>
+                                    <a href="{{route('dashboard2')}}">
+                                        <span class="sidebar-mini">DBP</span>
+                                        <span class="sidebar-normal">Dashboard-Products</span>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
+                </li>
                 @if($service && ($service->service_id == App\Service::SELL || $service->service_id == App\Service::ALL))
                     <li>
                         <a data-toggle="collapse" href="#pages">
@@ -256,31 +259,31 @@
                             </ul>
                         </div>
                     </li>
+                    <li>
+                        <a data-toggle="collapse" href="#coupon">
+                            <i class="pe-7s-note2"></i>
+                            <p>Khuyễn mãi
+                                <b class="caret"></b>
+                            </p>
+                        </a>
+                        <div class="collapse" id="coupon">
+                            <ul class="nav">
+                                <li>
+                                    <a href="{{route('coupon.create')}}">
+                                        <span class="sidebar-mini">NCP</span>
+                                        <span class="sidebar-normal">Thêm mới</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{route('coupon.index')}}">
+                                        <span class="sidebar-mini">LCP</span>
+                                        <span class="sidebar-normal">Danh sách</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 @endif
-                <li>
-                    <a data-toggle="collapse" href="#coupon">
-                        <i class="pe-7s-note2"></i>
-                        <p>Khuyễn mãi
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="coupon">
-                        <ul class="nav">
-                            <li>
-                                <a href="{{route('coupon.create')}}">
-                                    <span class="sidebar-mini">NCP</span>
-                                    <span class="sidebar-normal">Thêm mới</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('coupon.index')}}">
-                                    <span class="sidebar-mini">LCP</span>
-                                    <span class="sidebar-normal">Danh sách</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
                 @if($service && ($service->service_id == App\Service::BOOKING || $service->service_id == App\Service::ALL))
                     <li>
                         <a data-toggle="collapse" href="#stadium">

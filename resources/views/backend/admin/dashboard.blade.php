@@ -68,7 +68,10 @@
                     </thead>
                     <tbody>
                     @php
-                        $items = DB::table('order_pitch')->orderBy('id', 'desc')->get();
+                        $items = DB::table('order_pitch')->orderBy('order_pitch.id', 'desc')
+                                ->join('football_pitches', 'order_pitch.pitch_id', '=', 'football_pitches.id')
+                                ->where('football_pitches.user_id', auth()->user()->id)
+                                ->get();
                         // $stt = 0;
                     @endphp
                     @foreach ($items as $item ) @php
@@ -90,9 +93,9 @@
                         <td><a href="{{route('admin-detail-order',$item->id)}}">Chi tiết</a></td>
                         <td>
                             @if($item->status)
-                                <span class="badge badge-danger">Đã hủy</span>
+                                <span class="badge badge-danger text-dark">Đã hủy</span>
                             @else
-                                <span class="badge badge-success">Đã thanh toán</span>
+                                <span class="badge badge-success text-dark">Đã thanh toán</span>
                             @endif
                         </td>
                         <td>
@@ -121,6 +124,9 @@
     }
     .badge-danger {
         background-color: #f2dede !important;
+    }
+    .text-dark{
+        color: #000000 !important;
     }
 </style>
 @endpush

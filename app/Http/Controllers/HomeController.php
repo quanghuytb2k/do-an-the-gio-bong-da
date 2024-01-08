@@ -49,20 +49,21 @@ class HomeController extends Controller
     {
         $pitches = Pitches::where('id', $id)->get();
         $times = Pitches::find($id)->pitchBookingTimes;
+        $day_year = null;
         foreach ($times as $item) {
             $day_year = $item->day_year;
         }
         //        dd($pitches);
         return view('frontend.detail', compact('pitches', 'times', 'day_year'));
     }
-    
-    
+
+
     public function addToCart($id)
     {
         $pitch = Pitches::findOrFail($id);
-          
+
         $cart = session()->get('cart', []);
-  
+
         if(isset($cart[$id])) {
             $cart[$id];
         } else {
@@ -80,14 +81,14 @@ class HomeController extends Controller
     {
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://localhost/the-gioi-bong-da";
-        $vnp_TmnCode = "V6BP0S5P"; //Mã website tại VNPAY 
+        $vnp_TmnCode = "V6BP0S5P"; //Mã website tại VNPAY
         $vnp_HashSecret = "MYOCNMNQPLFAVFAWWNVZAZCTPXWQAOWE"; //Chuỗi bí mật
 
         $vnp_TxnRef = 12346781; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = 13223;
         $vnp_OrderType = 'billpayment';
         // $vnp_Amount = $_POST['amount'] * 100;
-        $vnp_Amount = 10000 * 100; 
+        $vnp_Amount = 10000 * 100;
         $vnp_Locale = 'vn';
         // $vnp_BankCode = 'VNPAYQR';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -168,7 +169,7 @@ class HomeController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
+            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
         $returnData = array(
