@@ -11,6 +11,7 @@ use App\OrderPitches;
 use App\PitchBookingTime;
 use App\Pitches;
 use App\Province;
+use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -377,6 +378,16 @@ class PitchesController extends Controller
                     'status' => PitchBookingTime::STATUS_ORDERED
                 ]);
             }
+            
+            $pitch = OrderPitches::find($id);
+            //send mail to customer
+            Mail::to($email)->send(new MailPitches($pitch,$pitch->pitches));
+            //send mail to admin
+            $pitchId = $pitch->pitch_id;
+            $adminId = Pitches::find($pitchId)->user_id;
+            $adminMail = User::find($adminId)->email;
+            Mail::to($adminMail)->send(new MailPitches($pitch,$pitch->pitches));
+
             return redirect('/home')->with('status', 'Đặt sân thành công!');
         }
 
@@ -402,9 +413,15 @@ class PitchesController extends Controller
         ]);
         $message = "Khách hàng $pitches->name_customer đã đặt sân bóng";
         Mail::to($pitches->email)->send(new MailPitches($pitches,$pitch));
+
+        $pitchId = $pitches->pitch_id;
+        $adminId = Pitches::find($pitchId)->user_id;
+        $adminMail = User::find($adminId)->email;
+        Mail::to($adminMail)->send(new MailPitches($pitches,$pitch));
         $a = $this->sendMessage($message);
         return redirect('/home')->with('status', 'Đặt sân và thanh toán thành công!');
     }
+
     public function sendMessage($message){
 
         $client = new Client();
