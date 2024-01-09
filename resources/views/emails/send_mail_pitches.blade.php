@@ -1,75 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en-US'>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/solid.min.css">
-
-    <link rel="stylesheet" href="{{asset('css/style.css')}} ">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
-    <script src="https://cdn.tiny.cloud/1/03vjjkv59uvqj4oy2r733miqbkspcof5omxzn0my2lwpia7j/tinymce/4/tinymce.min.js" referrerpolicy="origin"></script>
-
-    <title>Admintrator</title>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Appointment Reminder Email Template</title>
+    <meta name='description' content='Appointment Reminder Email Template' />
 </head>
-<body>
-<div id="main-content-wp" class="list-product-page">
-    <div class="wrap clearfix">
-        <div id="content-detail" class="detail-exhibition">
-            <div class="section" id="info">
-                <div class="section-head">
-                    <h1 class="section-title">Thông tin đơn hàng</h1>
-                </div>
-                <ul class="list-item">
-                    <li>
-                        <h4 class="title">Mã đơn hàng</h4>
-                        <span class="detail text-success">{{$pitches->id}}</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="section">
-                <div class="section-head">
-                    <h3 class="section-title">Thông tin sân đặt</h3>
-                </div>
-                <div class="table-responsive">
-                    <table class="table info-exhibition">
-                        <thead>
-                        <tr>
-                            <th class="thead-text">STT</th>
-                            <th class="thead-text">Tên người đặt sân</th>
-                            <th class="thead-text">email</th>
-                            <th class="thead-text">Tên sân</th>
-                            <th class="thead-text">Địa chỉ</th>
-                            <th class="thead-text">Tổng gía tiền</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @php
-                            $ordinal=0;
-                        @endphp
-                        @foreach($pitch as $item)
-                            @php
-                                $ordinal++;
-                            @endphp
-                            <tr>
-                                <td class="thead-text">{{$ordinal}}</td>
-                                <td class="thead-text">{{$pitches->name_customer}}</td>
-                                <td class="thead-text">{{$item->name_pitch}}</td>
-                                <td class="thead-text">{{$item->address}}</td>
-                                <td class="thead-text">{{$item->email}}</td>
-                                <td class="thead-text">{{number_format($pitches->price)}} VNĐ</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
+<style>
+    a:hover {
+        text-decoration: underline !important;
+    }
+</style>
 
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<body>
+<body marginheight='0' topmargin='0' marginwidth='0' style='margin: 0px; background-color: #f2f3f8;' leftmargin='0'>
+    <table cellspacing='0' border='0' cellpadding='0' width='100%' bgcolor='#f2f3f8' style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
+        <tr>
+            <td>
+                <table style='background-color: #f2f3f8; max-width:670px; margin:0 auto;' width='100%' border='0' align='center' cellpadding='0' cellspacing='0'>
+                    <tr>
+                        <td style='height:80px;'>&nbsp;</td>
+                    </tr>
+                    <!-- Logo -->
+                    <tr>
+                        <td style='text-align:center;'>
+                            <a href='{{env("APP_URL")}}' title='logo' target='_blank'>
+                                <h2 style='color: #0d6efd;text-decoration: none;font-size:40px'>Thethao24h</h2>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style='height:20px;'>&nbsp;</td>
+                    </tr>
+                    <!-- Email Content -->
+                    <tr>
+                        <td>
+                            <table width='95%' border='0' align='center' cellpadding='0' cellspacing='0' style='max-width:670px; background:#fff; border-radius:3px;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);padding:0 40px;'>
+                                <tr>
+                                    <td style='height:40px;'>&nbsp;</td>
+                                </tr>
+                                <!-- Title -->
+                                <tr>
+                                    <td style='padding:0 15px; text-align:center;'>
+                                        <h1 style="color:#1e1e2d; font-weight:400; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Đặt sân bóng thành công!!!</h1>
+                                        <span style='display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; 
+                                        width:100px;'></span>
+                                    </td>
+                                </tr>
+                                <!-- Details Table -->
+                                <tr>
+                                    <td>
+                                        <table cellpadding='0' cellspacing='0' style='width: 100%; border: 1px solid #ededed'>
+                                            <tbody>
+                                                @php
+                                                $ordinal=0;
+                                                @endphp
+                                                @foreach($pitch as $item)
+                                                @php
+                                                $ordinal++;
+                                                @endphp
+                                                <tr>
+                                                    <td style='padding: 10px; border-bottom: 1px solid #ededed; border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)'>
+                                                        Mã đặt sân:</td>
+                                                    <td style='padding: 10px; border-bottom: 1px solid #ededed; color: #455056;'>
+                                                        {{$pitches->id}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='padding: 10px; border-bottom: 1px solid #ededed; border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)'>
+                                                        Người đặt sân:</td>
+                                                    <td style='padding: 10px; border-bottom: 1px solid #ededed; color: #455056;'>
+                                                        {{$pitches->name_customer}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='padding: 10px; border-bottom: 1px solid #ededed; border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)'>
+                                                        Sân bóng:</td>
+                                                    <td style='padding: 10px; border-bottom: 1px solid #ededed; color: #455056;'>
+                                                        {{$item->name_pitch}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='padding: 10px; border-bottom: 1px solid #ededed;border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)'>
+                                                        Địa chỉ sân:</td>
+                                                    <td style='padding: 10px; border-bottom: 1px solid #ededed; color: #455056;'>
+                                                        {{$item->address}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='padding: 10px; border-bottom: 1px solid #ededed;border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)'>
+                                                        Giá:</td>
+                                                    <td style='padding: 10px; border-bottom: 1px solid #ededed; color: #455056;'>
+                                                        {{number_format($pitches->price)}} VNĐ
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style='padding: 10px; border-right: 1px solid #ededed; width: 35%;font-weight:500; color:rgba(0,0,0,.64)'>
+                                                        Ghi chú:</td>
+                                                    <td style='padding: 10px; color: #455056;'>{{$pitches->note}}</td>
+                                                </tr>
+                                            </tbody>
+                                            @endforeach
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='height:40px;'>&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style='height:20px;'>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style='text-align:center;'>
+                            <p style='font-size:14px; color:#455056bd; line-height:18px; margin:0 0 0;'>&copy;
+                                <strong>The thao 24h</strong>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
