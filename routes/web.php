@@ -28,10 +28,24 @@ Route::middleware(['auth','auth.user'])->group(function(){
         Route::get('admin/user/list-user', 'admin\AdminController@list')->name('admin/user/list-user');
         Route::get('admin/user/add-user', 'admin\AdminController@add')->name('admin/user/add-user');
         Route::post('admin/user/store', 'admin\AdminController@store');
-        Route::get('admin/user/delete/{id}', 'admin\AdminController@delete')->name('admin/user/delete');
+        Route::post('admin/user/delete', 'admin\AdminController@delete')->name('admin/user/delete');
         Route::get('admin/user/action', 'admin\AdminController@action');
         Route::get('admin/user/edit/{id}', 'admin\AdminController@edit')->name('admin/edit');
         Route::post('admin/user/update/{id}', 'admin\AdminController@update')->name('admin/update');
+
+        Route::get('admin/services/list-services', 'admin\ServiceController@list')->name('admin/services/list-services');
+        Route::get('admin/services/add-service', 'admin\ServiceController@create')->name('admin/services/add-service');
+        Route::post('admin/services/store', 'admin\ServiceController@store')->name('admin/services/store');
+        Route::get('admin/services/edit-service/{id}', 'admin\ServiceController@edit')->name('admin/services/edit-service');
+        Route::post('admin/services/update/{id}', 'admin\ServiceController@update')->name('admin/services/update');
+        Route::post('admin/services/delete', 'admin\ServiceController@delete')->name('admin/services/delete');
+
+        Route::get('admin/services-pack/list-services-pack', 'admin\ServicePackController@list')->name('admin/services-pack/list-services-pack');
+        Route::get('admin/services-pack/add-service', 'admin\ServicePackController@create')->name('admin/services-pack/add-service');
+        Route::post('admin/services-pack/store', 'admin\ServicePackController@store')->name('admin/services-pack/store');
+        Route::get('admin/services-pack/edit-service/{id}', 'admin\ServicePackController@edit')->name('admin/services-pack/edit-service');
+        Route::post('admin/services-pack/update/{id}', 'admin\ServicePackController@update')->name('admin/services-pack/update');
+        Route::post('admin/services-pack/delete', 'admin\ServicePackController@delete')->name('admin/services-pack/delete');
     });
     Route::get('dashboard','DashboardController@dashboard')->name('dashboard');
 
