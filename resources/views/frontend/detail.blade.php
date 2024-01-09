@@ -365,6 +365,7 @@
         });
     });
 </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script>
         $(document).ready(function () {
             $.ajaxSetup({
@@ -413,6 +414,11 @@
                     var event_id = info.event.id;
                     var price = info.event.extendedProps.price;
                     var status = info.event.extendedProps.status;
+                    info.start = moment(info.event.start).format('DD-MM-YYYY');
+                    if (info.start < moment().format('DD-MM-YYYY')) {
+                        alertError("Không thể đặt sân lịch đá trước ngày " + moment().format('DD-MM-YYYY'));
+                        return;
+                    }
                     if(status != 1) {
                         alertError('Thời gian đang không trống');
                         return;
