@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -18,35 +19,37 @@ class AdminController extends Controller
         });
     }
     function list(Request $request){
-        $list_act=['delete'=>'xóa tạm thời'];
-        $status = $request->input('status');
-        if($status == 'trash'){
-            $list_act=['restore'=>'khôi phục',
-            'forceDelete'=>'xóa vĩnh viễn'];
-            $users =User::paginate(2);
-        }
-        else{
-        $keyword ="";
-        if($request->input('keyword')){
-            $keyword =$request->input('keyword');
-        }
+    //     $list_act=['delete'=>'xóa tạm thời'];
+    //     $status = $request->input('status');
+    //     if($status == 'trash'){
+    //         $list_act=['restore'=>'khôi phục',
+    //         'forceDelete'=>'xóa vĩnh viễn'];
+    //         $users =User::paginate(2);
+    //     }
+    //     else{
+    //     $keyword ="";
+    //     if($request->input('keyword')){
+    //         $keyword =$request->input('keyword');
+    //     }
 
-        //lấy thông tin điều kiện
-        $users=User::where('name','LIKE',"%{$keyword}%")->paginate(2);
-    }
-    $count_active = User::count();
-    $count_trash = User::count();
-    $count =[$count_active,$count_trash];
+    //     //lấy thông tin điều kiện
+    //     $users=User::where('name','LIKE',"%{$keyword}%")->paginate(2);
+    // }
+    // $count_active = User::count();
+    // $count_trash = User::count();
+    // $count =[$count_active,$count_trash];
 
 
-        return view('backend.admin.list-user',compact('users','count','list_act'));
+    //     return view('backend.admin.list-user',compact('users','count','list_act'));
+
+        $users = User::select('*')->orderBy('id', 'desc')->get();
+        return view('backend.admin.list-user',compact('users'));
     }
     function add(){
         return view('backend.admin.add-user');
     }
     function store(Request $request){
         $request->validate([
-
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -62,15 +65,27 @@ class AdminController extends Controller
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password')),
+                'role' => $request->input('role') ? $request->input('role') : User::USER_CUSTOMER_ROLE,
+                'service_pack_id' => 0,
+                'service_id' => 0,
             ]);
-            return redirect('admin/user/list-user')->with('status','đã thêm bản ghi thành công');
+            return redirect('admin/user/list-user')->with('status','Đã thêm người dùng thành công');
 
     }
 
-    function delete($id){
-       $user = User::find($id);
-       $user->delete();
-       return redirect('admin/user/list-user')->with('đã xóa thành công user');
+    function delete(Request $request){
+        try {
+            DB::beginTransaction();
+                $dataRequest = $request->all();
+                $id = $dataRequest['id'];
+                $user = User::find($id);
+                $user->delete();
+                echo json_encode(200);
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            echo json_encode(500);
+        }
     }
     function action(Request $request){
         $list_check = $request->input('list_check');
@@ -114,24 +129,23 @@ class AdminController extends Controller
     }
     function update(Request $request, $id){
         $request->validate([
-
                 'name' => ['required', 'string', 'max:255'],
-
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             ],
             [
                 'required'=>':attribute không được để trống',
                 'min'=>':attribute có độ dại ít nhất :min ký tự',
                 'max'=>':attribute có độ dài tối đa :max ký tự' ,
-                'confirmed'=>'xác nhận mật khẩu không thành công',
+                'confirmed'=>'Xác nhận mật khẩu không thành công',
             ]);
 
-
-            User::where('id',$id)->update([
+            $user = User::where('id',$id)->first();
+            $user->update([
                 'name'=>$request->input('name'),
-            'password'=>Hash::make($request->input('password')),
+                'password'=> $request->input('password') ? Hash::make($request->input('password')) : $user->password,
+                'role'=> $request->input('role') ? $request->input('role') : $user->role,
             ]);
-            return redirect('admin/user/list-user')->with('status','đã sửa bản ghi thành công');
+            return redirect('admin/user/list-user')->with('status','Đã cập nhật người dùng thành công');
 
     }
 }

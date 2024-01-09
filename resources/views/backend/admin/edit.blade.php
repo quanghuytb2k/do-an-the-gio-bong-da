@@ -3,15 +3,15 @@
 @section('content')
 <div id="content" class="container-fluid">
     <div class="card">
-        <div class="card-header font-weight-bold">
-            Thêm người dùng
+        <div class="header font-weight-bold">
+            Cập nhật người dùng
         </div>
-        <div class="card-body">
+        <div class="content">
             <form action="{{url('admin/user/update',$user->id)}} " method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="name">Họ và tên</label>
-                    <input class="form-control" type="text" name="name" id="name">
+                    <input class="form-control" type="text" name="name" id="name" value="{{$user->name}}">
                     @error('name')
                         <small class="text-danger">{{$message}} </small>
                     @enderror
@@ -31,7 +31,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="password-confirm">xác nhận Mật khẩu</label>
+                    <label for="password-confirm">Xác nhận mật khẩu</label>
                     <input class="form-control" type="password" name="password_confirmation" id="password-confirm" value="" placeholder="Xác nhận mật khẩu" >
                     @error('password')
                         <small class="text-danger">{{$message}} </small>
@@ -40,12 +40,10 @@
 
                 <div class="form-group">
                     <label for="">Nhóm quyền</label>
-                    <select class="form-control" id="">
-                        <option>Chọn quyền</option>
-                        <option>Danh mục 1</option>
-                        <option>Danh mục 2</option>
-                        <option>Danh mục 3</option>
-                        <option>Danh mục 4</option>
+                    <select class="form-control" id="role" name="role">
+                        <option value="">Chọn quyền</option>
+                        <option value="{{App\User::USER_ADMIN_ROLE}}" @if($user->role == App\User::USER_ADMIN_ROLE) selected='selected' @endif>Quản trị viên</option>
+                        <option value="{{App\User::USER_CUSTOMER_ROLE}}" @if($user->role == App\User::USER_CUSTOMER_ROLE) selected='selected' @endif>Chủ sân</option>
                     </select>
                 </div>
 

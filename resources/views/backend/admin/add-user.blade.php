@@ -40,12 +40,10 @@
 
                 <div class="form-group">
                     <label for="">Nhóm quyền</label>
-                    <select class="form-control" id="">
-                        <option>Chọn quyền</option>
-                        <option>Danh mục 1</option>
-                        <option>Danh mục 2</option>
-                        <option>Danh mục 3</option>
-                        <option>Danh mục 4</option>
+                    <select class="form-control" id="role" name="role">
+                        <option value="">Chọn quyền</option>
+                        <option value="{{App\User::USER_ADMIN_ROLE}}">Quản trị viên</option>
+                        <option value="{{App\User::USER_CUSTOMER_ROLE}}">Chủ sân</option>
                     </select>
                 </div>
 

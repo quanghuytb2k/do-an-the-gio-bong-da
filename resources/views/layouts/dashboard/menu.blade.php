@@ -79,20 +79,20 @@
             <li>
                 <a data-toggle="collapse" href="#serivce">
                     <i class="pe-7s-note2"></i>
-                    <p>service
+                    <p>Service
                         <b class="caret"></b>
                     </p>
                 </a>
                 <div class="collapse" id="serivce">
                     <ul class="nav">
                         <li>
-                            <a href="">
+                            <a href="{{route('admin/services/add-service')}}">
                                 <span class="sidebar-mini">NSV</span>
                                 <span class="sidebar-normal">Thêm mới</span>
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="{{route('admin/services/list-services')}}">
                                 <span class="sidebar-mini">LSV</span>
                                 <span class="sidebar-normal">Danh sách</span>
                             </a>
@@ -110,13 +110,13 @@
                 <div class="collapse" id="service-pack">
                     <ul class="nav">
                         <li>
-                            <a href="">
+                            <a href="{{route('admin/services-pack/add-service')}}">
                                 <span class="sidebar-mini">NSVP</span>
                                 <span class="sidebar-normal">Thêm mới</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin/user/list-user')}}">
+                            <a href="{{route('admin/services-pack/list-services-pack')}}">
                                 <span class="sidebar-mini">LSVP</span>
                                 <span class="sidebar-normal">Danh sách</span>
                             </a>
