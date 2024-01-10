@@ -17,4 +17,8 @@ class Pitches extends Model
     function order_pitchs(){
         return $this->belongsTo('App\OrderPitches',  'id', 'pitch_id');
     }
+
+    function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

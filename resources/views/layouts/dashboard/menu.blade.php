@@ -31,11 +31,11 @@
 
                 <div class="collapse" id="collapseExample">
                     <ul class="nav">
-                        {{-- <li>
-                            <a href="javascript:void(0)">
-                                {{ __('Tài khoản') }}
+                        <li>
+                            <a href="admin/account/info">
+                                {{ __('Thông tin cá nhân') }}
                             </a>
-                        </li> --}}
+                        </li>
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
