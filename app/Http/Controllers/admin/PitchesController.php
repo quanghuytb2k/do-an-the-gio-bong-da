@@ -171,7 +171,7 @@ class PitchesController extends Controller
             $file= $request->file;
             $filename= $file->getClientOriginalName();
             $thumbnail = "uploads/".$filename;
-            $file->move('public/uploads/', $file->getClientOriginalName());
+            $file->move('uploads/', $file->getClientOriginalName());
 
         }else{
             $thumbnail = '';
@@ -378,7 +378,7 @@ class PitchesController extends Controller
                     'status' => PitchBookingTime::STATUS_ORDERED
                 ]);
             }
-            
+
             $pitch = OrderPitches::find($id);
             //send mail to customer
             Mail::to($email)->send(new MailPitches($pitch,$pitch->pitches));
@@ -610,7 +610,7 @@ class PitchesController extends Controller
                 $file= $req->file;
                 $filename= $file->getClientOriginalName();
                 $thumbnail = "uploads/".$filename;
-                $file->move('public/uploads/', $file->getClientOriginalName());
+                $file->move('uploads/', $file->getClientOriginalName());
 
             }else{
                 $thumbnail = '';
