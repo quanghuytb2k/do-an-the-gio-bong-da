@@ -32,7 +32,7 @@
                 <div class="collapse" id="collapseExample">
                     <ul class="nav">
                         <li>
-                            <a href="admin/account/info">
+                            <a href="{{route('admin/account/info')}}">
                                 {{ __('Thông tin cá nhân') }}
                             </a>
                         </li>
