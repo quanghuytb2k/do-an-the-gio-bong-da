@@ -11,6 +11,7 @@ class OrderPitches extends Model
 
     const STATUS_SUCCESS = 0;
     const STATUS_CANCEL = 1;
+    const STATUS_NO_PAY = 2;
     function pitchTimes(){
         return $this->belongsToMany('App\PitchBookingTime', 'pitch_time_order', 'order_id', 'time_id');
     }

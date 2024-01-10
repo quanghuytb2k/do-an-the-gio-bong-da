@@ -47,7 +47,7 @@ class HomeController extends Controller
     }
     public  function  detail($id)
     {
-        $pitches = Pitches::where('id', $id)->get();
+        $pitches = Pitches::with(['user'])->where('id', $id)->get();
         $times = Pitches::find($id)->pitchBookingTimes;
         $day_year = null;
         foreach ($times as $item) {

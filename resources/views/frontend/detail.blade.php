@@ -107,8 +107,8 @@
     </div>
 </nav>
 <!-- Navbar End -->
-<div class="container">
-    <div class="row">
+<div class="container-fluid px-4">
+    <div class="row px-4">
         @foreach($pitches as $item)
             <div class="col-md-3">
                 <div class="mySlides">
@@ -118,6 +118,7 @@
                     <div>
                         <div class="stars">
                             <div>
+                                <p class="card-title">Tên chủ sân : {{$item->user ? $item->user->name : null}}</p>
                                 <p class="card-title">Tên sân : {{$item->name_pitch}}</p>
                                 <p class="card-title">Địa chỉ : {{$item->address}}</p>
                                 <p class="card-title">Số điện thoại : {{$item->phone_number}}</p>

@@ -54,7 +54,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Tên chủ sân</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder='Tên chủ sân'>
+                        <input type="text" name="name" id="name" class="form-control" placeholder='Tên chủ sân' value="{{auth()->user()->name}}">
                         @error('name')
                         <small class="form-text text-danger">{{$message}}</small>
                         @enderror
@@ -70,7 +70,7 @@
                     <div class="form-group">
                         <label for="">Email chủ sân</label>
                         <input type="email" name="email" class="form-control"
-                               placeholder='Số điện thoại chủ sân '>
+                               placeholder='Số điện thoại chủ sân ' value="{{auth()->user()->email}}">
                         @error('telephone')
                         <small class="form-text text-danger">{{$message}}</small>
                         @enderror

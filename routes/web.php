@@ -84,7 +84,9 @@ Route::middleware(['auth','auth.user'])->group(function(){
     Route::post('/add-soccer-schedule', 'admin\PitchesController@addScheduleForPitches')->name('add-schedules-for-pitches');
     Route::post('/edit-soccer-schedule', 'admin\PitchesController@editScheduleForPitches')->name('edit-schedules-for-pitches');
 });
-
+Route::get('admin/account/info', 'admin\AccountController@getInfo')->name('admin/account/info');
+Route::post('admin/account/change-info', 'admin\AccountController@changeInfo')->name('admin/account/change-info');
+Route::post('admin/account/change-password', 'admin\AccountController@changePassword')->name('admin/account/change-password');
 Route::post('/create-oder', 'admin\PitchesController@create_oder')->name('create-oder');
 Route::get('/home', 'HomeController@index')->name('index');
 Route::get('/service', 'HomeController@service')->name('service');

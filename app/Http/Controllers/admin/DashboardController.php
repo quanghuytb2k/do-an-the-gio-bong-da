@@ -5,19 +5,27 @@ namespace App\Http\Controllers\admin;
 use App\Checkout;
 use App\Http\Controllers\Controller;
 use App\OrderPitches;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     function dashboard(){
-        $count_orders_process = OrderPitches::where('status', 1)->count();
-        $count_orders_transport = OrderPitches::where('status', 0)->count();
-        $count_orders_success= OrderPitches::count();
-
-        $proceeds = OrderPitches::where('status', 1)->sum('price');
-        // dd($proceeds);
-        // return $proceeds;
+        if(auth()->user()->role == User::USER_ADMIN_ROLE){
+            $count_orders_process = OrderPitches::where('status', OrderPitches::STATUS_SUCCESS)->count();
+            $count_orders_transport = OrderPitches::where('status', OrderPitches::STATUS_NO_PAY)->count();
+            $count_orders_success= OrderPitches::count();
+            $proceeds = OrderPitches::where('status', OrderPitches::STATUS_SUCCESS)->sum('price');
+        }else{
+            $order = OrderPitches::whereHas('pitches', function($q){
+                $q->where('user_id', auth()->user()->id);
+            });
+            $count_orders_process = (clone $order)->where('status', OrderPitches::STATUS_SUCCESS)->count();
+            $count_orders_transport = (clone $order)->where('status', OrderPitches::STATUS_NO_PAY)->count();
+            $count_orders_success= (clone $order)->count();
+            $proceeds = (clone $order)->where('status', OrderPitches::STATUS_SUCCESS)->sum('price');
+        }
         $count = [$count_orders_process, $count_orders_transport, $count_orders_success];
         return view('backend.admin.dashboard', compact('count_orders_process', 'count_orders_transport','count_orders_success','proceeds'));
     }
@@ -31,7 +39,7 @@ class DashboardController extends Controller
             $validUntil = strtotime($user->valid_until);
             $dateDiff = $validUntil - $now;
             $dayOfDataDiff = round($dateDiff / (60 * 60 * 24));
-            
+
             if($dayOfDataDiff <= 7){
                 session(['jsAlert'=>'Tài khoản của bạn sẽ hạn hạn trong '.$dayOfDataDiff . ' ngày nữa vui lòng gia hạn để tiếp tục sử dụng dịch vụ']);
             }else if($dayOfDataDiff <= 0){
