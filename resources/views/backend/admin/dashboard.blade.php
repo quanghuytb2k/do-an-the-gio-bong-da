@@ -69,13 +69,13 @@
                     <tbody>
                     @php
                         $items = DB::table('order_pitch')->orderBy('order_pitch.id', 'desc')
-                                ->join('football_pitches', 'order_pitch.pitch_id', '=', 'football_pitches.id')
-                                ->where('football_pitches.user_id', auth()->user()->id)
-                                ->get();
-                        // $stt = 0;
+                                ->join('football_pitches', 'order_pitch.pitch_id', '=', 'football_pitches.id');
+                        if(auth()->user()->role == App\User::USER_CUSTOMER_ROLE){
+                            $items = $items->where('football_pitches.user_id', auth()->user()->id);
+                        }
+                        $items = $items->select('order_pitch.*')->get();
                     @endphp
                     @foreach ($items as $item ) @php
-                            // $stt ++ ;
                             $pitches = DB::table('football_pitches')->where('id',$item->pitch_id)->first();
                         @endphp
 
