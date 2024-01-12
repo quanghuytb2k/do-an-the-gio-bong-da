@@ -16,14 +16,14 @@
                         <div class="form-row clearfix">
                             <div class="form-col fl-left">
                                 <label for="name">Họ tên</label>
-                                <input type="text" name="name" id="name" class="form-control">
+                                <input type="text" name="name" id="name" class="form-control" autocomplete="off">
                                 @error('name')
                                     <small class="form-text text-danger">{{$message}}</small>
                                 @enderror
                             </div>
                             <div class="form-col fl-right">
                                 <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control">
+                                <input type="email" name="email" id="email" class="form-control" autocomplete="off">
                                 @error('email')
                                     <small class="form-text text-danger">{{$message}}</small>
                                 @enderror
@@ -32,7 +32,7 @@
                         <div class="form-row">
                             <div class="form-col fl-right">
                                 <label for="phone">Số điện thoại</label>
-                                <input type="tel" name="phone_number" id="phone" class="form-control">
+                                <input type="tel" name="phone_number" id="phone" class="form-control" autocomplete="off">
                                 @error('phone_number')
                                     <small class="form-text text-danger">{{$message}}</small>
                                 @enderror
@@ -41,7 +41,7 @@
                         <div class="form-row">
                             <div class="form-col">
                                 <label for="notes">Ghi chú</label>
-                                <textarea name="note" class="form-control"></textarea>
+                                <textarea name="note" class="form-control" autocomplete="off"></textarea>
                                 @error('note')
                                     <small class="form-text text-danger">{{$message}}</small>
                                 @enderror

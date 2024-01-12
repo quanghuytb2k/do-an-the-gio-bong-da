@@ -23,28 +23,28 @@
                 @csrf
                 <div class="form-group">
                     <label for="name">Tên tài khoản</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Enter name" required name="name">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" aria-describedby="emailHelp" placeholder="Enter name" required name="name" autocomplete="off">
                     @error('name')
                     <small class="form-text text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" placeholder="Enter email" required name="email">
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" placeholder="Enter email" required name="email" autocomplete="off">
                     @error('email')
                     <small class="form-text text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                    <input type="password" id="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="off">
                     @error('password')
                     <small class="form-text text-danger">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="password-confirm">Confirm password</label>
-                    <input type="password" class="form-control" id="password-confirm" placeholder="Enter confirm password" name="password_confirmation" required autocomplete="new-password">
+                    <input type="password" class="form-control" id="password-confirm" placeholder="Enter confirm password" name="password_confirmation" required autocomplete="off">
                 </div>
                 <div class="form-group row d-none">
                     <input id="servicePackId" type="number" name="service_id" value="{{ $service->id }}">
