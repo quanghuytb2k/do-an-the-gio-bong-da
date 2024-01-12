@@ -61,6 +61,7 @@
                         <th scope="col">Chủ sân</th>
                         <th scope="col">Giá tiền sân</th>
                         <th scope="col">Ngày đặt</th>
+                        <th scope="col">Phương thức thanh toán</th>
                         <th scope="col">Chi tết</th>
                         <th scope="col">Trạng thái</th>
                         <th scope="col">Tác vụ</th>
@@ -90,12 +91,23 @@
                         <td>{{$pitches->name ?? null}}</td>
                         <td>{{$item->price ? number_format($item->price, 0, ',', '.') : null}}</td>
                         <td>{{$item->created_at}}</td>
+                        <td>
+                            @if($item->type_payment == App\OrderPitches::TYPE_DIRECT_PAYMENT)
+                            Thanh toán trực tiếp
+                            @elseif($item->type_payment == App\OrderPitches::TYPE_MOMO_PAYMENT)
+                            Thanh toán qua momo
+                            @elseif($item->type_payment == App\OrderPitches::TYPE_VNPAY_PAYMENT)
+                            Thanh toán qua vnpay
+                            @endif
+                        </td>
                         <td><a href="{{route('admin-detail-order',$item->id)}}">Chi tiết</a></td>
                         <td>
-                            @if($item->status)
+                            @if($item->status == App\OrderPitches::STATUS_CANCEL)
                                 <span class="badge badge-danger text-dark">Đã hủy</span>
-                            @else
+                            @elseif($item->status == App\OrderPitches::STATUS_SUCCESS)
                                 <span class="badge badge-success text-dark">Đã thanh toán</span>
+                            @else
+                                <span class="badge badge-warning text-dark">Chưa thanh toán</span>
                             @endif
                         </td>
                         <td>
@@ -124,6 +136,10 @@
     }
     .badge-danger {
         background-color: #f2dede !important;
+    }
+
+    .badge-warning{
+        background-color: orange !important;
     }
     .text-dark{
         color: #000000 !important;

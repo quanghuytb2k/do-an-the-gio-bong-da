@@ -294,7 +294,8 @@ class PitchesController extends Controller
             'phone' => $phone_number,
             'email' => $email,
             'note' => $note,
-    ]);
+            'type_payment' => $pay,
+        ]);
         $price = OrderPitches::where('id',$id)->value('price');
         $code = rand(1,50);
         $order = rand(1,50);
@@ -387,12 +388,16 @@ class PitchesController extends Controller
 
             $pitch = OrderPitches::find($id);
             //send mail to customer
-            Mail::to($email)->send(new MailPitches($pitch,$pitch->pitches));
+            if($email){
+                Mail::to($email)->send(new MailPitches($pitch,$pitch->pitches));
+            }
             //send mail to admin
             $pitchId = $pitch->pitch_id;
             $adminId = Pitches::find($pitchId)->user_id;
             $adminMail = User::find($adminId)->email;
-            Mail::to($adminMail)->send(new MailPitches($pitch,$pitch->pitches));
+            if($adminMail){
+                Mail::to($adminMail)->send(new MailPitches($pitch,$pitch->pitches));
+            }
 
             return redirect('/home')->with('status', 'Đặt sân thành công!');
         }
@@ -415,15 +420,19 @@ class PitchesController extends Controller
             ]);
         }
         $pitche = OrderPitches::where('id',$id)->update([
-            'status' => 1,
+            'status' => OrderPitches::STATUS_SUCCESS,
         ]);
         $message = "Khách hàng $pitches->name_customer đã đặt sân bóng";
-        Mail::to($pitches->email)->send(new MailPitches($pitches,$pitch));
+        if($pitches->email){
+            Mail::to($pitches->email)->send(new MailPitches($pitches,$pitch));
+        }
 
         $pitchId = $pitches->pitch_id;
         $adminId = Pitches::find($pitchId)->user_id;
         $adminMail = User::find($adminId)->email;
-        Mail::to($adminMail)->send(new MailPitches($pitches,$pitch));
+        if($adminMail){
+            Mail::to($adminMail)->send(new MailPitches($pitches,$pitch));
+        }
         $a = $this->sendMessage($message);
         return redirect('/home')->with('status', 'Đặt sân và thanh toán thành công!');
     }

@@ -31,20 +31,29 @@
                     </li>
                     <li>
                         <h4 class="title">Thông tin thanh toán</h4>
-                        <h4 class="title">Tổng số tiền cần thanh toán là: {{$order_pitches->price}}</h4>
-                        <span class="detail text-success"><?php if($order_pitches->status == 1)echo("Đã thanh toán");else echo("Chưa thanh toán");?></span>
+                        <h4 class="title">Tổng số tiền cần thanh toán là: {{$order_pitches->price ? number_format($order_pitches->price,0,',','.') : 0}}</h4>
+                        @if($order_pitches->status == App\OrderPitches::STATUS_CANCEL)
+                            <span class="detail text-danger">Đã hủy</span>
+                        @elseif($order_pitches->status == App\OrderPitches::STATUS_SUCCESS)
+                            <span class="detail text-success">Đã thanh toán</span>
+                        @elseif($order_pitches->status == App\OrderPitches::STATUS_NO_PAY)
+                            <span class="detail text-warning">Chưa thanh toán</span>
+                        @endif
                     </li>
                     <form method="POST" action="{{route('pay', $order_pitches->id)}}" class="form-action form-inline">
                         @csrf
                         <li>
                             <h3 class="title">Tình trạng thanh toán</h3>
                             <select name="status" class="form-control">
-                                <option  value= 1 @if($order_pitches->status =='1')
+                                <option  value="{{App\OrderPitches::STATUS_SUCCESS}}" @if($order_pitches->status == App\OrderPitches::STATUS_SUCCESS)
                                     selected='selected'
                                 @endif>Đã thanh toán</option>
-                                <option value=0 @if($order_pitches->status =='0')
+                                <option value="{{App\OrderPitches::STATUS_NO_PAY}}" @if($order_pitches->status == App\OrderPitches::STATUS_NO_PAY)
                                     selected='selected'
                                 @endif>Chưa thanh toán</option>
+                                <option value="{{App\OrderPitches::STATUS_CANCEL}}" @if($order_pitches->status == App\OrderPitches::STATUS_CANCEL)
+                                    selected='selected'
+                                @endif>Đã hủy</option>
                             </select>
                             <input type="submit" name="sm_status" value="Cập nhật thanh toán" class="btn btn-primary">
                         </li>
