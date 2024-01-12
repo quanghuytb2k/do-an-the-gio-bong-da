@@ -125,10 +125,10 @@
                 </div>
             </li>
             @else
-                @php
+                {{-- @php
                     $service = DB::table('service_users')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
                     // $stt = 0;
-                @endphp
+                @endphp --}}
                 <li>
                     <a data-toggle="collapse" href="#chart">
                         <i class="pe-7s-note2"></i>
@@ -138,14 +138,14 @@
                     </a>
                     <div class="collapse" id="chart">
                         <ul class="nav">
-                            @if($service && ($service->service_id == App\Service::BOOKING || $service->service_id == App\Service::ALL))
+                            @if((Auth::user()->service_id == App\Service::BOOKING || Auth::user()->service_id == App\Service::ALL))
                                 <li>
                                     <a href="{{route('dashboard')}}">
                                         <span class="sidebar-mini">DHB</span>
                                         <span class="sidebar-normal">Dashboard</span>
                                     </a>
                                 </li>
-                            @elseif($service && ($service->service_id == App\Service::SELL || $service->service_id == App\Service::ALL))
+                            @elseif((Auth::user()->service_id == App\Service::SELL || Auth::user()->service_id == App\Service::ALL))
                                 <li>
                                     <a href="{{route('dashboard2')}}">
                                         <span class="sidebar-mini">DBP</span>
@@ -156,7 +156,7 @@
                         </ul>
                     </div>
                 </li>
-                @if($service && ($service->service_id == App\Service::SELL || $service->service_id == App\Service::ALL))
+                @if((Auth::user()->service_id == App\Service::SELL || Auth::user()->service_id == App\Service::ALL))
                     <li>
                         <a data-toggle="collapse" href="#pages">
                             <i class="pe-7s-note2"></i>
@@ -284,7 +284,7 @@
                         </div>
                     </li>
                 @endif
-                @if($service && ($service->service_id == App\Service::BOOKING || $service->service_id == App\Service::ALL))
+                @if((Auth::user()->service_id == App\Service::BOOKING || Auth::user()->service_id == App\Service::ALL))
                     <li>
                         <a data-toggle="collapse" href="#stadium">
                             <i class="pe-7s-note2"></i>
