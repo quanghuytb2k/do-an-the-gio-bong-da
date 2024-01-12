@@ -56,13 +56,13 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Khách hàng</th>
-                        <th scope="col">Địa chỉ</th>
                         <th scope="col">email</th>
                         <th scope="col">Tên sân</th>
                         <th scope="col">Chủ sân</th>
-                        <th scope="col">Gía tiền sân</th>
-                        <th scope="col"> Chi tết </th>
-                        <th scope="col"> Trạng thái </th>
+                        <th scope="col">Giá tiền sân</th>
+                        <th scope="col">Ngày đặt</th>
+                        <th scope="col">Chi tết</th>
+                        <th scope="col">Trạng thái</th>
                         <th scope="col">Tác vụ</th>
                     </tr>
                     </thead>
@@ -80,16 +80,16 @@
                         @endphp
 
                     <tr>
-                        <th scope="row"></th>
+                        <td scope="col"></td>
                         <td>
                             {{$item->name_customer}} <br>
                             {{$item->phone}}
                         </td>
-                        <td><a href="#">{{$item->address}}</a></td>
                         <td>{{$item->email}}</td>
                         <td>{{$pitches->name_pitch ?? null }}</td>
                         <td>{{$pitches->name ?? null}}</td>
                         <td>{{$item->price ? number_format($item->price, 0, ',', '.') : null}}</td>
+                        <td>{{$item->created_at}}</td>
                         <td><a href="{{route('admin-detail-order',$item->id)}}">Chi tiết</a></td>
                         <td>
                             @if($item->status)
