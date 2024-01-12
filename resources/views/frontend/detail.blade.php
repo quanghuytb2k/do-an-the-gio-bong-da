@@ -48,6 +48,20 @@
     .form-check-input {
         margin-left: 10px;
     }
+
+    .status-box{
+        width: 50px;
+        height: 30px;
+    }
+    .status-box-default{
+        background-color: gray
+    }
+    .status-box-warning{
+        background-color: orange
+    }
+    .status-box-success{
+        background-color: green
+    }
 </style>
 {{--<div class="container-fluid bg-dark p-2">--}}
 {{--    <div class="row gx-0 d-none d-lg-flex">--}}
@@ -176,7 +190,20 @@
 
             <!-- left-content -->
             <div class="col-md-9">
-                <h1>Lịch đá</h1>
+                <div class="row p-0 m-0">
+                    <div class="col-lg-3">
+                        <h1>Lịch đá</h1>
+                    </div>
+                    <div class="col-lg-3 d-flex align-items-end">
+                        <p class="status-box status-box-default m-0 p-0 mr-1"></p>Còn trống (<span class="status-default-number"></span>)
+                    </div>
+                    <div class="col-lg-3 d-flex align-items-end">
+                        <p class="status-box status-box-warning m-0 p-0 mr-1"></p>Đã đặt (<span class="status-ordered-number"></span>)
+                    </div>
+                    <div class="col-lg-3 d-flex align-items-end">
+                        <p class="status-box status-box-success m-0 p-0 mr-1"></p>Đang chọn (<span class="status-booking-number"></span>)
+                    </div>
+                </div>
                 <div id='calendar'></div>
             </div>
     </div>
@@ -393,6 +420,9 @@
                     if (data.schedules) {
                         list_schedules = data.schedules;
                     }
+                    $('.status-default-number').html((data.status_normal ? data.status_normal : 0));
+                    $('.status-ordered-number').html((data.status_ordered ? data.status_ordered : 0));
+                    $('.status-booking-number').html((data.status_booking ? data.status_booking : 0));
                     renderCalendar();
                 },
             });

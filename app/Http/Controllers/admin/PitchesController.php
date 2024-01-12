@@ -42,10 +42,16 @@ class PitchesController extends Controller
             $data['id'] = $pitches->id;
             $data['name'] = $pitches->name;
             $data['address'] = $pitches->address;
+            $data['status_normal'] = 0;
+            $data['status_ordered'] = 0;
+            $data['status_booking'] = 0;
             $schedules = [];
             if ($pitches->pitchBookingTimes) {
                 foreach ($pitches->pitchBookingTimes as $key => $value) {
                     $color = $value->status == 1 ? 'gray' : ($value->status == 2 ? 'green' : ($value->status == 3 ? 'orange' : 'gray'));
+                    $data['status_normal'] += $value->status == 1 ? 1 : 0;
+                    $data['status_booking'] += $value->status == 2 ? 1 : 0;
+                    $data['status_ordered'] += $value->status == 3 ? 1 : 0;
                     $type = $value->type ? PitchBookingTime::getTypeName($value->type) : null;
                     $schedules[] = [
                         "id" => $value->id,

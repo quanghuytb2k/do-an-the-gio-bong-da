@@ -6,7 +6,7 @@
             {{ session('status') }}
         </div>
     @endif
-    <div class="container">
+    <div>
         <h1 class="text-bold">Thêm lịch đá</h1>
         <div class="row">
             <div class="col-md-12">
