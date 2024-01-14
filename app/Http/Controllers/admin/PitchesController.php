@@ -76,6 +76,61 @@ class PitchesController extends Controller
         echo json_encode($data);
     }
 
+    function generateSchedulePitches(Request $req){
+        try {
+            DB::beginTransaction();
+            $data = $req->all();
+            $generate_time_from = $data['generate_time_from'];
+            $generate_time_to = $data['generate_time_to'];
+            $generate_date_from = $data['generate_date_from'];
+            $generate_date_to = $data['generate_date_to'];
+            $pitch_id = $data['id'];
+            $type = $data['type'];
+            $price = $data['price'];
+
+            $time_from = strtotime($generate_time_from);
+            $time_to = strtotime($generate_time_to);
+            $time_difference = round(round(abs($time_to - $time_from) / 3600,2) / 1.5);
+
+            $date_difference = strtotime($generate_date_to) - strtotime($generate_date_from);
+            $date_difference = round($date_difference / (60 * 60 * 24));
+
+            for($j = 0; $j <= $date_difference; $j ++){
+                for($i = 1; $i <= $time_difference; $i ++){
+                    if($i == 1){
+                        $start = $generate_time_from;
+                    }else{
+                        $start = strtotime($generate_time_from) + 90*60;
+                        $start = $start * $i;
+                        $start = date('H:i', $start);
+                    }
+                    $end = strtotime($start) + 90*60;
+                    $end = date('H:i', $end);
+
+                    $time = PitchBookingTime::create([
+                        'time_start' => $start,
+                        'time_end' => $end,
+                        'price' => intval($price),
+                        'day_year'=> date('Y-m-d',strtotime('+'.$j.' day',strtotime($generate_date_from))),
+                        'pitch_id'=> $pitch_id,
+                        'type'=> $type,
+                    ]);
+                    DB::table('pitches_time')->insert([
+                        'pitches_id' => $pitch_id,
+                        'time_id' => $time->id
+                    ]);
+                }
+            }
+            
+            DB::commit();
+            echo json_encode(200);
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollBack();
+            echo json_encode(500);
+        }
+    }
+
     function addScheduleForPitches(PitchesRequest $req){
         try {
             DB::beginTransaction();
@@ -84,20 +139,26 @@ class PitchesController extends Controller
             $day_year = $data['day_year'];
             $type = $data['type'];
             $data_time = $data['data'];
-            if(isset($data_time) && count($data_time)){
-                foreach ($data_time as $key => $value) {
-                    $time = PitchBookingTime::create([
-                        'time_start' => $value['time_from'],
-                        'time_end' => $value['time_to'],
-                        'price' => $value['price'],
-                        'day_year'=> $day_year,
-                        'pitch_id'=> $pitch_id,
-                        'type'=> $type,
-                    ]);
-                    DB::table('pitches_time')->insert([
-                        'pitches_id' => $pitch_id,
-                        'time_id' => $time->id
-                    ]);
+            $repeat = $data['repeat'];
+            $repeat_info = $data['repeat_info'];
+            if($repeat){
+
+            }else{
+                if(isset($data_time) && count($data_time)){
+                    foreach ($data_time as $key => $value) {
+                        $time = PitchBookingTime::create([
+                            'time_start' => $value['time_from'],
+                            'time_end' => $value['time_to'],
+                            'price' => $value['price'],
+                            'day_year'=> $day_year,
+                            'pitch_id'=> $pitch_id,
+                            'type'=> $type,
+                        ]);
+                        DB::table('pitches_time')->insert([
+                            'pitches_id' => $pitch_id,
+                            'time_id' => $time->id
+                        ]);
+                    }
                 }
             }
             DB::commit();
