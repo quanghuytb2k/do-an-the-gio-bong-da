@@ -141,44 +141,45 @@
                                         <label class="form-check-label" for="monday">
                                             Thứ 2:
                                         </label>
-                                        <input class="form-check-input" type="checkbox" id="monday" value="2">
+                                        <input class="form-check-input" type="checkbox" id="monday" value="monday">
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="tuesday">
                                             Thứ 3:
                                         </label>
-                                        <input class="form-check-input" type="checkbox" id="tuesday" value="3">
+                                        <input class="form-check-input" type="checkbox" id="tuesday" value="tuesday">
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="wednesday">
                                             Thứ 4:
                                         </label>
-                                        <input class="form-check-input" type="checkbox" id="wednesday" value="4">
+                                        <input class="form-check-input" type="checkbox" id="wednesday" value="wednesday">
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="thursday">
                                             Thứ 5:
                                         </label>
-                                        <input class="form-check-input" type="checkbox" id="thursday" value="5">
+                                        <input class="form-check-input" type="checkbox" id="thursday" value="thursday">
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="friday">
                                             Thứ 6:
                                         </label>
-                                        <input class="form-check-input" type="checkbox" id="friday" value="6">
+                                        <input class="form-check-input" type="checkbox" id="friday" value="friday">
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="saturday">
                                             Thứ 7:
                                         </label>
-                                        <input class="form-check-input" type="checkbox" id="saturday" value="7">
+                                        <input class="form-check-input" type="checkbox" id="saturday" value="saturday">
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label" for="sunday">
                                             Chủ nhật:
                                         </label>
-                                        <input class="form-check-input" type="checkbox" id="sunday" value="8">
+                                        <input class="form-check-input" type="checkbox" id="sunday" value="sunday">
                                     </div>
+                                    <span class="text-danger error-text week-error" style="font-size:15px"></span>
                                 </div>
                                 <div style="margin-top: 10px;">
                                     <div class="col-lg-4" style="padding:0">
@@ -283,10 +284,12 @@
         $('#generate_time_to').val()
         $('#generate_date_from').val()
         $('#generate_date_to').val()
+
         $('.generate-time-from-error').html('');
         $('.generate-time-to-error').html('');
         $('.generate-date-from-error').html('');
         $('.generate-date-to-error').html('');
+        
         $('#generateForm').modal()
     }
 
@@ -414,7 +417,17 @@
                             </div>
                         `;
                 $('#calendar-form').html(append_form);
-
+                $('#repeat_time_to').val('');
+                $('.repeat_time_to-error').html('');
+                
+                $('#repeat').prop('checked', false);
+                $('#monday').prop('checked', false);
+                $('#tuesday').prop('checked', false);
+                $('#wednesday').prop('checked', false);
+                $('#thursday').prop('checked', false);
+                $('#friday').prop('checked', false);
+                $('#saturday').prop('checked', false);
+                $('#sunday').prop('checked', false);
                 $("#insertForm").modal();
             },
 
@@ -593,17 +606,17 @@
         const saturday = $('#saturday');
         const sunday = $('#sunday');
 
-        const repeat_time_from = $('#repeat_time_from').val();
+        const repeat_time_to = $('#repeat_time_to').val();
 
         let week = [];
 
         if (repeat) {
-            if (!repeat_time_from) {
-                $('.repeat-time-from-error').html(
-                    'Chưa chọn thời gian bắt đầu');
+            if (!repeat_time_to) {
+                $('.repeat-time-to-error').html(
+                    'Chưa chọn thời gian kết thúc lặp');
                 return;
             } else {
-                return $('.repeat-time-from-error').html('');
+                $('.repeat-time-to-error').html('');
             }
             if (monday.is(':checked')) {
                 week.push(monday.val())
@@ -625,6 +638,11 @@
             }
             if (sunday.is(':checked')) {
                 week.push(sunday.val())
+            }
+            if(week.length <=0 ){
+                $('.week-error').html(
+                    'Vui lòng chọn các ngày lặp lại trong tuần');
+                return;
             }
         }
 

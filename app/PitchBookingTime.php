@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class PitchBookingTime extends Model
 {
+    const PEAK_START = '18:00';
+
+    const PEAK_END = '21:00';
+
+    const WEEKEND = ['saturday','sunday'];
+
     protected $table= "pitch_booking_time";
     protected  $fillable = ['time_start', 'day_year', 'time_end', 'status', 'price','pitch_id', 'type'];
     function pitches(){
