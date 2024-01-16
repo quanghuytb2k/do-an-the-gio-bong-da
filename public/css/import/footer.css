@@ -6,7 +6,7 @@
     font-size: 28px;
     font-family: 'Roboto Medium';
     font-weight: normal;
-    color: #da1818;
+    color: #000000;
     text-transform: uppercase;
     margin-bottom: 25px;
 }
@@ -51,7 +51,7 @@
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: #da1818;
+    background: gray;
     transform: translateY(-50%);
 }
 #form-reg #email{
@@ -64,7 +64,7 @@
 #form-reg #sm-reg{
     display: block;
     width: 100%;
-    background: #da1818;
+    background: gray;
     border: none;
     outline: none;
     padding: 10px 0px;
@@ -73,7 +73,7 @@
     font-family: 'Roboto Medium';
     line-height: normal;
 }
-#form-reg #sm-reg:hover{ background: #c10f0f;}
+#form-reg #sm-reg:hover{ background: gray;}
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #999;
     font-family: 'Roboto Light';
@@ -95,7 +95,7 @@
     font-size: 13px;
 }
 #foot-bot{
-    background: #da1818;
+    background: gray;
     text-align: center;
     padding: 10px 0px;
 }

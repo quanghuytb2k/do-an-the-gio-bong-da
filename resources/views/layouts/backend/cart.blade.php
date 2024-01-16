@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>ISMART STORE</title>
+        <title>Thế giới bóng đá</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{{asset('css/bootstrap/bootstrap-theme.min.css')}}" rel="stylesheet" type="text/css"/>
@@ -61,7 +61,10 @@
                     </div>
                     <div id="head-body" class="clearfix">
                         <div class="wp-inner">
-                            <a href="?page=home" title="" id="logo" class="fl-left"><img src="{{asset('images/logo.png')}}"/></a>
+                            <a href="?page=home" title="" id="logo" class="fl-left">
+                                {{-- <img src="{{asset('images/logo.png')}}"/> --}}
+                                Thế giới bóng đá
+                            </a>
                             <div id="search-wp" class="fl-left">
                                 <form method="POST" action="">
                                     <input type="text" name="s" id="s" placeholder="Nhập từ khóa tìm kiếm tại đây!">
@@ -120,10 +123,10 @@
 
 <div id="footer-wp">
     <div id="foot-body">
-        <div class="wp-inner clearfix">
+        <div class="wp-inner clearfix border-top pt-4">
             <div class="block" id="info-company">
-                <h3 class="title">ISMART</h3>
-                <p class="desc">ISMART luôn cung cấp luôn là sản phẩm chính hãng có thông tin rõ ràng, chính sách ưu đãi cực lớn cho khách hàng có thẻ thành viên.</p>
+                <h3 class="title">THẾ GIỚI BÓNG ĐÁ</h3>
+                <p class="desc">THẾ GIỚI BÓNG ĐÁ luôn cung cấp luôn là sản phẩm chính hãng có thông tin rõ ràng, chính sách ưu đãi cực lớn cho khách hàng có thẻ thành viên.</p>
                 <div id="payment">
                     <div class="thumb">
                         <img src="{{asset('images/img-foot.png')}}" alt="">

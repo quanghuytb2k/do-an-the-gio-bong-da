@@ -49,7 +49,7 @@
 
 
 
-                        <p class="price">{{$products->price}}đ </p>
+                        <p class="price">{{$products->price ? number_format($products->price) : 0}}đ </p>
 
 
                         <form action="{{route('cart/add',$products->id)}}">

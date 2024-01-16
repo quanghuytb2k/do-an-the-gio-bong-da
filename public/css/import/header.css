@@ -1,10 +1,10 @@
 /*HEADER*/
-#head-top{ background: #d9263c;}
+#head-top{ background: gray;}
 #head-top #main-menu li{ float: left;}
 #head-top #payment-link{
     position: relative;
     display: block;
-    color: #fff;
+    color: #000000;
     padding: 10px 0px 10px 20px;
 }
 #head-top #payment-link:before{
@@ -16,16 +16,16 @@
 }
 #head-top #main-menu li a{
     display: block;
-    color: #fff;
+    color: #000000;
     padding: 10px 15px;
 }
 #head-top #main-menu li:last-child a{ padding-right: 0!important;}
-#head-body{ background: #f12a43;}
+#head-body{ background: gray;}
 #head-body #logo{
     display: block;
     text-transform: uppercase;
     font-family: 'Roboto Medium';
-    color: #fff;
+    color: #000000;
     padding: 13px 0px;
 }
 #head-body #search-wp{ padding: 22px 0px 22px 195px;}
@@ -43,8 +43,8 @@
     display: inline-block;
     border: none;
     outline: none;
-    background: #111111;
-    color: #fff;
+    background: #000000;
+    color: #ffffff;
     padding: 10px 20px;
     line-height: 13px;
     font-size: 13px;
@@ -61,11 +61,11 @@
     top: 50%;
     left: 0px;
     font-size: 21px;
-    color: #fff;
+    color: #000000;
     width: 38px;
     height: 38px;
     line-height: 35px;
-    border: 2px solid #fff;
+    border: 2px solid #000000;
     border-radius: 50%;
     text-align: center;
     transform: translateY(-50%);
@@ -75,7 +75,7 @@
     content: '';
     width: 1px;
     height: 50%;
-    background: #da263c;
+    background: white;
     top: 50%;
     right: 0;
     transform: translateY(-50%);
@@ -83,14 +83,14 @@
 #advisory-wp span{
     position: relative;
     display: block;
-    color: #fff;
+    color: #000000;
 }
 #advisory-wp .title{ font-size: 15px;}
 #advisory-wp .phone{ font-family: 'Roboto Bold'; font-size: 16px;}
 #cart-wp, #cart-respon-wp{
     position: relative;
     display: block;
-    color: #fff;
+    color: #000000;
     padding: 20px 0px 20px 30px;
 }
 #cart-wp i, #cart-respon-wp i{
@@ -99,7 +99,7 @@
     height: 37px;
     line-height: 33px;
     text-align: center;
-    border: 2px solid #fff;
+    border: 2px solid #000000;
     border-radius: 50%;
 }
 #cart-wp #num, #cart-respon-wp #num{
@@ -139,9 +139,9 @@
     margin-bottom: 5px;
     border-bottom: 1px solid #ddd;
 }
-#cart-wp .list-cart li:last-child{ 
-    margin-bottom: 0!important; 
-    border-bottom: none; 
+#cart-wp .list-cart li:last-child{
+    margin-bottom: 0!important;
+    border-bottom: none;
     padding-bottom: 0!important;
 }
 #cart-wp .list-cart .thumb{ width: 25%;}
