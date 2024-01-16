@@ -99,13 +99,13 @@ class ChooserServicePackController extends Controller
             }
 
             $userId = $user->id;
-
+            $returnURL = env('APP_URL', 'http://localhost:7012');
             if ($pay == 2) {
                 $response = \MoMoAIO::purchase([
                     // 'amount' => $input['amount'],
                     'amount' => 10000,
-                    'returnUrl' => "http://localhost/choose-service-pack/check/$userId/",
-                    'notifyUrl' => 'http://localhost/the-gioi-bong-da/ipn/',
+                    'returnUrl' => $returnURL ."/choose-service-pack/check/$userId/",
+                    'notifyUrl' => $returnURL .'/ipn/',
                     'orderId' =>  $order,
                     'requestId' => $code,
                 ])->send();
@@ -116,7 +116,7 @@ class ChooserServicePackController extends Controller
             }
             if ($pay == 3) {
                 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-                $vnp_Returnurl = "http://localhost/choose-service-pack/check/$userId/";
+                $vnp_Returnurl = $returnURL . "/choose-service-pack/check/$userId/";
                 $vnp_TmnCode = "V6BP0S5P"; //Mã website tại VNPAY
                 $vnp_HashSecret = "MYOCNMNQPLFAVFAWWNVZAZCTPXWQAOWE"; //Chuỗi bí mật
 

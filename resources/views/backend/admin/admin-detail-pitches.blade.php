@@ -277,7 +277,8 @@
                 if(data != ""){
                     alert(data);
                 }else{
-                    window.location="http://localhost/the-gioi-bong-da/checkout/pitches";
+                    // window.location="http://localhost/the-gioi-bong-da/checkout/pitches";
+                    window.location.replace("/checkout/pitches");
                 }
             }
         });
@@ -318,6 +319,9 @@
             dayMaxEvents: true,
             displayEventTime: false,
             eventDisplay: 'block',
+            buttonText: {
+                today: 'Hôm nay',
+            },
 
         });
         calendar.render();

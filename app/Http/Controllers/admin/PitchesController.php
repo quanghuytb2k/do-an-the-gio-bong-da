@@ -83,10 +83,10 @@ class PitchesController extends Controller
         try {
             DB::beginTransaction();
             $data = $req->all();
-            
+
             $price_peak = $data['price_peak'];
             $price_weekend = $data['price_weekend'];
-            
+
             $priceSetup = PriceSetup::find(1);
             $priceSetup->price_peak = $price_peak;
             $priceSetup->price_weekend = $price_weekend;
@@ -163,7 +163,7 @@ class PitchesController extends Controller
                     ]);
                 }
             }
-            
+
             DB::commit();
             echo json_encode(200);
         } catch (\Throwable $th) {
@@ -192,11 +192,11 @@ class PitchesController extends Controller
                         if(strtotime($value['time_from']) >= strtotime(PitchBookingTime::PEAK_START) || strtotime($value['time_from']) < strtotime(PitchBookingTime::PEAK_END)){
                             $price = $price + ($priceOrigin * $priceSetup->price_peak / 100);
                         }
-                        
+
                         if(in_array((string) $this->getWeekday($day_year),PitchBookingTime::WEEKEND)){
                             $price = $price + ($priceOrigin * $priceSetup->price_weekend / 100);
                         }
-                        
+
                         $time = PitchBookingTime::create([
                             'time_start' => $value['time_from'],
                             'time_end' => $value['time_to'],
@@ -241,7 +241,7 @@ class PitchesController extends Controller
                         if(strtotime($value['time_from']) >= strtotime(PitchBookingTime::PEAK_START) || strtotime($value['time_from']) < strtotime(PitchBookingTime::PEAK_END)){
                             $price = $price + ($priceOrigin * $priceSetup->price_peak / 100);
                         }
-                        
+
                         if(in_array((string) $this->getWeekday($day_year),PitchBookingTime::WEEKEND)){
                             $price = $price + ($priceOrigin * $priceSetup->price_weekend / 100);
                         }
@@ -460,12 +460,13 @@ class PitchesController extends Controller
         $price = OrderPitches::where('id',$id)->value('price');
         $code = rand(1,50);
         $order = rand(1,50);
+        $returnURL = env('APP_URL', 'http://localhost:7012');
         if($pay == 2){
             $response = \MoMoAIO::purchase([
                 // 'amount' => $input['amount'],
                 'amount' => 10000,
-                'returnUrl' => "http://localhost/the-gioi-bong-da/checked/$id/",
-                'notifyUrl' => 'http://localhost/the-gioi-bong-da/ipn/',
+                'returnUrl' => $returnURL . "/checked/$id/",
+                'notifyUrl' => $returnURL . '/ipn/',
                     'orderId' =>  $order,
                     'requestId' => $code,
             ])->send();
@@ -477,7 +478,7 @@ class PitchesController extends Controller
         }
         if($pay == 3){
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-            $vnp_Returnurl = "http://localhost/the-gioi-bong-da/checked/$id/";
+            $vnp_Returnurl = $returnURL . "/checked/$id/";
             $vnp_TmnCode = "V6BP0S5P"; //Mã website tại VNPAY
             $vnp_HashSecret = "MYOCNMNQPLFAVFAWWNVZAZCTPXWQAOWE"; //Chuỗi bí mật
 
