@@ -25,63 +25,61 @@
                     </h4>
                     <p style="color:red">Các lịch được tạo tự động được tạo sẽ có thời gian là 1 tiếng rưỡi</p>
                 </div>
-                <div class="modal-body" style="height: 30vh;">
+                <div class="modal-body">
                     <div class="content">
-                        <div class="">
-                            <div class="form-group">
-                                <label>Chọn loại sân:</label>
-                                <select class="form-control" id="stadium-type">
-                                    <option value="2">Sân 7</option>
-                                    <option value="3">Sân 11</option>
-                                </select>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Chọn loại sân:</label>
+                                    <select class="form-control" id="stadium-type">
+                                        <option value="2">Sân 7</option>
+                                        <option value="3">Sân 11</option>
+                                    </select>
+                                </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Giá:</label>
                                     <input type="text" id="price-generate" pattern="[0-9]*" class="form-control" oninput="localStringToNumber('price-generate')">
                                     <span class="text-danger error-text price_generate_error" style="font-size:15px"></span>
                                 </div>
+                            </div>
                         </div>
-                        <div>
-                            <div style="margin-top: 10px">
-                                <div class="col-lg-4" style="padding:0;margin-right:30px">
-                                    <div class="form-group">
-                                        <label for="generate_time_from">Giờ bắt đầu:</label>
-                                        <input type="time" class="form-control" id="generate_time_from">
-                                        <span class="text-danger error-text generate-time-from-error" style="font-size:15px"></span>
-                                    </div>
-
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="generate_time_from">Giờ bắt đầu:</label>
+                                    <input type="time" class="form-control" id="generate_time_from">
+                                    <span class="text-danger error-text generate-time-from-error" style="font-size:15px"></span>
                                 </div>
-                                <div class="col-lg-4" style="padding:0">
-                                    <div class="form-group">
-                                        <label for="generate_time_to">Giờ kết thúc:</label>
-                                        <input type="time" class="form-control" id="generate_time_to">
-                                        <span class="text-danger error-text generate-time-to-error" style="font-size:15px"></span>
-                                    </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="generate_time_to">Giờ kết thúc:</label>
+                                    <input type="time" class="form-control" id="generate_time_to">
+                                    <span class="text-danger error-text generate-time-to-error" style="font-size:15px"></span>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <div style="margin-top: 10px">
-                                <div class="col-lg-4" style="padding:0;margin-right:30px">
-                                    <div class="form-group">
-                                        <label for="generate_date_from">Từ:</label>
-                                        <input type="date" class="form-control" id="generate_date_from">
-                                        <span class="text-danger error-text generate-date-from-error" style="font-size:15px"></span>
-                                    </div>
-
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="generate_date_from">Từ:</label>
+                                    <input type="date" class="form-control" id="generate_date_from">
+                                    <span class="text-danger error-text generate-date-from-error" style="font-size:15px"></span>
                                 </div>
-                                <div class="col-lg-4" style="padding:0">
-                                    <div class="form-group">
-                                        <label for="generate_date_to">Đến:</label>
-                                        <input type="date" class="form-control" id="generate_date_to">
-                                        <span class="text-danger error-text generate-date-to-error" style="font-size:15px"></span>
-                                    </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="generate_date_to">Đến:</label>
+                                    <input type="date" class="form-control" id="generate_date_to">
+                                    <span class="text-danger error-text generate-date-to-error" style="font-size:15px"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btn-generate">Lưu</button>
@@ -126,8 +124,8 @@
                         </div>
                         <div id="calendar-form">
                         </div>
-                        <div>
-                            <div>
+                        <div class="row">
+                            <div class="col-lg-12">
                                 <div class="form-check">
                                     <label class="form-check-label" for="repeat">
                                         Lặp lại:
@@ -135,54 +133,56 @@
                                     <input class="form-check-input" type="checkbox" id="repeat">
                                 </div>
                             </div>
-                            <div style="display: none; gap: 10px; margin-top:10px" id="repeat-form">
-                                <div style="display: flex;gap: 10px;">
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="monday">
-                                            Thứ 2:
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" id="monday" value="monday">
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="tuesday">
-                                            Thứ 3:
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" id="tuesday" value="tuesday">
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="wednesday">
-                                            Thứ 4:
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" id="wednesday" value="wednesday">
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="thursday">
-                                            Thứ 5:
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" id="thursday" value="thursday">
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="friday">
-                                            Thứ 6:
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" id="friday" value="friday">
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="saturday">
-                                            Thứ 7:
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" id="saturday" value="saturday">
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="sunday">
-                                            Chủ nhật:
-                                        </label>
-                                        <input class="form-check-input" type="checkbox" id="sunday" value="sunday">
-                                    </div>
-                                    <span class="text-danger error-text week-error" style="font-size:15px"></span>
+                        </div>
+                        <div class="row" style="display: none;" id="repeat-form">
+                            <div style="display: flex;" class="col-lg-12">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="monday">
+                                        Thứ 2:
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="monday" value="monday">
                                 </div>
-                                <div style="margin-top: 10px;">
-                                    <div class="col-lg-4" style="padding:0">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="tuesday">
+                                        Thứ 3:
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="tuesday" value="tuesday">
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label" for="wednesday">
+                                        Thứ 4:
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="wednesday" value="wednesday">
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label" for="thursday">
+                                        Thứ 5:
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="thursday" value="thursday">
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label" for="friday">
+                                        Thứ 6:
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="friday" value="friday">
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label" for="saturday">
+                                        Thứ 7:
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="saturday" value="saturday">
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label" for="sunday">
+                                        Chủ nhật:
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="sunday" value="sunday">
+                                </div>
+                                <span class="text-danger error-text week-error" style="font-size:15px"></span>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Thời gian kết thực lặp lại:</label>
                                             <input type="date" class="form-control" id="repeat_time_to">
@@ -289,7 +289,7 @@
         $('.generate-time-to-error').html('');
         $('.generate-date-from-error').html('');
         $('.generate-date-to-error').html('');
-        
+
         $('#generateForm').modal()
     }
 
@@ -321,6 +321,9 @@
             dayMaxEvents: true,
             displayEventTime: false,
             eventDisplay: 'block',
+            buttonText: {
+                today: 'Hôm nay',
+            },
             eventClick: function(info) {
                 info.jsEvent.preventDefault();
                 var event_id = info.event.id;
@@ -419,7 +422,7 @@
                 $('#calendar-form').html(append_form);
                 $('#repeat_time_to').val('');
                 $('.repeat_time_to-error').html('');
-                
+
                 $('#repeat').prop('checked', false);
                 $('#monday').prop('checked', false);
                 $('#tuesday').prop('checked', false);
@@ -488,10 +491,10 @@
         event.preventDefault()
         if (event.target.checked) {
             $('#repeat-form').show()
-            $('#new-form').css("height", "30vh")
+            // $('#new-form').css("height", "30vh")
         } else {
             $('#repeat-form').hide()
-            $('#new-form').css("height", "")
+            // $('#new-form').css("height", "")
         }
     })
 
@@ -666,6 +669,7 @@
                     alertSuccess("");
                     display_event();
                     $("#insertForm").modal('hide');
+                    $('#repeat-form').hide();
                 } else {
                     alertError("");
                 }

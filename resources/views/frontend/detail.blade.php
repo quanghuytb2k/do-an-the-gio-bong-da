@@ -440,6 +440,9 @@
                 dayMaxEvents: true,
                 displayEventTime: false,
                 eventDisplay: 'block',
+                buttonText: {
+                    today: 'Hôm nay',
+                },
                 eventClick: function(info) {
                     info.jsEvent.preventDefault();
                     var event_id = info.event.id;
