@@ -139,7 +139,7 @@ class PitchesController extends Controller
                     $end = date('H:i', $end);
 
                     $price = $priceOrigin;
-                    if(strtotime($start) >= strtotime(PitchBookingTime::PEAK_START) || strtotime($start) < strtotime(PitchBookingTime::PEAK_END)){
+                    if(strtotime($start) >= strtotime(PitchBookingTime::PEAK_START) && strtotime($start) < strtotime(PitchBookingTime::PEAK_END)){
                         $price = $price + ($priceOrigin * $priceSetup->price_peak / 100);
                     }
 
@@ -189,7 +189,7 @@ class PitchesController extends Controller
                     foreach ($data_time as $key => $value) {
                         $priceOrigin = $value['price'];
                         $price = $priceOrigin;
-                        if(strtotime($value['time_from']) >= strtotime(PitchBookingTime::PEAK_START) || strtotime($value['time_from']) < strtotime(PitchBookingTime::PEAK_END)){
+                        if(strtotime($value['time_from']) >= strtotime(PitchBookingTime::PEAK_START) && strtotime($value['time_from']) < strtotime(PitchBookingTime::PEAK_END)){
                             $price = $price + ($priceOrigin * $priceSetup->price_peak / 100);
                         }
 
@@ -215,10 +215,17 @@ class PitchesController extends Controller
                             $day = strtotime($week_day.' this week');
                             do {
                                 if($day > strtotime($day_year)){
+                                    $priceRepeat = $priceOrigin;
+                                    if(strtotime($value['time_from']) >= strtotime(PitchBookingTime::PEAK_START) && strtotime($value['time_from']) < strtotime(PitchBookingTime::PEAK_END)){
+                                        $priceRepeat += ($priceRepeat * $priceSetup->price_peak / 100);
+                                    }
+                                    if(in_array((string) date('w', $day),PitchBookingTime::WEEKEND)){
+                                        $priceRepeat += ($priceRepeat * $priceSetup->price_weekend / 100);
+                                    }
                                     $time = PitchBookingTime::create([
                                         'time_start' => $value['time_from'],
                                         'time_end' => $value['time_to'],
-                                        'price' => $price,
+                                        'price' => $priceRepeat,
                                         'day_year'=> date('Y-m-d',$day),
                                         'pitch_id'=> $pitch_id,
                                         'type'=> $type,
@@ -238,7 +245,7 @@ class PitchesController extends Controller
                     foreach ($data_time as $key => $value) {
                         $priceOrigin = $value['price'];
                         $price = $priceOrigin;
-                        if(strtotime($value['time_from']) >= strtotime(PitchBookingTime::PEAK_START) || strtotime($value['time_from']) < strtotime(PitchBookingTime::PEAK_END)){
+                        if(strtotime($value['time_from']) >= strtotime(PitchBookingTime::PEAK_START) && strtotime($value['time_from']) < strtotime(PitchBookingTime::PEAK_END)){
                             $price = $price + ($priceOrigin * $priceSetup->price_peak / 100);
                         }
 

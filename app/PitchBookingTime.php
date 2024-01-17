@@ -10,7 +10,8 @@ class PitchBookingTime extends Model
 
     const PEAK_END = '21:00';
 
-    const WEEKEND = ['saturday','sunday'];
+    // const WEEKEND = ['saturday','sunday'];
+    const WEEKEND = [0, 6];
 
     protected $table= "pitch_booking_time";
     protected  $fillable = ['time_start', 'day_year', 'time_end', 'status', 'price','pitch_id', 'type'];
