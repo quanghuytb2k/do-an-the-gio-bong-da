@@ -127,40 +127,44 @@ class PitchesController extends Controller
             $priceSetup = PriceSetup::find(1);
 
             for($j = 0; $j <= $date_difference; $j ++){
+                $start = $generate_time_from;
+                $end = $generate_time_from;
                 for($i = 1; $i <= $time_difference; $i ++){
                     if($i == 1){
                         $start = $generate_time_from;
                     }else{
-                        $start = strtotime($generate_time_from) + 90*60;
-                        $start = $start * $i;
+                        $start = strtotime($end) + 30*60;
+                        // $start = $start * $i;
                         $start = date('H:i', $start);
                     }
-                    $end = strtotime($start) + 90*60;
-                    $end = date('H:i', $end);
-
-                    $price = $priceOrigin;
-                    if(strtotime($start) >= strtotime(PitchBookingTime::PEAK_START) && strtotime($start) < strtotime(PitchBookingTime::PEAK_END)){
-                        $price = $price + ($priceOrigin * $priceSetup->price_peak / 100);
+                    $endCheck = strtotime($start) + 90*60;
+                    if($endCheck <= $time_to){
+                        $end = strtotime($start) + 90*60;
+                        $end = date('H:i', $end);
+                        $price = $priceOrigin;
+                        if(strtotime($start) >= strtotime(PitchBookingTime::PEAK_START) && strtotime($start) < strtotime(PitchBookingTime::PEAK_END)){
+                            $price = $price + ($priceOrigin * $priceSetup->price_peak / 100);
+                        }
+    
+                        $day_year = date('Y-m-d',strtotime('+'.$j.' day',strtotime($generate_date_from)));
+    
+                        if(in_array((string) $this->getWeekday($day_year),PitchBookingTime::WEEKEND)){
+                            $price = $price + ($priceOrigin * $priceSetup->price_weekend / 100);
+                        }
+    
+                        $time = PitchBookingTime::create([
+                            'time_start' => $start,
+                            'time_end' => $end,
+                            'price' => intval($price),
+                            'day_year'=> $day_year,
+                            'pitch_id'=> $pitch_id,
+                            'type'=> $type,
+                        ]);
+                        DB::table('pitches_time')->insert([
+                            'pitches_id' => $pitch_id,
+                            'time_id' => $time->id
+                        ]);
                     }
-
-                    $day_year = date('Y-m-d',strtotime('+'.$j.' day',strtotime($generate_date_from)));
-
-                    if(in_array((string) $this->getWeekday($day_year),PitchBookingTime::WEEKEND)){
-                        $price = $price + ($priceOrigin * $priceSetup->price_weekend / 100);
-                    }
-
-                    $time = PitchBookingTime::create([
-                        'time_start' => $start,
-                        'time_end' => $end,
-                        'price' => intval($price),
-                        'day_year'=> $day_year,
-                        'pitch_id'=> $pitch_id,
-                        'type'=> $type,
-                    ]);
-                    DB::table('pitches_time')->insert([
-                        'pitches_id' => $pitch_id,
-                        'time_id' => $time->id
-                    ]);
                 }
             }
 
@@ -236,7 +240,7 @@ class PitchesController extends Controller
                                     ]);
                                 }
                                 $day = strtotime('+1 week',$day);
-                              } while ($day < strtotime($repeat_info['time_to']));
+                              } while ($day <= strtotime($repeat_info['time_to']));
                         }
                     }
                 }

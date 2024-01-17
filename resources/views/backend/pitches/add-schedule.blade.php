@@ -23,7 +23,7 @@
                             Tự động tạo lịch
                         </b>
                     </h4>
-                    <p style="color:red">Các lịch được tạo tự động được tạo sẽ có thời gian là 1 tiếng rưỡi</p>
+                    <p style="color:red">Các lịch được tạo tự động sẽ có thời gian là 1 tiếng rưỡi, và các lịch đá cách nhau 30 phút</p>
                 </div>
                 <div class="modal-body">
                     <div class="content">
@@ -127,56 +127,56 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="repeat">
                                     <label class="form-check-label" for="repeat">
                                         Lặp lại:
                                     </label>
-                                    <input class="form-check-input" type="checkbox" id="repeat">
                                 </div>
                             </div>
                         </div>
                         <div class="row" style="display: none;" id="repeat-form">
-                            <div style="display: flex;" class="col-lg-12">
+                            <div style="display: flex; justify-content: space-between;" class="col-lg-12">
                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="monday" value="monday">
                                     <label class="form-check-label" for="monday">
                                         Thứ 2:
                                     </label>
-                                    <input class="form-check-input" type="checkbox" id="monday" value="monday">
                                 </div>
                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="tuesday" value="tuesday">
                                     <label class="form-check-label" for="tuesday">
                                         Thứ 3:
                                     </label>
-                                    <input class="form-check-input" type="checkbox" id="tuesday" value="tuesday">
                                 </div>
                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="wednesday" value="wednesday">
                                     <label class="form-check-label" for="wednesday">
                                         Thứ 4:
                                     </label>
-                                    <input class="form-check-input" type="checkbox" id="wednesday" value="wednesday">
                                 </div>
                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="thursday" value="thursday">
                                     <label class="form-check-label" for="thursday">
                                         Thứ 5:
                                     </label>
-                                    <input class="form-check-input" type="checkbox" id="thursday" value="thursday">
                                 </div>
                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="friday" value="friday">
                                     <label class="form-check-label" for="friday">
                                         Thứ 6:
                                     </label>
-                                    <input class="form-check-input" type="checkbox" id="friday" value="friday">
                                 </div>
                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="saturday" value="saturday">
                                     <label class="form-check-label" for="saturday">
                                         Thứ 7:
                                     </label>
-                                    <input class="form-check-input" type="checkbox" id="saturday" value="saturday">
                                 </div>
                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="sunday" value="sunday">
                                     <label class="form-check-label" for="sunday">
                                         Chủ nhật:
                                     </label>
-                                    <input class="form-check-input" type="checkbox" id="sunday" value="sunday">
                                 </div>
                                 <span class="text-danger error-text week-error" style="font-size:15px"></span>
                             </div>
