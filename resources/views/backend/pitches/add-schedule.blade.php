@@ -110,7 +110,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Chọn loại sân:</label>
-                                    <select class="form-control" id="stadium-type">
+                                    <select class="form-control" id="stadium-type-create">
                                         <option value="2">Sân 7</option>
                                         <option value="3">Sân 11</option>
                                     </select>
@@ -280,10 +280,11 @@
     });
 
     function handleGenerateSchedule() {
-        $('#generate_time_from').val()
-        $('#generate_time_to').val()
-        $('#generate_date_from').val()
-        $('#generate_date_to').val()
+        $('#generate_time_from').val('')
+        $('#generate_time_to').val('')
+        $('#generate_date_from').val('')
+        $('#generate_date_to').val('')
+        $('#price-generate').val('')
 
         $('.generate-time-from-error').html('');
         $('.generate-time-to-error').html('');
@@ -505,7 +506,7 @@
         const generate_date_from = $('#generate_date_from').val()
         const generate_date_to = $('#generate_date_to').val()
         const stadium_type = $('#stadium-type').val();
-        const price = $('#price-generate').val();
+        const price = $('#price-generate').val().replaceAll(",", '');
 
         $('.generate-time-from-error').html('');
         $('.generate-time-to-error').html('');
@@ -571,7 +572,7 @@
     $('#btn-submit').on('click', function(event) {
         event.preventDefault();
         const date_start = $('#date-start').val();
-        const stadium_type = $('#stadium-type').val();
+        const stadium_type = $('#stadium-type-create').val();
         const form = document.getElementById('calendar-form');
         let form_data = [];
         for (const child of form.children) {
